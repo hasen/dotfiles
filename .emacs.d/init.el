@@ -16,6 +16,16 @@
 ;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
 ( add-to-load-path "elisp" "conf" "public_repos" )
 
+;; ELPAの設定
+( when( require 'package nil t )
+  ;; パッケージリポジトリにMarmaladeと開発者運営のELPAを追加
+  ( add-to-list 'package-archives
+                '( "marmalade" . "http://marmalade-repo.org/packages/" ))
+  ( add-to-list 'package-archives
+                '( "ELPA" . "http://tromey.com/elpa/" ))
+  ;; インストールしたパッケージにロードパスを通して読み込む
+  ( package-initialize ) )
+
 ;; バックアップとオートセーブファイルの作成ディレクトリを変更
 ( add-to-list 'backup-directory-alist
               ( cons "." "~/.emacs.d/backups/"))
@@ -29,6 +39,16 @@
                      ( setq eldoc-idle-delay 0.2 )
                      ( setq eldoc-echo-area-use-moltiline-p t )
                      ( turn-on-eldoc-mode ))))
+
+;; auto-installを有効にする
+( when ( require 'auto-install nil t )
+  ;; installDirを設定する
+  ( setq auto-install-directory "~/.emacs.d/elisp/" )
+  ;; EmacsWikiに登録されているelispの名前を取得する
+  ( auto-install-update-emacswiki-package-name t )
+  ;; 必要であればproxyの設定を行う 
+  ;;  ( setq url-proxy-services '(( "http" . "localhost:8339" )))
+  ( auto-install-compatibility-setup ) )
 
 ;; オートセーブの間隔を変更する
 ;;( setq auto-save-timeout 15 )
@@ -82,3 +102,8 @@
 ( global-set-key( kbd "M-u") 'enlarge-window )
 ;;( global-set-key( kbd "M-") 'shrink-window-verticaly )
 ;;( global-set-key( kbd "M-") 'shrink-window-verticaly )
+
+;; redo機能を追加 ( http://www.emacswiki.org/emacs/download/redo+.el )
+( when( require 'redo+ nil t )
+  ( global-set-key ( kbd "C-'" ) 'redo ))
+
