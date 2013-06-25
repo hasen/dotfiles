@@ -26,6 +26,44 @@
   ;; インストールしたパッケージにロードパスを通して読み込む
   ( package-initialize ) )
 
+;; anything
+;; ( auto-instal-bathc "anything" )
+( when( require 'anything nil t )
+  ( setq
+    ;; 候補を表示する迄の時間
+    anything-idle-delay 0.3
+    ;; タイプして再描写する迄の時間
+    anything-input-idel-delay 0.2
+    ;; 候補の最大表示数
+    anything-candidate-number-limit 100
+    ;; 候補が多い時に体感速度を速くする
+    anything-quick-update t
+    ;; 候補選択ショートカットをアルファベットに
+    anything-enable-shortcuts 'alphabet)
+
+    ( when( require 'anything-config nil t)
+      ;; root権限でアクションを実行する時のコマンド
+      ( setq anything-su-or-sudo "sudo"))
+
+    ( require 'anything-match-plugin nil t)
+
+    ( when( and( executable-find "cmigemo")
+               ( require 'mibemo nil t))
+          ( require 'anything-migemo nil t))
+
+    ( when( require 'anything-complete nil t )
+      ;; lispシンボルの補完候補の再検索時間
+      ( anything-lisp-complete-symbol-set-timer 150 ))
+
+    ( require 'anything-show-completion nil t )
+
+    ( when( require 'auto-install nil t )
+      ( require 'anything-auto-install nil t ))
+
+    ( when( require 'descbinds-anything nil t )
+      ;; describe-bindingsをAnythingに置き換える
+      ( descbinds-anything-install)))
+  
 ;; バックアップとオートセーブファイルの作成ディレクトリを変更
 ( add-to-list 'backup-directory-alist
               ( cons "." "~/.emacs.d/backups/"))
@@ -93,9 +131,30 @@
 ;; タブ文字の表示幅
 ( setq-default tab-width 2 )
 
-;;; Short-cut
+;;; SHORT-CUT
 ;; 改行と同時にインデントする
 ( global-set-key( kbd "C-m" ) 'newline-and-indent )
+
+;; auto-completeの設定
+( when( require 'auto-complete-config nil t )
+  ( add-to-list 'ac-dictionary-directories
+    "~/.emacs.d/elisp/ac-dict")
+  ( define-key ac-mode-map( kbd "M-TAB" ) 'auto-complete )
+  ( ac-config-default ))
+
+;; 要color-moccur.el
+( when( require 'anything-c-moccur nil t )
+  ( setq
+    ;; anything-c-moccur用 `anything-idle-delay'
+    anything-c-moccur-anything-idle-delay 0.1
+    ;; バッファの情報をハイライトする
+    anything-c-moccur-highlight-info-line-flag t
+    ;; 現在選択中の候補の位置を他のウィンドウに表示する
+    anything-c-moccur-enable-auto-look-flag t
+    ;; 起動時にポイントの位置の単語を初期パターンにする
+    anything-c-moccur-enable-initial-pattern t )
+  ;; C-M-oにanything-c-moccur-occur-by-moccurを割り当てる
+  ( global-set-key ( kbd "C-M-o") 'anything-cmoccur-occur-by-moccur ))
 
 ;; バッファウィンドウの立て幅を調整
 ( global-set-key( kbd "M-d") 'shrink-window )
@@ -107,3 +166,5 @@
 ( when( require 'redo+ nil t )
   ( global-set-key ( kbd "C-'" ) 'redo ))
 
+;; M-yにanything-show-kill-ringを割当
+( define-key global-map ( kbd "M-y" ) 'anything-show-kill-ring )
