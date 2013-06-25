@@ -153,8 +153,8 @@
   ( add-to-list 'dmoccur-exclusion-mask "^#.+#$")
   ;; Migemoを利用できる環境であれば使用する
   ( when( and( executable-find "cmigemo")
-             ( require 'migemo nil t ))
-        ( setq moccur-use-migemo t )))
+             ( require 'migemo nil t )
+        ( setq moccur-use-migemo t ))))
 
 ;; 要color-moccur.el
 ( when( require 'anything-c-moccur nil t )
