@@ -13,12 +13,12 @@
         ( if( fboundp 'normal-top-level-add-subdirs-to-load-path )
           ( normal-top-level-add-subdirs-to-load-path ))))))
 
-;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
+;; 引数のディレクトリとそのサブディレクトリをLOAD-pathに追加
 ( add-to-load-path "elisp" "conf" "public_repos" )
 
 ;; ELPAの設定
 ( when( require 'package nil t )
-  ;; パッケージリポジトリにMarmaladeと開発者運営のELPAを追加
+  ;; パッケージリポジトリにMARMALADEと開発者運営のELPAを追加
   ( add-to-list 'package-archives
                 '( "marmalade" . "http://marmalade-repo.org/packages/" ))
   ( add-to-list 'package-archives
@@ -48,8 +48,8 @@
     ( require 'anything-match-plugin nil t)
 
     ( when( and( executable-find "cmigemo")
-               ( require 'mibemo nil t))
-          ( require 'anything-migemo nil t))
+               ( require 'migemo nil t))
+               ( require 'anything-migemo nil t))
 
     ( when( require 'anything-complete nil t )
       ;; lispシンボルの補完候補の再検索時間
@@ -131,6 +131,13 @@
 ;; タブ文字の表示幅
 ( setq-default tab-width 2 )
 
+;; wgrepの設定
+( require 'wgrep nil t )
+
+;; undo-treeの設定
+( when( require 'undo-tree nil t )
+  ( global-undo-tree-mode) )
+
 ;;; SHORT-CUT
 ;; 改行と同時にインデントする
 ( global-set-key( kbd "C-m" ) 'newline-and-indent )
@@ -153,10 +160,10 @@
   ( add-to-list 'dmoccur-exclusion-mask "^#.+#$")
   ;; Migemoを利用できる環境であれば使用する
   ( when( and( executable-find "cmigemo")
-             ( require 'migemo nil t ))
+             ( Require 'migemo nil t ))
         ( setq moccur-use-migemo t )))
 
-;; 要color-moccur.el
+;; 要Color-moccur.el
 ( when( require 'anything-c-moccur nil t )
   ( setq
     ;; anything-c-moccur用 `anything-idle-delay'
@@ -170,6 +177,14 @@
   ;; C-M-oにanything-c-moccur-occur-by-moccurを割り当てる
   ( global-set-key ( kbd "C-M-o") 'anything-cmoccur-occur-by-moccur ))
 
+;; 要color-moccur.el
+( require 'moccur-edit nil t )
+
+;; moccur-edit-finish-editと同時にファイルを保存する
+( defadvice moccur-edit-change-file
+  ( after save-after-moccur-edit-buffer activate )
+  ( save-buffer ) )
+
 ;; バッファウィンドウの立て幅を調整
 ( global-set-key( kbd "M-d") 'shrink-window )
 ( global-set-key( kbd "M-u") 'enlarge-window )
@@ -180,5 +195,5 @@
 ( when( require 'redo+ nil t )
   ( global-set-key ( kbd "C-'" ) 'redo ))
 
-;; M-yにanything-show-kill-ringを割当
+;; M-YにANYTHING-SHOW-KILL-ringを割当
 ( define-key global-map ( kbd "M-y" ) 'anything-show-kill-ring )
