@@ -202,6 +202,17 @@
 ( global-set-key ( kbd "<M-s-right>" ) 'tabbar-forward-tab )
 ( global-set-key ( kbd "<M-s-left>" ) 'tabbar-backward-tab )
 
+;; howmメモ保存の場所
+( setq howm-directory( concat user-emacs-directory "howm" ))
+;; howm-menuの言語を日本語に
+;; ( setq howm-menu-lang 'ja )
+;; howmメモを１日１ファイルにする
+( setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm" )
+;; howm-modeを読み込む
+( when( require 'howm-mode nil t )
+  ;; C-c,,で起動
+  ( define-key global-map ( kbd "C-c ,," ) 'howm-menu ))
+
 
 ;;; SHORT-CUT
 ;; 改行と同時にインデントする
