@@ -138,6 +138,71 @@
 ( when( require 'undo-tree nil t )
   ( global-undo-tree-mode) )
 
+;; point-undoの設定
+( when( require 'point-undo nil t )
+  ( define-key global-map ( kbd "M-[") 'point-undo )
+  ( define-key global-map ( kbd "M-]") 'point-redo ))
+
+;; tabbar http://www.emacswiki.org/emacs/download/tabbar.el
+( require 'tabbar )
+( tabbar-mode 1 )
+;; タブ上でマウスホイール操作無効
+( tabbar-mwheel-mode -1 )
+;; グループ化しない
+( setq tabbar-buffer-groups-function nil )
+;; 左に表示されるボタンを無効化
+( dolist ( btn '( tabbar-buffer-home-button
+                  tabbar-scroll-left-button
+                  tabbar-scroll-right-button ))
+  ( set btn ( cons( cons "" nil)
+                  ( cons "" nil ))))
+;; タブの長さ
+( setq tabbar-separator '(1.5))
+;; 外観変更
+( set-face-attribute
+  'tabbar-unselected nil
+  :background "black"
+  :foreground "grey72"
+  :box nil )
+( set-face-attribute
+  'tabbar-selected nil
+  :background "black"
+  :foreground "yellow"
+  :box nil )
+( set-face-attribute
+  'tabbar-button nil
+  :box nil )
+( set-face-attribute
+  'tabbar-separator nil
+  :height 1.5 )
+;; タブに表示させるバッファの設定
+( defvar my-tabbar-displayed-buffers
+  '( "*scratch*" "*Messages*" " *Backtrace*" "$Colors*" "*Faces*" "*vc-")
+     "*Regexps matches buffer names always included tabs." )
+( defun my-tabbar-buffer-list ()
+   "Return the list of buffers to show in tabs.
+    Exclude buffers whose name starts with a space of an asterisk.
+    The current buffer and buffers matches `my-tabbar-displayed-buffers'
+    are always included."
+   ( let* ( ( hides( list ?\ ?\* ))
+            ( re( regexp-opt my-tabbar-displayed-buffers ))
+            ( cur-buf( current-buffer ))
+            ( tabs( delq nil
+                         ( mapcar( lambda( buf )
+                                   ( let( ( name( buffer-name buf )))
+                                     ( when( or( string-match re name )
+                                               ( not ( memq( aref name 0 ) hides)))
+                                       buf)))
+                                 ( buffer-list )))))
+;; Always include the current buffer.
+( if( memq cur-buf tabs )
+    tabs
+  ( cons cur-buf tabs))))
+;; Chromeライクなタブ切り替えのキーバインド
+( global-set-key ( kbd "<M-s-right>" ) 'tabbar-forward-tab )
+( global-set-key ( kbd "<M-s-left>" ) 'tabbar-backward-tab )
+
+
 ;;; SHORT-CUT
 ;; 改行と同時にインデントする
 ( global-set-key( kbd "C-m" ) 'newline-and-indent )
