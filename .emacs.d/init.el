@@ -1,4 +1,6 @@
+;;;=============================
 ;;; Utility
+;;;=============================
 ;;  文字コードを指定
 ( set-language-environment "Japanese" )
 ( prefer-coding-system 'utf-8 )
@@ -225,9 +227,53 @@
 ;; cua-modeの設定 矩形編集モードのみ利用する
 ( cua-mode t )
 ( setq cua-enable-cua-keys nil )
+( global-set-key ( kbd "C-@") 'cua-set-rectangle-mark )
+
+;; cssm_modeの基本設定
+( defun css-mode-hooks ()
+  "css-mode hooks"
+  ;; インデントをCスタイルにする
+  ( setq cssm-indent-function #'cssm-c-style-indenter)
+  ;; インデント幅を２にする
+  ( setq cssm-indent-level 2 )
+  ;; インデントにタブ文字を使わない
+  ( setq-default indent-tabs-mode nil )
+  ;; 閉じ括弧の前に改行を挿入する
+  ( setq cssm-newline-before-closing-bracket t))
+
+( add-hook 'css-mode-hook 'css-mode-hooks )
+
+;; js-modeの基本設定
+( defun js-indent-hook ()
+  ;; インデント幅を２にする
+  ( setq js-indent-level 2
+         js-expr-indent-offset 2
+         indent-tabs-mode nil )
+  ;; switch分のcaseラベルをインデントする
+  ( defun my-js-indent-line ()
+    ( interactive )
+    ( let* ( ( parse-status( save-excursion( syntax-ppss( point-at-bol ))))
+             ( offset( - ( current-column ) ( current-indentation )))
+             ( indentation( js--proper-indentation parse-status )))
+           ( back-to-indentation )
+           ( if( looking-at "case\\s-")
+               ( indent-line-to ( + indentation 2 ))
+             ( js-indent-line ))
+           ( when( > offset 0 ) ( forward-char offset ))))
+      ;; caseラベルのインデント処理をセットする
+      ( set( make-local-variable 'indent-line-funcion) 'my-js-indent-line )
+      ;; ここ迄caseラベルを調整する設定
+      )
+    ;; js-modeの起動時にhookを追加
+    ( add-hook 'js-mode-hook 'js-indent-hook )
+    ( add-to-list 'auto-mode-alist '( "\\.js$" . js2-mode ))
+    ( add-hook 'js2-mode-hook 'js-indent-hook )
 
 
+;;;=========================
 ;;; SHORT-CUT
+;;;=========================
+
 ;; 改行と同時にインデントする
 ( global-set-key( kbd "C-m" ) 'newline-and-indent )
 
