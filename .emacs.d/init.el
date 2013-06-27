@@ -317,6 +317,10 @@
 '( "^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)"
    1 2 nil 4 ))
 
+;; gtags-modeのキーバインドを有効化する
+( setq gtags-suggested-key-mapping t )
+( require 'gtags nil t )
+
 
 ;;;=========================
 ;;; SHORT-CUT
