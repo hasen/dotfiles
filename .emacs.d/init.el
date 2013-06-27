@@ -65,7 +65,7 @@
     ( when( require 'descbinds-anything nil t )
       ;; describe-bindingsをAnythingに置き換える
       ( descbinds-anything-install)))
-  
+
 ;; バックアップとオートセーブファイルの作成ディレクトリを変更
 ( add-to-list 'backup-directory-alist
               ( cons "." "~/.emacs.d/backups/"))
@@ -86,7 +86,7 @@
   ( setq auto-install-directory "~/.emacs.d/elisp/" )
   ;; EmacsWikiに登録されているelispの名前を取得する
   ( auto-install-update-emacswiki-package-name t )
-  ;; 必要であればproxyの設定を行う 
+  ;; 必要であればproxyの設定を行う
   ;;  ( setq url-proxy-services '(( "http" . "localhost:8339" )))
   ( auto-install-compatibility-setup ) )
 
@@ -283,6 +283,16 @@
   ( c-set-offset 'arglist-intro '+ )
   ( c-set-offset 'arglist-close  0))
 
+;; php-modeの補完を強化する(install-elisp-from-emacswiki)
+( defun php-completion-hook ()
+  ( when( require 'php-completion nil t )
+    ( php-completion-mode t )
+    ( define-key php-mode-map ( kbd "C-o" ) 'phpcmp-complete )
+    ( when( require 'auto-complete nil t )
+    ( make-variable-frame-local 'ac-sources )
+    ( add-to-list 'ac-sources 'ac-source-php-completion )
+    ( auto-complete-mode t ))))
+( add-hook 'php-mode-hook 'php-completion-hook )
 
 ;;;=========================
 ;;; SHORT-CUT
@@ -346,3 +356,6 @@
 
 ;; M-YにANYTHING-SHOW-KILL-ringを割当
 ( define-key global-map ( kbd "M-y" ) 'anything-show-kill-ring )
+
+;; M-x dtwをdelete-trailing-whitespaceのエイリアスに
+( defalias 'dtw 'delete-trailing-whitespace )
