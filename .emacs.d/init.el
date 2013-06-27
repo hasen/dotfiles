@@ -294,6 +294,30 @@
     ( auto-complete-mode t ))))
 ( add-hook 'php-mode-hook 'php-completion-hook )
 
+;; HTML用Flymakeの設定
+( defun flymake-html-init ()
+  ( list "tidy" ( list( flymake-init-create-temp-buffer-copy
+                        'flymake-create-temp-inplace ))))
+( add-to-list 'flymake-allowed-file-name-masks
+              '( "\\.html\\'" flymake-html-init ))
+
+;; tidy error pattern
+( add-to-list 'flymake-err-line-patterns
+'("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\/Error\\): \\(.*\\)"
+  nil 1 2 4 ))
+
+;; JS用Flymakeの初期化関数の定義
+( defun flymake-jsl-init ()
+  ( list "jsl" ( list "-process" ( flymake-init-create-temp-buffer-copy
+                                   'flymake-create-temp-inplace ))))
+;; JS編集でFlymakeを起動する
+( add-to-list 'flymake-allowed-file-name-masks
+              '( "\\.js\\'" flymake-jsl-init ))
+( add-to-list 'flymake-err-line-patterns
+'( "^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)"
+   1 2 nil 4 ))
+
+
 ;;;=========================
 ;;; SHORT-CUT
 ;;;=========================
