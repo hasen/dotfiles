@@ -269,6 +269,20 @@
     ( add-to-list 'auto-mode-alist '( "\\.js$" . js2-mode ))
     ( add-hook 'js2-mode-hook 'js-indent-hook )
 
+;; php-modeの基本設定
+( when( require 'php-mode nil t )
+  ( add-to-list 'auto-mode-alist '( "\\.ctp\\'" . php-mode ))
+  ( setq php-search-url "http://jp.php.net/")
+  ( setq php-manual-url "http://jp.net/manual/"))
+
+;; php-modeのインデント設定
+( defun php-indent-hook ()
+  ( setq indent-tabs-mode nil )
+  ( setq c-basic-offset 4 )
+  ( c-set-offset 'case-label '+ )
+  ( c-set-offset 'arglist-intro '+ )
+  ( c-set-offset 'arglist-close  0))
+
 
 ;;;=========================
 ;;; SHORT-CUT

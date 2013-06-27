@@ -1,1 +1,1 @@
-root@www16082ue.sakura.ne.jp.32315:1370073829
+root@www16082ue.sakura.ne.jp.10071:1370073829
