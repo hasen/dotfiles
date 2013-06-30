@@ -1,8 +1,9 @@
-;;;=============================
-;;; Utility
-;;;=============================
+;;;===================================================================
+;;; UTILITY
+;;;===================================================================
+
 ;;  文字コードを指定
-( set-language-environment "Japanese" )
+( set-language-environment "JAPANESE" )
 ( prefer-coding-system 'utf-8 )
 
 ;; load-pathを追加する関数を定義
@@ -28,7 +29,10 @@
   ;; インストールしたパッケージにロードパスを通して読み込む
   ( package-initialize ) )
 
-;; anything
+;;;==================================================================
+;;; anything
+;;;==================================================================
+
 ;; ( auto-instal-bathc "anything" )
 ( when( require 'anything nil t )
   ( setq
@@ -80,6 +84,10 @@
                      ( setq eldoc-echo-area-use-moltiline-p t )
                      ( turn-on-eldoc-mode ))))
 
+;;;================================================================
+;;; auto-install
+;;;================================================================
+
 ;; auto-installを有効にする
 ( when ( require 'auto-install nil t )
   ;; installDirを設定する
@@ -91,15 +99,16 @@
   ( auto-install-compatibility-setup ) )
 
 ;; オートセーブの間隔を変更する
-;;( setq auto-save-timeout 15 )
+;;( setq atuo-save-timeout 15 )
 ;;( setq auto-save-interval 60 )
+
+;;;================================================================
+;;; display
+;;;================================================================
 
 ;; カラーテーマの読み込み
 ( when( require 'color-theme nil t )
   ( color-theme-initialize ) )
-
-;;タイトルバーにファイルのフルパスを表示
-( setq frame-title-format "%f" )
 
 ;; ファイルサイズを表示
 ( size-indication-mode t )
@@ -136,6 +145,10 @@
 ;; wgrepの設定
 ( require 'wgrep nil t )
 
+;;;================================================================
+;;; undo
+;;;================================================================
+
 ;; undo-treeの設定
 ( when( require 'undo-tree nil t )
   ( global-undo-tree-mode) )
@@ -144,6 +157,10 @@
 ( when( require 'point-undo nil t )
   ( define-key global-map ( kbd "M-[") 'point-undo )
   ( define-key global-map ( kbd "M-]") 'point-redo ))
+
+;;;================================================================
+;;; tabbar
+;;;================================================================
 
 ;; tabbar http://www.emacswiki.org/emacs/download/tabbar.el
 ( require 'tabbar )
@@ -204,6 +221,10 @@
 ( global-set-key ( kbd "<M-s-right>" ) 'tabbar-forward-tab )
 ( global-set-key ( kbd "<M-s-left>" ) 'tabbar-backward-tab )
 
+;;;==================================================================
+;;; howm
+;;;==================================================================
+
 ;; howmメモ保存の場所
 ( setq howm-directory( concat user-emacs-directory "howm" ))
 ;; howm-menuの言語を日本語に
@@ -224,10 +245,18 @@
 ;; C-c C-cでメモの保存と同時にバッファを閉じる
 ( define-key howm-mode-map ( kbd "C-c C-c" ) 'howm-save-buffer-and-kill )
 
+;;;==================================================================
+;;; cua-mode
+;;;==================================================================
+
 ;; cua-modeの設定 矩形編集モードのみ利用する
 ( cua-mode t )
 ( setq cua-enable-cua-keys nil )
 ( global-set-key ( kbd "C-@") 'cua-set-rectangle-mark )
+
+;;;==================================================================
+;;; mode
+;;;==================================================================
 
 ;; cssm_modeの基本設定
 ( defun css-mode-hooks ()
@@ -294,37 +323,77 @@
     ( auto-complete-mode t ))))
 ( add-hook 'php-mode-hook 'php-completion-hook )
 
+;;;===============================================================
+;;; flymake
+;;;===============================================================
+
 ;; HTML用Flymakeの設定
-( defun flymake-html-init ()
-  ( list "tidy" ( list( flymake-init-create-temp-buffer-copy
-                        'flymake-create-temp-inplace ))))
-( add-to-list 'flymake-allowed-file-name-masks
-              '( "\\.html\\'" flymake-html-init ))
+;;(defun flymake-html-init ()
+;;    ( let* (( temp-file ( flymake-init-create-temp-buffer-copy
+;;                       'flymake-create-temp-inplace ))
+;;             ( local-file  ( file-relative-name
+;;                         temp-file
+;;                         ( file-name-directory buffer-file-name ))))
+;;          ( list "tidy" ( list local-file ))))
 
-;; tidy error pattern
-( add-to-list 'flymake-err-line-patterns
-'("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\/Error\\): \\(.*\\)"
-  nil 1 2 4 ))
+;;( add-to-list 'flymake-allowed-file-name-masks
+;;                          '( "\\.html$\\|\\.ctp" flymake-html-init ))
 
-;; JS用Flymakeの初期化関数の定義
-( defun flymake-jsl-init ()
-  ( list "jsl" ( list "-process" ( flymake-init-create-temp-buffer-copy
-                                   'flymake-create-temp-inplace ))))
-;; JS編集でFlymakeを起動する
-( add-to-list 'flymake-allowed-file-name-masks
-              '( "\\.js\\'" flymake-jsl-init ))
-( add-to-list 'flymake-err-line-patterns
-'( "^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)"
-   1 2 nil 4 ))
+;; Tidy error pattern
+;;( add-to-list 'flymake-err-line-patterns
+;;'("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\/Error\\): \\(.*\\)"
+;;  nil 1 2 4 ))
+
+;;;; JS用Flymakeの初期化関数の定義
+;; defun flymake-jsl-init ()
+;; ( list "jsl" ( list "-process" ( flymake-init-create-temp-buffer-copy
+;;                                  'flymake-create-temp-inplace ))))
+;;; JS編集でFlymakeを起動する
+;; add-to-list 'flymake-allowed-file-name-masks
+;;             '( "\\.js\\'" flymake-jsl-init ))
+;; add-to-list 'flymake-err-line-patterns
+;;( "^\\(.+\\)(\\([0-9]+\\)): \\(.*warning\\|SyntaxError\\): \\(.*\\)"
+;;  1 2 nil 4 ))
+
+;;;==================================================================
+;;; gtags
+;;;==================================================================
 
 ;; gtags-modeのキーバインドを有効化する
 ( setq gtags-suggested-key-mapping t )
 ( require 'gtags nil t )
 
+;; ctags.elの設定
+( require 'ctags nil t )
+( setq tags-revert-without-query t )
 
-;;;=========================
-;;; SHORT-CUT
-;;;=========================
+;; ctagsを呼び出すコマンドライン。
+( setq ctags-command "ctags -e -R" )
+( setq ctags-command "ctags -R --fields=\"+afikklmnsSzt\" ")
+( global-set-key ( kbd "<f5>" ) 'ctags-create-or-update-tags-table )
+
+;; AnythingからTAGSを利用しやすくするコマンド作成
+( when ( and ( require 'anything-exuberant-ctags nil t )
+             ( require 'anything-gtags nil t ))
+  ;; anything-for-tags用のソースを定義
+  ( setq anything-for-tags
+         ( list anything-c-source-gtags-select
+;;                anything-c-source-etags-select
+                anything-c-source-exuberant-ctags-select
+                ))
+  ;; anything-for-tagsコマンドを作成
+  ( defun anything-for-tags ()
+    "Preconfigured `anything' for anything-for-tags."
+    ( inter active )
+    ( anything anything-fot-tags
+               ( thing-at-point 'symbol )
+               nil nil nil "*anything for tags*"))
+  ;; M-tにanything-for-tagsを割当
+  ( define-key global-map ( kbd "M-t" ) 'anything-for-tags ))
+
+;;;===============================================================
+;;; short-cut
+;;;===============================================================
 
 ;; 改行と同時にインデントする
 ( global-set-key( kbd "C-m" ) 'newline-and-indent )
@@ -335,6 +404,10 @@
     "~/.emacs.d/elisp/ac-dict")
   ( define-key ac-mode-map( kbd "M-TAB" ) 'auto-complete )
   ( ac-config-default ))
+
+;;;==================================================================
+;;; moccur
+;;;==================================================================
 
 ;; color-moccurの設定
 ( when( require 'color-moccur nil t )
@@ -371,6 +444,10 @@
 ( defadvice moccur-edit-change-file
   ( after save-after-moccur-edit-buffer activate )
   ( save-buffer ) )
+
+;;;==================================================================
+;;; window
+;;;==================================================================
 
 ;; バッファウィンドウの立て幅を調整
 ( global-set-key( kbd "M-d") 'shrink-window )
