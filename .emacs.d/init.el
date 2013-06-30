@@ -1,5 +1,5 @@
 ;;;===================================================================
-;;; UTILITY
+;;; utility
 ;;;===================================================================
 
 ;;  文字コードを指定
@@ -7,16 +7,16 @@
 ( prefer-coding-system 'utf-8 )
 
 ;; load-pathを追加する関数を定義
-( defun add-to-load-path( &rest paths )
-  ( let( path )
-    ( dolist( paths paths paths )
-      ( let(( default-directory
-              ( expand-file-name( concat user-emacs-directory path ))))
+( defun add-to-load-path ( &rest paths )
+  ( let ( path )
+    ( dolist ( path paths paths )
+      ( let (( default-directory
+              ( expand-file-name ( concat user-emacs-directory path ))))
         ( add-to-list 'load-path default-directory )
-        ( if( fboundp 'normal-top-level-add-subdirs-to-load-path )
+        ( if ( fboundp 'normal-top-level-add-subdirs-to-load-path )
           ( normal-top-level-add-subdirs-to-load-path ))))))
 
-;; 引数のディレクトリとそのサブディレクトリをLOAD-pathに追加
+;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
 ( add-to-load-path "elisp" "conf" "public_repos" )
 
 ;; ELPAの設定
@@ -27,7 +27,7 @@
   ( add-to-list 'package-archives
                 '( "ELPA" . "http://tromey.com/elpa/" ))
   ;; インストールしたパッケージにロードパスを通して読み込む
-  ( package-initialize ) )
+  ( package-initialize ))
 
 ;;;==================================================================
 ;;; anything
@@ -378,7 +378,7 @@
   ;; anything-for-tags用のソースを定義
   ( setq anything-for-tags
          ( list anything-c-source-gtags-select
-;;                anything-c-source-etags-select
+                anything-c-source-etags-select
                 anything-c-source-exuberant-ctags-select
                 ))
   ;; anything-for-tagsコマンドを作成
@@ -464,3 +464,52 @@
 
 ;; M-x dtwをdelete-trailing-whitespaceのエイリアスに
 ( defalias 'dtw 'delete-trailing-whitespace )
+
+;;;==================================================================
+;;; emoji
+;;;==================================================================
+
+( require 'emoji nil t )
+
+;;;==================================================================
+;;; diff
+;;;==================================================================
+
+;; ediffコントロールパネルを別フレームにしない
+( setq ediff-window-setup-function 'ediff-setup-windows-plain )
+
+;;;==================================================================
+;;; psvn
+;;;==================================================================
+
+( when ( executable-find "svn" )
+  ( setq svn-status-verbose nil )
+  ( autoload 'svn-status "psvn" "Run `svn status'." t ))
+
+;;;==================================================================
+;;; egg
+;;;==================================================================
+
+( when ( executable-find "git" )
+  ( require 'egg nil t ))
+
+;;;==================================================================
+;;; multi-term
+;;;==================================================================
+
+( when ( require 'multi-term nil t  )
+  ( setq multi-term-program "/usr/bin/zsh" ))
+
+;;;==================================================================
+;;; tramp
+;;;==================================================================
+
+( add-to-list 'backup-directory-alist
+              ( cons tramp-file-name-regexp nil ))
+
+;;;==================================================================
+;;; WoMan
+;;;==================================================================
+
+( setq woman-chache-filename "~/.emacs.d/.wmncach.el" )
+
