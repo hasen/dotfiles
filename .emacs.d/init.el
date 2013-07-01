@@ -6,6 +6,10 @@
 ( set-language-environment "JAPANESE" )
 ( prefer-coding-system 'utf-8 )
 
+;;;===================================================================
+;;; load-path
+;;;===================================================================
+
 ;; load-pathを追加する関数を定義
 ( defun add-to-load-path ( &rest paths )
   ( let ( path )
@@ -18,6 +22,10 @@
 
 ;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
 ( add-to-load-path "elisp" "conf" "public_repos" )
+
+;;;===================================================================
+;;; ELPA
+;;;===================================================================
 
 ;; ELPAの設定
 ( when( require 'package nil t )
@@ -103,6 +111,16 @@
 ;;( setq auto-save-interval 60 )
 
 ;;;================================================================
+;;; auto-byte-compile
+;;;================================================================
+
+( require 'auto-async-byte-compile )
+
+;; 自動バイトコンパイルを無効にするファイル名の正規表現
+( setq auto-async-byte-compile-exclude-files-regexp "/junk/" )
+( add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode )
+
+;;;================================================================
 ;;; display
 ;;;================================================================
 
@@ -165,18 +183,23 @@
 ;; tabbar http://www.emacswiki.org/emacs/download/tabbar.el
 ( require 'tabbar )
 ( tabbar-mode 1 )
+
 ;; タブ上でマウスホイール操作無効
 ( tabbar-mwheel-mode -1 )
+
 ;; グループ化しない
 ( setq tabbar-buffer-groups-function nil )
+
 ;; 左に表示されるボタンを無効化
 ( dolist ( btn '( tabbar-buffer-home-button
                   tabbar-scroll-left-button
                   tabbar-scroll-right-button ))
   ( set btn ( cons( cons "" nil)
                   ( cons "" nil ))))
+
 ;; タブの長さ
 ( setq tabbar-separator '(1.5))
+
 ;; 外観変更
 ( set-face-attribute
   'tabbar-unselected nil
@@ -194,6 +217,7 @@
 ( set-face-attribute
   'tabbar-separator nil
   :height 1.5 )
+
 ;; タブに表示させるバッファの設定
 ( defvar my-tabbar-displayed-buffers
   '( "*scratch*" "*Messages*" " *Backtrace*" "$Colors*" "*Faces*" "*vc-")
@@ -213,10 +237,12 @@
                                                ( not ( memq( aref name 0 ) hides)))
                                        buf)))
                                  ( buffer-list )))))
-;; Always include the current buffer.
-( if( memq cur-buf tabs )
-    tabs
-  ( cons cur-buf tabs))))
+
+     ;; Always include the current buffer.
+     ( if( memq cur-buf tabs )
+         tabs
+       ( cons cur-buf tabs))))
+
 ;; Chromeライクなタブ切り替えのキーバインド
 ( global-set-key ( kbd "<M-s-right>" ) 'tabbar-forward-tab )
 ( global-set-key ( kbd "<M-s-left>" ) 'tabbar-backward-tab )
@@ -227,14 +253,18 @@
 
 ;; howmメモ保存の場所
 ( setq howm-directory( concat user-emacs-directory "howm" ))
+
 ;; howm-menuの言語を日本語に
 ;; ( setq howm-menu-lang 'ja )
+
 ;; howmメモを１日１ファイルにする
 ; ( setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm" )
+
 ;; howm-modeを読み込む
 ( when( require 'howm-mode nil t )
   ;; C-c,,で起動
   ( define-key global-map ( kbd "C-c ,," ) 'howm-menu ))
+
 ;; howmを保存と同時に閉じる
 ( defun howm-save-guffer-and-kill ()
   ( interactive )
@@ -242,6 +272,7 @@
              ( string-match " \\.howm" ( buffer-file-name )))
     ( save-buffer)
     ( kill-buffer nil )))
+
 ;; C-c C-cでメモの保存と同時にバッファを閉じる
 ( define-key howm-mode-map ( kbd "C-c C-c" ) 'howm-save-buffer-and-kill )
 
@@ -405,6 +436,9 @@
   ( define-key ac-mode-map( kbd "M-TAB" ) 'auto-complete )
   ( ac-config-default ))
 
+;; C-kで行全体を削除
+( setq kill-whole-line t )
+
 ;;;==================================================================
 ;;; moccur
 ;;;==================================================================
@@ -511,5 +545,31 @@
 ;;; WoMan
 ;;;==================================================================
 
+;; キャッシュを作成
 ( setq woman-chache-filename "~/.emacs.d/.wmncach.el" )
 
+;; manパスを設定
+( setq woman-manpath '( "/usr/share/man"
+                        "/usr/local/share/man"
+                        "/usr/local/share/man/ja" ))
+
+;; anything-for-document用のソースを定義
+( setq anything-for-document-sources
+       ( list anything-c-source-man-pages
+              anything-c-source-info-cl
+              anything-c-source-info-pages
+              anything-c-source-info-elisp
+              anything-c-source-apropos-emacs-commands
+              anything-c-source-apropos-emacs-functions
+              anything-c-source-apropos-emacs-variables ))
+
+;; anything-for-documentコマンドを作成
+( defun anything-for-document ()
+  "Preconfigured `anything' for anything-for-document."
+  ( interactinve )
+  ( anything anything-for-document-sources
+             ( thing-at-point 'symbol ) nil nil nil
+             "*anything for document*" ))
+
+;; C+dにanything-for-ducumentを割当
+( define-key global-map ( kbd "C-d" ) 'anything-for-document )
