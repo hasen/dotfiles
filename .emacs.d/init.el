@@ -131,6 +131,9 @@
 ;; ファイルサイズを表示
 ( size-indication-mode t )
 
+;; 桁番号を表示
+( line-number-mode t )
+
 ;; カラム番号を表示
 ( column-number-mode t )
 
@@ -427,24 +430,28 @@
 ;;;===============================================================
 
 ;; 改行と同時にインデントする
-( global-set-key( kbd "C-m" ) 'newline-and-indent )
+( global-set-key ( kbd "C-m" ) 'newline-and-indent )
 
 ;; auto-completeの設定
-( when( require 'auto-complete-config nil t )
+( when ( require 'auto-complete-config nil t )
   ( add-to-list 'ac-dictionary-directories
     "~/.emacs.d/elisp/ac-dict")
-  ( define-key ac-mode-map( kbd "M-TAB" ) 'auto-complete )
+  ( define-key ac-mode-map ( kbd "M-TAB" ) 'auto-complete )
   ( ac-config-default ))
 
 ;; C-kで行全体を削除
-( setq kill-whole-line t )
+( defun kill-whole-line ()
+  ( interactive )
+  ( beginning-of-line )
+  ( kill-line 1 ))
+( global-set-key ( kbd "C-k" ) 'kill-whole-line )
 
 ;;;==================================================================
 ;;; moccur
 ;;;==================================================================
 
 ;; color-moccurの設定
-( when( require 'color-moccur nil t )
+( when ( require 'color-moccur nil t )
   ;; M-oにoccur-by-moccurを割当
   ( define-key global-map ( kbd "M-o" ) 'occur-by-moccur )
   ;; スペース区切りでAND検索
@@ -453,12 +460,12 @@
   ( add-to-list 'dmoccur-exclusion-mask "\\.DS_Store" )
   ( add-to-list 'dmoccur-exclusion-mask "^#.+#$")
   ;; Migemoを利用できる環境であれば使用する
-  ( when( and( executable-find "cmigemo")
-             ( Require 'migemo nil t ))
-        ( setq moccur-use-migemo t )))
+  ( when ( and( executable-find "cmigemo")
+              ( Require 'migemo nil t ))
+    ( setq moccur-use-migemo t )))
 
 ;; 要Color-moccur.el
-( when( require 'anything-c-moccur nil t )
+( when ( require 'anything-c-moccur nil t )
   ( setq
     ;; anything-c-moccur用 `anything-idle-delay'
     anything-c-moccur-anything-idle-delay 0.1
@@ -484,10 +491,10 @@
 ;;;==================================================================
 
 ;; バッファウィンドウの立て幅を調整
-( global-set-key( kbd "M-d") 'shrink-window )
-( global-set-key( kbd "M-u") 'enlarge-window )
-;;( global-set-key( kbd "M-") 'shrink-window-verticaly )
-;;( global-set-key( kbd "M-") 'shrink-window-verticaly )
+( global-set-key ( kbd "M-d") 'shrink-window )
+( global-set-key ( kbd "M-u") 'enlarge-window )
+;;( global-set-key ( kbd "M-") 'shrink-window-verticaly )
+;;( global-set-key ( kbd "M-") 'shrink-window-verticaly )
 
 ;; redo機能を追加 ( http://www.emacswiki.org/emacs/download/redo+.el )
 ( when( require 'redo+ nil t )
@@ -573,3 +580,5 @@
 
 ;; C+dにanything-for-ducumentを割当
 ( define-key global-map ( kbd "C-d" ) 'anything-for-document )
+
+;; 
