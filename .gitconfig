@@ -1,1 +1,3 @@
-/root/.gitconfig
+[user]
+	name = root
+	email = hasenfus7@gmail.com
