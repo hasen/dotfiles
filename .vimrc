@@ -13,7 +13,7 @@ set statusline=%F%r
 "シンタックスハイライトを有効にする
 syntax on
 set nohlsearch
-set cursorline
+"set cursorline
 "カラー設定を行う
 "highlight Normal ctermbg=none ctermfg=white
 highlight StatusLine term=none cterm=none ctermfg=none ctermbg=grey
