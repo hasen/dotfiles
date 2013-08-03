@@ -16,3 +16,4 @@ if [ -f /etc/bashrc ]; then
 fi
 
 PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
+source ~/perl5/perlbrew/etc/bashrc 
