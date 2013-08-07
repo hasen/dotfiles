@@ -7,16 +7,18 @@ if has('vim_starting')
   set runtimepath+=./.vim/.bundle/neobundle.vim
   call neobundle#rc(expand('./.vim/.bundle/'))
 endif
-NeoBundle 'git://github.com/Shougo/clang_complete.git'
-NeoBundle 'git://github.com/Shougo/echodoc.git'
-NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
-NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/Shougo/vim-vcs.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
-NeoBundle 'git://github.com/shougo/vimshell.git'
-NeoBundle 'git://github.com/Shougo/vinarise.git'
-NeoBundle 'git://github.com/thinca/vim-quickrun'
-NeoBundle 'git://github.com/taka84u9/vim-ref-ri'
+NeoBundle 'Shougo/clang_complete.git'
+NeoBundle 'Shougo/echodoc.git'
+NeoBundle 'Shougo/neobundle.vim.git'
+NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'Shougo/vim-vcs.git'
+NeoBundle 'Shougo/vimfiler.git'
+NeoBundle 'shougo/vimshell.git'
+NeoBundle 'Shougo/vinarise.git'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'taka84u9/vim-ref-ri'
+NeoBundle 'taka84u9/unite-git'
+NeoBundle 'ujihisa/unite-colrscheme'
 
 filetype plugin indent on
 filetype indent on
