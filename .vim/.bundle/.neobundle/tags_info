@@ -3,6 +3,7 @@ echodoc
 neobundle.vim
 powerline
 unite-git
+unite-git-conflict.vim
 unite.vim
 vim-quickrun
 vim-ref-ri

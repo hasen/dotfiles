@@ -1,12 +1,15 @@
 "Vimをなるべくvi互換にする
 set nocompatible
+
 filetype off
+
 "pathの追加
 "初期化 引数pluginをinstallする基準となるpath
 if has('vim_starting')
-  set runtimepath+=./.vim/.bundle/neobundle.vim
-  call neobundle#rc(expand('./.vim/.bundle/'))
+  set runtimepath+=~/projects/dotfiles/.vim/.bundle/neobundle.vim
+  call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
 endif
+
 "NeoBundle 'Shougo/clang_complete.git'
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/neobundle.vim.git'
@@ -21,9 +24,16 @@ NeoBundle 'taka84u9/unite-git'
 "NeoBundle 'ujihisa/unite-colrscheme'
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline',{'rtp':'powerline/bindings/vim'}
+NeoBundle 'moznion/unite-git-conflict.vim'
 
 filetype plugin indent on
 filetype indent on
+
+" font
+set encoding=utf-8
+set guifont=Ricty_for_Powerline:h10
+set guifont=Ricty:h10
+let g:Powerline_symbols='fancy'
 
 "コマンドラインモードにおける補完機能を有効にする
 set wildmenu wildmode=list:full
