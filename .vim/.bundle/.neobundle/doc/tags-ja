@@ -3,6 +3,13 @@
 :Vcs	vcs.jax	/*:Vcs*
 <Plug>(quickrun)	quickrun.jax	/*<Plug>(quickrun)*
 <Plug>(quickrun-op)	quickrun.jax	/*<Plug>(quickrun-op)*
+alpaca_powerlinetabline-changelog	alpaca_powertagline.jax	/*alpaca_powerlinetabline-changelog*
+alpaca_powerlinetabline-examples	alpaca_powertagline.jax	/*alpaca_powerlinetabline-examples*
+alpaca_powerlinetabline-introduction	alpaca_powertagline.jax	/*alpaca_powerlinetabline-introduction*
+alpaca_powerlinetabline-options	alpaca_powertagline.jax	/*alpaca_powerlinetabline-options*
+alpaca_powerlinetabline.txt	alpaca_powertagline.jax	/*alpaca_powerlinetabline.txt*
+alpaca_powertabline	alpaca_powertagline.jax	/*alpaca_powertabline*
+alpaca_powertabline-contents	alpaca_powertagline.jax	/*alpaca_powertabline-contents*
 b:quickrun_config	quickrun.jax	/*b:quickrun_config*
 g:quickrun#default_config	quickrun.jax	/*g:quickrun#default_config*
 g:quickrun_config	quickrun.jax	/*g:quickrun_config*

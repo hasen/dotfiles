@@ -1,7 +1,7 @@
-clang_complete
+alpaca_powertabline
 echodoc
 neobundle.vim
-unite-colrscheme
+powerline
 unite-git
 unite.vim
 vim-quickrun

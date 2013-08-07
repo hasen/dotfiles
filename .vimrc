@@ -7,7 +7,7 @@ if has('vim_starting')
   set runtimepath+=./.vim/.bundle/neobundle.vim
   call neobundle#rc(expand('./.vim/.bundle/'))
 endif
-NeoBundle 'Shougo/clang_complete.git'
+"NeoBundle 'Shougo/clang_complete.git'
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/neobundle.vim.git'
 NeoBundle 'Shougo/unite.vim.git'
@@ -18,7 +18,9 @@ NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'taka84u9/unite-git'
-NeoBundle 'ujihisa/unite-colrscheme'
+"NeoBundle 'ujihisa/unite-colrscheme'
+NeoBundle 'alpaca-tc/alpaca_powertabline'
+NeoBundle 'Lokaltog/powerline',{'rtp':'powerline/bindings/vim'}
 
 filetype plugin indent on
 filetype indent on
