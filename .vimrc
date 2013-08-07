@@ -1,5 +1,26 @@
 "Vimをなるべくvi互換にする
 set nocompatible
+filetype off
+"pathの追加
+"初期化 引数pluginをinstallする基準となるpath
+if has('vim_starting')
+  set runtimepath+=./.vim/.bundle/neobundle.vim
+  call neobundle#rc(expand('./.vim/.bundle/'))
+endif
+NeoBundle 'git://github.com/Shougo/clang_complete.git'
+NeoBundle 'git://github.com/Shougo/echodoc.git'
+NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+NeoBundle 'git://github.com/Shougo/unite.vim.git'
+NeoBundle 'git://github.com/Shougo/vim-vcs.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/shougo/vimshell.git'
+NeoBundle 'git://github.com/Shougo/vinarise.git'
+NeoBundle 'git://github.com/thinca/vim-quickrun'
+NeoBundle 'git://github.com/taka84u9/vim-ref-ri'
+
+filetype plugin indent on
+filetype indent on
+
 "コマンドラインモードにおける補完機能を有効にする
 set wildmenu wildmode=list:full
 "Ctrl+nでファイルを切り替える 切り替える前にファイルを保存する
