@@ -1,6 +1,5 @@
 "Vimをなるべくvi互換にする
 set nocompatible
-
 filetype off
 
 "pathの追加
@@ -22,6 +21,7 @@ NeoBundle 'Shougo/unite-ssh.git'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'petdance/vim-perl'
+"Shift+kでperldocがひける
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'taka84u9/vim-ref-ri'
@@ -50,6 +50,7 @@ let g:Powerline_symbols='fancy'
 let g:unite_enable_start_insert=1
 let g:unite_enable_split_vertically=1
 let g:unite_winwidth=25
+
 "<Nop>は空マップ(:help <nop>で確認)
 nnoremap [unite] <Nop>
 nmap     <Leader>u [unite]
@@ -99,8 +100,11 @@ endif
 let g:neocomplcache_keyword_patterns['default']='\h\w*'
 
 "for snippets
-imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplecache_snippets_expand)" : "\<C-n>"
+imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-n>"
 smap <C-k><Plug>(neocomplcache_snippets_expand)
+
+"quickrunの設定(\+rで実行)
+nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
