@@ -15,7 +15,7 @@ NeoBundle 'Shougo/neobundle.vim.git'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/vim-vcs.git'
 NeoBundle 'Shougo/vimfiler.git'
-NeoBundle 'shougo/vimshell.git'
+NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/unite-ssh.git'
 NeoBundle 'Shougo/neocomplcache'
@@ -46,9 +46,9 @@ set guifont=Ricty:h10
 let g:Powerline_symbols='fancy'
 
 "popupの背景色
-hi Pmenu ctermbg=0
-hi pmenuSel ctermbg=4
-hi PmenuSbar ctermbg=2
+hi Pmenu      ctermbg=0
+hi pmenuSel   ctermbg=4
+hi PmenuSbar  ctermbg=2
 hi PmenuThumb ctermfg=3
 
 "unite.vimの設定
@@ -84,11 +84,11 @@ let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
 "use smartcase
 let g:neocomplcache_enable_smart_case=1
 "use camel case completion
-let g:neocomplchache_enable_camel_case_completion=1
+let g:neocomplcache_enable_camel_case_completion=1
 "select with <TAB>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-let g:neocomplecache_ctags_arguments_list={
+let g:neocomplcache_ctags_arguments_list={
   \ 'perl' : '-R -h ".pm"'
   \ }
 
@@ -106,7 +106,7 @@ endif
 let g:neocomplcache_keyword_patterns['default']='\h\w*'
 
 "for snippets
-imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-n>"
+imap <expr><C-k> neocomplcache#sources#neosnippet#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-n>"
 smap <C-k><Plug>(neocomplcache_snippets_expand)
 
 "quickrunの設定(\+rで実行)
