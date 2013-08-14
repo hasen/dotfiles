@@ -12,6 +12,7 @@ endif
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/neobundle.vim.git'
 NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'Shougo/vimproc.git'
 NeoBundle 'Shougo/vim-vcs.git'
 NeoBundle 'Shougo/vimfiler.git'
 NeoBundle 'Shougo/vimshell.git'
@@ -34,7 +35,7 @@ NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
+"NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
 
 filetype plugin on
 filetype indent on
@@ -96,7 +97,7 @@ let g:neocomplcache_ctags_arguments_list={
   \ }
 
 "vim-ref用のpathを設定する
-let g:ref_phpmanual_path = $HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
+let g:ref_phpmanual_path=$HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
 let g:neocomplcache_dictionary_filetype_lists={
   \ 'default' : '',
@@ -120,15 +121,18 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+"unite-grepのバックエンドをagに切り替える
+let g:unite_source_grep_command='ag'
+let g:unite_source_grep_default_opts='--nocolor --nogroup'
+let g:unite_source_grep_recursive_opt=''
+let g:unite_source_grep_max_candidates=200
+vnoremap /g y:Unite grep::-iHRn:<C-r>=escape(@",'\\.*$^[]')<CR><CR>
+
 "quickrunの設定(\+rで実行)
 nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
-
-"backupを有効にする
-"set backup
-"set backupdir=~/Documents/vim_backups/
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
@@ -205,7 +209,7 @@ if has('syntax')
 endif
 
 "バックアップファイルを作るディレクトリ
-"set backupdir=$HOME/vimbackup
+set backupdir=$HOME/vim_backup
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
 "set browsedir=buffer 
