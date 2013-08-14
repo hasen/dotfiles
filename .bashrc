@@ -9,6 +9,7 @@ alias vi='vim'
 alias ll='ls -l'
 alias la='ls -al -G'
 alias tm='tmux attach -t'
+alias his='history'
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then

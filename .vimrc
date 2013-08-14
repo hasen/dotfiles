@@ -5,7 +5,7 @@ filetype off
 "pathの追加
 "初期化 引数pluginをinstallする基準となるpath
 if has('vim_starting')
-  set runtimepath+=~/projects/dotfiles/.vim/.bundle/neobundle.vim
+  set runtimepath+=~/projects/dotfiles/.vim/neobundle.vim
   call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
 endif
 
@@ -18,12 +18,13 @@ NeoBundle 'Shougo/vimfiler.git'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/unite-ssh.git'
-NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'petdance/vim-perl'
 "Shift+kでperldocがひける
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-ref'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'taka84u9/unite-git'
 "NeoBundle 'ujihisa/unite-colrscheme'
@@ -34,8 +35,9 @@ NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
 
-filetype plugin indent on
+filetype plugin on
 filetype indent on
 
 "font
@@ -87,11 +89,15 @@ let g:neocomplcache_enable_smart_case=1
 let g:neocomplcache_enable_camel_case_completion=1
 "select with <TAB>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
+"Plugin key_mappings
+imap <C-k><Plug>(neosnippet_expand_or_jump)
+smap <C-k><Plug>(neosnippet_expand_or_jump)
 let g:neocomplcache_ctags_arguments_list={
   \ 'perl' : '-R -h ".pm"'
   \ }
 
+"vim-ref用のpathを設定する
+let g:ref_phpmanual_path = $HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
 let g:neocomplcache_dictionary_filetype_lists={
   \ 'default' : '',
@@ -106,8 +112,14 @@ endif
 let g:neocomplcache_keyword_patterns['default']='\h\w*'
 
 "for snippets
-imap <expr><C-k> neocomplcache#sources#neosnippet#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-n>"
-smap <C-k><Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+imap <expr><C-k> pumvisible() ? "\<C-n>" :neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
+smap <expr><C-k> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
+
+"for snippet_complete marker
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 "quickrunの設定(\+rで実行)
 nmap <Leader>r <plug>(quickrun)
@@ -149,6 +161,50 @@ highlight StatusLine term=none cterm=none ctermfg=none ctermbg=grey
 set autoindent
 set smartindent
 
+"insert_mode時、status_lineの色を変更
+let g:hi_insert='highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
+if has('syntax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd=''
+function! s:StatusLine(mode)
+if a:mode == 'Enter'
+  silent! let s:slhlcmd='highlight ' . s:GetHighlight('StatusLine')
+  silent exec g:hi_insert
+else
+  highlight clear StatusLine
+  silent exec s:slhlcmd
+endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight '.a:hi
+  redir END
+  let hl=substitute(hl, '[\r\n]', '', 'g')
+  let hl=substitute(hl, 'xxx', '', '')
+return hl
+endfunction
+
+"全角スペースを表示
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
+endfunction
+
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd ColorScheme * call ZenkakuSpace()
+    autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+  augroup END
+  call ZenkakuSpace()
+endif
+
 "バックアップファイルを作るディレクトリ
 "set backupdir=$HOME/vimbackup
 
@@ -173,11 +229,8 @@ set expandtab
 "インクリメンタルサーチを行う
 set incsearch
 
-"タブ文字、行末など不可視文字を表示する
-"set list
-
 "listで表示される文字のフォーマットを指定する
-"set listchars=eol:$,tab:>\ ,extends:<
+set listchars=tab:>\
 
 "行番号を表示する
 set number
@@ -208,3 +261,4 @@ set smartcase
 
 "モードを非表示に
 set noshowmode
+

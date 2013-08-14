@@ -13,6 +13,7 @@ unite-zf
 unite.vim
 vim-perl
 vim-quickrun
+vim-ref
 vim-ref-ri
 vim-unite-ack
 vim-vcs
