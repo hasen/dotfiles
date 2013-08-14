@@ -213,9 +213,6 @@ endif
 "クリップボードをWindowsと連携
 "set clipboard=unnamed
 
-"Vi互換をオフ
-"set nocompatible
-
 "スワップファイル用のディレクトリ
 "set directory=$HOME/vimbackup
 
