@@ -37,6 +37,7 @@ NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'rking/ag.vim'
 "NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
 NeoBundle 'spolu/dwm.vim'
+NeoBundle 'mattn/emmet-vim'
 
 filetype plugin on
 filetype indent on
