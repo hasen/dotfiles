@@ -1,4 +1,3 @@
-"Vimをなるべくvi互換にする
 set nocompatible
 filetype off
 
@@ -43,9 +42,9 @@ filetype indent on
 "font
 set encoding=utf-8
 set fileencoding=utf-8
-set guifont=Ricty_for_Powerline:h10
-set guifont=Ricty:h10
-let g:Powerline_symbols='fancy'
+"set guifont=Ricty_for_Powerline:h10
+"set guifont=Ricty:h10
+"let g:Powerline_symbols='fancy'
 
 "popupの背景色
 hi Pmenu      ctermbg=0
@@ -54,8 +53,8 @@ hi PmenuSbar  ctermbg=2
 hi PmenuThumb ctermfg=3
 
 "unite.vimの設定
-"起動時にインサートモードで開始
-let g:unite_enable_start_insert=1
+"起動時にインサートモードで開始しない
+let g:unite_enable_start_insert=0
 let g:unite_enable_split_vertically=1
 let g:unite_winwidth=25
 
