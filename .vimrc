@@ -36,6 +36,7 @@ NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'rking/ag.vim'
 "NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
+NeoBundle 'spolu/dwm.vim'
 
 filetype plugin on
 filetype indent on
@@ -133,6 +134,21 @@ nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
+
+"spolu/dwm.vim(ウィンド型タイルマネージャ)の設定
+nnoremap <C-j> <C-w>w
+nnoremap <C-k> <C-w>W
+nmap <M-r> <Plug>DWMRotateCounterclockwise
+nmap <M-t> <Plug>DWMRotateClockwise
+nmap <C-n> <Plug>DWMNew
+nmap <C-n> <Plug>DWMClose
+nmap <C-@> <Plug>DWMFocus
+nmap <C-Space> <Plug>DWMFocus
+nmap <C-l> <Plug>DWMGrowMaster
+nmap <C-h> <Plug>DWMShrinkMaster
+"Unite設定
+noremap zp :Unite buffer_tab file_mru<CR>
+noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
