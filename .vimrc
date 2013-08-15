@@ -38,6 +38,10 @@ NeoBundle 'rking/ag.vim'
 "NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 'mattn/emmet-vim'
+"NeoBundle 'mattn/ctrlp-hotentry'
+"NeoBundle 'mattn/ctrlp-google'
+"(:help fugitiveで確認)
+NeoBundle 'tpope/vim-fugitive'
 
 filetype plugin on
 filetype indent on
@@ -174,7 +178,7 @@ set nohlsearch
 
 "カラー設定を行う
 "highlight Normal ctermbg=none ctermfg=white
-highlight StatusLine term=none cterm=none ctermfg=none ctermbg=grey
+highlight StatusLine term=none cterm=none ctermfg=0 ctermbg=255
 "highlight CursorLine term=none cterm=none ctermfg=none  ctermbg=grey
 
 "新しい行のインデントを現在行と同じにする
@@ -182,7 +186,7 @@ set autoindent
 set smartindent
 
 "insert_mode時、status_lineの色を変更
-let g:hi_insert='highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
+let g:hi_insert='highlight StatusLine ctermfg=0 ctermbg=190 cterm=none'
 if has('syntax')
   augroup InsertHook
     autocmd!
