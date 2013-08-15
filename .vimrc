@@ -62,7 +62,7 @@ hi PmenuThumb ctermfg=3
 "unite.vimの設定
 "起動時にインサートモードで開始しない
 let g:unite_enable_start_insert=0
-let g:unite_enable_split_vertically=1
+let g:unite_enable_split_vertically=0
 let g:unite_winwidth=25
 
 "<Nop>は空マップ(:help <nop>で確認)
