@@ -280,3 +280,5 @@ set smartcase
 "モードを非表示に
 set noshowmode
 
+"特定のディレクトリ以下だけの設定
+"autocmd BufNewfile,BufRead /path/to/project/*.php set noexpandtab
