@@ -9,6 +9,7 @@ alias ll='ls -l'
 alias la='ls -al -G'
 alias tm='tmux attach -t'
 alias his='history'
+alias preview='open -a Preview'
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
