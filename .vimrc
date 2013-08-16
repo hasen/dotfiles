@@ -73,9 +73,9 @@ autocmd  FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 nnoremap [unite]u :<C-u>Unite -no-split<Space>
 nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
 nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
-nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
-nnoremap <silent> [unite]c :<C-u>Unite<Space>-auto-preview<Space>colorscheme<CR>
+"nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+"nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
+"nnoremap <silent> [unite]c :<C-u>Unite<Space>-auto-preview<Space>colorscheme<CR>
 nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
 nnoremap <silent> ,vr :UniteResume<CR>
 
@@ -84,17 +84,20 @@ nnoremap <silent> ,vr :UniteResume<CR>
 let g:acp_enableAtStartup=0
 "use neocomplcache
 let g:neocomplcache_enable_at_startup=1
-"use underbar completion
-let g:neocomplcache_enable_underbar_completion=1
 "set minimum syntax keyword length
 let g:neocomplcache_min_syntax_length=3
 let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
+let g:neocomplcache_enable_ignore_case=1
 "use smartcase
 let g:neocomplcache_enable_smart_case=1
 "use camel case completion
 let g:neocomplcache_enable_camel_case_completion=1
+"use underbar completion
+let g:neocomplcache_enable_underbar_completion=1
 "select with <TAB>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"close with <CR>
+inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 "Plugin key_mappings
 imap <C-k><Plug>(neosnippet_expand_or_jump)
 smap <C-k><Plug>(neosnippet_expand_or_jump)
@@ -104,6 +107,7 @@ let g:neocomplcache_ctags_arguments_list={
 
 "vim-ref用のpathを設定する
 let g:ref_phpmanual_path=$HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
+let g:neocomplcache_snippets_disable_runtime_snippets=1
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
 let g:neocomplcache_dictionary_filetype_lists={
   \ 'default' : '',
@@ -114,8 +118,13 @@ let g:neocomplcache_dictionary_filetype_lists={
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns={}
 endif
-
 let g:neocomplcache_keyword_patterns['default']='\h\w*'
+let g:neocomplcache_delimiter_patterns['php']=['->', '::', '\']
+
+"file type
+if !exists('g:neocomplcache_same_filetype_lists')
+  let g:neocomplcache_same_filetype_lists={}
+endif
 
 "for snippets
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
@@ -139,7 +148,6 @@ nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
-
 "spolu/dwm.vim(ウィンド型タイルマネージャ)の設定
 nnoremap <C-j> <C-w>w
 nnoremap <C-k> <C-w>W
@@ -154,6 +162,7 @@ nmap <C-h> <Plug>DWMShrinkMaster
 "Unite設定
 noremap zp :Unite buffer_tab file_mru<CR>
 noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
+noremap zh :Unite file<CR>
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
