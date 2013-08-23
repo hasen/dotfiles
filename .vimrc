@@ -182,7 +182,7 @@ set statusline=%F%r
 
 "シンタックスハイライトを有効にする
 syntax on
-set nohlsearch
+"set nohlsearch
 "set cursorline
 
 "カラー設定を行う
@@ -258,6 +258,9 @@ set expandtab
 
 "インクリメンタルサーチを行う
 set incsearch
+
+"該当箇所の背景色を変化させる
+set hlsearch
 
 "listで表示される文字のフォーマットを指定する
 set listchars=tab:>\
