@@ -44,7 +44,7 @@ NeoBundle 'mattn/calendar-vim'
 "NeoBundle 'mattn/ctrlp-google'
 "(:help fugitiveで確認)
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'itchyny/lightline.vim'
+"NeoBundle 'itchyny/lightline.vim'
 
 filetype plugin on
 filetype indent on
@@ -181,7 +181,7 @@ set wildmenu wildmode=list:full
 
 "常にステータスラインを表示する
 set laststatus=2
-set statusline=%F%r
+set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]%=%c-%l%5p%%\ \ \ \ \ 
 
 "シンタックスハイライトを有効にする
 syntax on
@@ -196,63 +196,60 @@ highlight StatusLine term=none cterm=none ctermfg=0 ctermbg=255
 "highlight CursorLine term=none cterm=none ctermfg=none  ctermbg=grey
 
 "lightlineの設定を行う
-let g:lightline = {
-      \ 'colorscheme': 'landscape',
-      \ 'mode_map': { 'c': 'NORMAL' },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'modified': 'MyModified',
-      \   'readonly': 'MyReadonly',
-      \   'fugitive': 'MyFugitive',
-      \   'filename': 'MyFilename',
-      \   'fileformat': 'MyFileformat',
-      \   'filetype': 'MyFiletype',
-      \   'fileencoding': 'MyFileencoding',
-      \   'mode': 'MyMode',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-
-function! MyModified()
-     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-  
-function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
-endfunction
-    
-function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-            \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-            \  &ft == 'unite' ? unite#get_status_string() : 
-            \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') : 
-            \ '' != expand('%t') ? expand('%t') : '[No Name]') .
-            \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-      
-function! MyFugitive()
-    return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
-endfunction
-        
-function! MyFileformat()
-    return winwidth('.') > 70 ? &fileformat : ''
-endfunction
-          
-function! MyFiletype()
-    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-            
-function! MyFileencoding()
-    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-              
-function! MyMode()
-    return winwidth('.') > 60 ? lightline#mode() : ''
-endfunction
-}
+"let g:lightline = {
+"      \ 'colorscheme': 'solarized',
+"      \ 'mode_map': { 'c': 'NORMAL' },
+"      \ 'active': {
+"      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+"      \ },
+"      \ 'component_function': {
+"      \   'modified': 'MyModified',
+"      \   'readonly': 'MyReadonly',
+"      \   'fugitive': 'MyFugitive',
+"      \   'filename': 'MyFilename',
+"      \   'fileformat': 'MyFileformat',
+"      \   'filetype': 'MyFiletype',
+"      \   'fileencoding': 'MyFileencoding',
+"      \   'mode': 'MyMode',
+"      \ }
+"
+"function! MyModified()
+"     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+"endfunction
+"  
+"function! MyReadonly()
+"    return &ft !~? 'help\|vimfiler\|gundo' && ''
+"endfunction
+"    
+"function! MyFilename()
+"    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+"            \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+"            \  &ft == 'unite' ? unite#get_status_string() : 
+"            \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') : 
+"            \ '' != expand('%t') ? expand('%t') : '[No Name]') .
+"            \ ('' != MyModified() ? ' ' . MyModified() : '')
+"endfunction
+"      
+"function! MyFugitive()
+"    return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head()) ' '.fugitive#head() : ''
+"endfunction
+"        
+"function! MyFileformat()
+"    return winwidth('.') > 70 ? &fileformat : ''
+"endfunction
+"          
+"function! MyFiletype()
+"    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+"endfunction
+"            
+"function! MyFileencoding()
+"    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+"endfunction
+"              
+"function! MyMode()
+"    return winwidth('.') > 60 ? lightline#mode() : ''
+"endfunction
+"}
 
 "新しい行のインデントを現在行と同じにする
 set autoindent
@@ -333,9 +330,10 @@ set number
 "set shiftwidth=4
 
 "閉じ括弧が入力されたとき、対応する括弧を表示する
-set showmatch
+set showmatch matchtime=1
 
 "検索時に大文字を含んでいたら大/小を区別
+set ignorecase
 set smartcase
 
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
@@ -355,3 +353,8 @@ set noshowmode
 
 "特定のディレクトリ以下だけの設定
 "autocmd BufNewfile,BufRead /path/to/project/*.php set noexpandtab
+
+"コマンドラインの高さ
+set cmdheight=2
+set laststatus=2
+
