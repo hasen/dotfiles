@@ -21,4 +21,4 @@ PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
 source ~/perl5/perlbrew/etc/bashrc 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 
-
+PYTHONPATH=$PYTHONPATH:/usr/bin/python2.7

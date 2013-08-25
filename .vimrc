@@ -29,7 +29,7 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'taka84u9/unite-git'
 "NeoBundle 'ujihisa/unite-colrscheme'
-NeoBundle 'alpaca-tc/alpaca_powertabline'
+"NeoBundle 'alpaca-tc/alpaca_powertabline'
 "NeoBundle 'Lokaltog/powerline',{'rtp':'powerline/bindings/vim'}
 NeoBundle 'moznion/unite-git-conflict.vim'
 NeoBundle 'heavenshell/unite-zf.git'
@@ -39,10 +39,12 @@ NeoBundle 'rking/ag.vim'
 "NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'mattn/calendar-vim'
 "NeoBundle 'mattn/ctrlp-hotentry'
 "NeoBundle 'mattn/ctrlp-google'
 "(:help fugitiveで確認)
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'itchyny/lightline.vim'
 
 filetype plugin on
 filetype indent on
@@ -50,9 +52,9 @@ filetype indent on
 "font
 set encoding=utf-8
 set fileencoding=utf-8
-"set guifont=Ricty_for_Powerline:h10
-"set guifont=Ricty:h10
-"let g:Powerline_symbols='fancy'
+set guifont=Ricty_for_Powerline:h10
+set guifont=Ricty:h10
+let g:Powerline_symbols='fancy'
 
 "popupの背景色
 hi Pmenu      ctermbg=0
@@ -192,6 +194,65 @@ set hlsearch
 "highlight Normal ctermbg=none ctermfg=white
 highlight StatusLine term=none cterm=none ctermfg=0 ctermbg=255
 "highlight CursorLine term=none cterm=none ctermfg=none  ctermbg=grey
+
+"lightlineの設定を行う
+let g:lightline = {
+      \ 'colorscheme': 'landscape',
+      \ 'mode_map': { 'c': 'NORMAL' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'modified': 'MyModified',
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+  
+function! MyReadonly()
+    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+endfunction
+    
+function! MyFilename()
+    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+            \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+            \  &ft == 'unite' ? unite#get_status_string() : 
+            \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') : 
+            \ '' != expand('%t') ? expand('%t') : '[No Name]') .
+            \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+      
+function! MyFugitive()
+    return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+endfunction
+        
+function! MyFileformat()
+    return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+          
+function! MyFiletype()
+    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+            
+function! MyFileencoding()
+    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+              
+function! MyMode()
+    return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
+}
 
 "新しい行のインデントを現在行と同じにする
 set autoindent
