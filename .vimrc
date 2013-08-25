@@ -1,3 +1,4 @@
+"vi互換にしない
 set nocompatible
 filetype off
 
