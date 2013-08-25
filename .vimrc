@@ -181,7 +181,7 @@ set wildmenu wildmode=list:full
 
 "常にステータスラインを表示する
 set laststatus=2
-set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]%=%c-%l%5p%%\ \ \ \ \ 
+set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]%=row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
 
 "シンタックスハイライトを有効にする
 syntax on
