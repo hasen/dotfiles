@@ -52,9 +52,9 @@ filetype indent on
 "font
 set encoding=utf-8
 set fileencoding=utf-8
-set guifont=Ricty_for_Powerline:h10
+"set guifont=Ricty_for_Powerline:h10
 set guifont=Ricty:h10
-let g:Powerline_symbols='fancy'
+"let g:Powerline_symbols='fancy'
 
 "popupの背景色
 hi Pmenu      ctermbg=0
@@ -165,7 +165,7 @@ nmap <C-h> <Plug>DWMShrinkMaster
 "Unite設定
 noremap zp :Unite buffer_tab file_mru<CR>
 noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
-noremap zh :Unite file<CR>
+noremap zf :Unite file<CR>
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
@@ -327,7 +327,7 @@ set listchars=tab:>\
 set number
 
 "シフト移動幅
-"set shiftwidth=4
+set shiftwidth=2
 
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch matchtime=1
@@ -358,3 +358,7 @@ set noshowmode
 set cmdheight=2
 set laststatus=2
 
+"ESCキーの待ちをなくす
+let &t_SI .= "\e[?7727h"
+let &t_EI .= "\e[?7727l"
+inoremap <special> <Esc>O[ <Esc>
