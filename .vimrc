@@ -311,8 +311,17 @@ set backupdir=$HOME/vim_backup
 "スワップファイル用のディレクトリ
 "set directory=$HOME/vimbackup
 
+"行頭の余白内でTabを打ち込むと'shiftwidth'の数だけインデントする
+set smarttab
+
 "タブの代わりに空白文字を挿入する
 set expandtab
+
+"ファイル内の <Tab> が対応する空白の数
+set tabstop=2
+
+"シフト移動幅
+set shiftwidth=2
 
 "変更中のファイルでも、保存しないで他のファイルを表示
 "set hidden
@@ -326,21 +335,12 @@ set listchars=tab:>\
 "行番号を表示する
 set number
 
-"シフト移動幅
-set shiftwidth=2
-
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch matchtime=1
 
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase
 set smartcase
-
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
-"set smarttab
-
-"ファイル内の <Tab> が対応する空白の数
-"set tabstop=4
 
 "カーソルを行頭、行末で止まらないようにする
 "set whichwrap=b,s,h,l,<,>,[,]
@@ -362,3 +362,19 @@ set laststatus=2
 let &t_SI .= "\e[?7727h"
 let &t_EI .= "\e[?7727l"
 inoremap <special> <Esc>O[ <Esc>
+
+"無限undo
+if has( 'persistent_undo' )
+    set undodir=~/.vim/undo
+    set undofile
+endif   
+
+"カーソルを自動的に括弧の中へ
+imap {} {}<Left>
+imap [] []<Left>
+imap () ()<Left>
+imap "" ""<Left>
+imap '' ''<Left>
+imap <> <><Left>
+imap // //<Left>
+imap /// ///<Left>
