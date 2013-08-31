@@ -195,6 +195,11 @@ set hlsearch
 highlight StatusLine term=none cterm=none ctermfg=0 ctermbg=255
 "highlight CursorLine term=none cterm=none ctermfg=none  ctermbg=grey
 
+"日本語入力時にカーソルの色を帰る
+if has('multi_byte_ime')||('xie')
+  highlight CursorIM guibg=Purple guifg=NONE
+endif
+
 "lightlineの設定を行う
 "let g:lightline = {
 "      \ 'colorscheme': 'solarized',
