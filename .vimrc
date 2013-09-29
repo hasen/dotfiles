@@ -40,11 +40,18 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mattn/calendar-vim'
+NeoBundle 'mattn/perlvalidate-vim.git'
 "NeoBundle 'mattn/ctrlp-hotentry'
 "NeoBundle 'mattn/ctrlp-google'
 "(:help fugitiveで確認)
 NeoBundle 'tpope/vim-fugitive'
 "NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'rhysd/accelerated-jk'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'c9s/perlomni.vim'
+NeoBundle 'vim-perl/vim-perl'
+NeoBundle 'airblade/vim-gitgutter'
 
 filetype plugin on
 filetype indent on
@@ -178,6 +185,7 @@ set wildmenu wildmode=list:full
 "imap :update:bn
 "vmap :update:bn
 "cmap :update:bn
+cmap w!! w !sudo tee > /dev/null %
 
 "常にステータスラインを表示する
 set laststatus=2
@@ -267,6 +275,17 @@ if has('syntax')
     autocmd!
     autocmd InsertEnter * call s:StatusLine('Enter')
     autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+if has('syntax')
+  augroup filetypedetect
+    au BufNewFile,BufRead cpanfile setf perl
+    au BufNewFile,BufRead *.psgi   setf perl
+    au BufNewFile,BufRead *.t      setf perl
+    au BufNewFile,BufRead *.tt     setf tt2html
+    au BufNewFile,BufRead *.tt2    setf tt2html
+    au BufNewFile,BufRead
   augroup END
 endif
 
@@ -363,6 +382,11 @@ set noshowmode
 set cmdheight=2
 set laststatus=2
 
+"jkを加速する
+let g:accelerated_jk_acceleration_table = [10,5,3]
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+
 "ESCキーの待ちをなくす
 let &t_SI .= "\e[?7727h"
 let &t_EI .= "\e[?7727l"
@@ -383,3 +407,4 @@ imap '' ''<Left>
 imap <> <><Left>
 "imap // //<Left>
 imap /// ///<Left>
+imap `` ``<Left>
