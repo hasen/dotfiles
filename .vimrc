@@ -1,4 +1,6 @@
-"vi互換にしない
+"Vim7.4から$HOME/.vimrcが$HOME/.vim/vimrcに配置変更
+"vi互換にしない VimがVimとして動作する
+"但しvimrcがあるとVimは自動的にcompatibleオプションがoffになる
 set nocompatible
 filetype off
 
