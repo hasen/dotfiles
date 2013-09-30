@@ -45,7 +45,7 @@ NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
 "NeoBundle 'mattn/ctrlp-hotentry'
 "NeoBundle 'mattn/ctrlp-google'
-"(:help fugitiveで確認)
+":help fugitiveで確認
 NeoBundle 'tpope/vim-fugitive'
 "NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'rhysd/accelerated-jk'
@@ -54,6 +54,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'terryma/vim-multiple-cursors'
 
 filetype plugin on
 filetype indent on
