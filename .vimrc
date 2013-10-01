@@ -2,7 +2,9 @@
 "vi互換にしない VimがVimとして動作する
 "但しvimrcがあるとVimは自動的にcompatibleオプションがoffになる
 set nocompatible
-filetype off
+
+filetype plugin off
+filetype indent off
 
 "pathの追加
 "初期化 引数pluginをinstallする基準となるpath
@@ -11,19 +13,15 @@ if has('vim_starting')
   call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
 endif
 
-"NeoBundleをNeoBundleで管理
-"NeoBundleFetch 'Shougo/neobundle.vim'
-
-"NeoBundle 'Shougo/clang_complete.git'
 NeoBundle 'Shougo/echodoc.git'
-NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'Shougo/unite-ssh.git'
+NeoBundle 'Shougo/unite-outline.git'
 NeoBundle 'Shougo/vimproc.git'
 NeoBundle 'Shougo/vim-vcs.git'
 NeoBundle 'Shougo/vimfiler.git'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
-NeoBundle 'Shougo/unite-ssh.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'petdance/vim-perl'
@@ -57,6 +55,8 @@ NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'shawncplus/php.vim'
+NeoBundle 'snipMate'
 ""http://d.hatena.ne.jp/osyo-manga/20130717/1374069987
 "NeoBundle 'kana/vim-textobj-user'
 "NeoBundle 'kana/vim-textobj-function-perl'
@@ -65,6 +65,7 @@ NeoBundle 'honza/vim-snippets'
 "NeoBundle 'deris/vim-textobj-enclosedsyntax'
 "NeoBundle 'vimtaku/vim-textobj-sigil'
 
+filetype on
 filetype plugin on
 filetype indent on
 
@@ -96,6 +97,7 @@ nnoremap [unite]u :<C-u>Unite -no-split<Space>
 nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
 nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
+nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
 nnoremap <silent> ,vr :UniteResume<CR>
 
 "補完ウィンドウの設定
@@ -228,62 +230,6 @@ if has('multi_byte_ime')||('xie')
   highlight CursorIM guibg=Purple guifg=NONE
 endif
 
-"lightlineの設定を行う
-"let g:lightline = {
-"      \ 'colorscheme': 'solarized',
-"      \ 'mode_map': { 'c': 'NORMAL' },
-"      \ 'active': {
-"      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-"      \ },
-"      \ 'component_function': {
-"      \   'modified': 'MyModified',
-"      \   'readonly': 'MyReadonly',
-"      \   'fugitive': 'MyFugitive',
-"      \   'filename': 'MyFilename',
-"      \   'fileformat': 'MyFileformat',
-"      \   'filetype': 'MyFiletype',
-"      \   'fileencoding': 'MyFileencoding',
-"      \   'mode': 'MyMode',
-"      \ }
-"
-"function! MyModified()
-"     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-"endfunction
-"  
-"function! MyReadonly()
-"    return &ft !~? 'help\|vimfiler\|gundo' && ''
-"endfunction
-"    
-"function! MyFilename()
-"    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-"            \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-"            \  &ft == 'unite' ? unite#get_status_string() : 
-"            \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') : 
-"            \ '' != expand('%t') ? expand('%t') : '[No Name]') .
-"            \ ('' != MyModified() ? ' ' . MyModified() : '')
-"endfunction
-"      
-"function! MyFugitive()
-"    return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head()) ' '.fugitive#head() : ''
-"endfunction
-"        
-"function! MyFileformat()
-"    return winwidth('.') > 70 ? &fileformat : ''
-"endfunction
-"          
-"function! MyFiletype()
-"    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-"endfunction
-"            
-"function! MyFileencoding()
-"    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-"endfunction
-"              
-"function! MyMode()
-"    return winwidth('.') > 60 ? lightline#mode() : ''
-"endfunction
-"}
-
 "新しい行のインデントを現在行と同じにする
 set autoindent
 set smartindent
@@ -351,8 +297,14 @@ set backupdir=$HOME/vim_backup
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
 "set browsedir=buffer 
 
-"クリップボードをWindowsと連携
-"set clipboard=unnamed
+"クリップボードを連携
+set clipboard=unnamed,autoselect
+
+"マウスモード有効
+set mouse=a
+
+"xtermとscreen対応
+set ttymouse=xterm2
 
 "スワップファイル用のディレクトリ
 "set directory=$HOME/vimbackup
@@ -375,6 +327,9 @@ set shiftwidth=2
 "インクリメンタルサーチを行う
 set incsearch
 
+"サーチハイライトをESC２回で消す
+nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
+
 "listで表示される文字のフォーマットを指定する
 set listchars=tab:>\
 
@@ -387,12 +342,6 @@ set showmatch matchtime=1
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase
 set smartcase
-
-"カーソルを行頭、行末で止まらないようにする
-"set whichwrap=b,s,h,l,<,>,[,]
-
-"検索をファイルの先頭へループしない
-"set nowrapscan
 
 "モードを非表示に
 set noshowmode
@@ -430,3 +379,42 @@ imap <> <><Left>
 "imap // //<Left>
 imap /// ///<Left>
 imap `` ``<Left>
+
+"gfでカーソル下のファイル名を新しいタブで開く
+nnoremap gf :tab <cfile><CR>
+vnoremap gf :tab <cfile><CR>
+
+"検索語が画面中央に来るように
+nmap n nzz
+nmap N Nzz
+
+" :makeや:grepをした際に自動的にquickfixが開くようにする
+autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd if len(getqflist()) != 0 | cw | endif
+
+"ctagsのファイルをカレントディレクトリから検索して上位にあるもの読み込む
+if has('path_extra')
+set tags+=tags;
+endif
+
+"vimファイルに関して{と}による折りたたみ設定をする
+au FileType vim setlocal foldmethod=marker
+"
+" :makeでPHP構文チェック
+au FileType php setlocal makeprg=php\ -l\ %
+au FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+
+" 文字列の中のSQLをハイライト
+let php_sql_query = 1
+
+" Baselibメソッドのハイライト
+let php_baselib = 1
+
+" HTMLもハイライト
+let php_htmlInStrings = 1
+
+" <? を無効にする→ハイライト除外にする
+let php_noShortTags = 1
+
+" ] や ) の対応エラーをハイライト
+let php_parent_error_close = 1
+let php_parent_error_open = 1
