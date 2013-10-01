@@ -11,9 +11,12 @@ if has('vim_starting')
   call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
 endif
 
+"NeoBundleをNeoBundleで管理
+"NeoBundleFetch 'Shougo/neobundle.vim'
+
 "NeoBundle 'Shougo/clang_complete.git'
 NeoBundle 'Shougo/echodoc.git'
-NeoBundle 'Shougo/neobundle.vim.git'
+NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/vimproc.git'
 NeoBundle 'Shougo/vim-vcs.git'
@@ -22,9 +25,8 @@ NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/unite-ssh.git'
 NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'petdance/vim-perl'
-"Shift+kでperldocがひける
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
@@ -45,7 +47,6 @@ NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
 "NeoBundle 'mattn/ctrlp-hotentry'
 "NeoBundle 'mattn/ctrlp-google'
-":help fugitiveで確認
 NeoBundle 'tpope/vim-fugitive'
 "NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'rhysd/accelerated-jk'
@@ -55,6 +56,14 @@ NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'honza/vim-snippets'
+""http://d.hatena.ne.jp/osyo-manga/20130717/1374069987
+"NeoBundle 'kana/vim-textobj-user'
+"NeoBundle 'kana/vim-textobj-function-perl'
+"NeoBundle 'kana/vim-operator-user.git'
+""regex treat as text objs
+"NeoBundle 'deris/vim-textobj-enclosedsyntax'
+"NeoBundle 'vimtaku/vim-textobj-sigil'
 
 filetype plugin on
 filetype indent on
@@ -86,11 +95,11 @@ autocmd  FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 nnoremap [unite]u :<C-u>Unite -no-split<Space>
 nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
 nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
-"nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-"nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
-"nnoremap <silent> [unite]c :<C-u>Unite<Space>-auto-preview<Space>colorscheme<CR>
 nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
 nnoremap <silent> ,vr :UniteResume<CR>
+
+"補完ウィンドウの設定
+set completeopt=menuone
 
 "neocomplchacheの設定
 "disable AutoComplPop
@@ -114,6 +123,8 @@ inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 "Plugin key_mappings
 imap <C-k><Plug>(neosnippet_expand_or_jump)
 smap <C-k><Plug>(neosnippet_expand_or_jump)
+xmap <C-k><Plug>(neosnippet_expand_target)
+
 let g:neocomplcache_ctags_arguments_list={
   \ 'perl' : '-R -h ".pm"'
   \ }
@@ -132,7 +143,7 @@ if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns={}
 endif
 let g:neocomplcache_keyword_patterns['default']='\h\w*'
-let g:neocomplcache_delimiter_patterns['php']=['->', '::', '\']
+"let g:neocomplcache_delimiter_patterns['php']=['->', '::', '\']
 
 "file type
 if !exists('g:neocomplcache_same_filetype_lists')
@@ -148,6 +159,12 @@ smap <expr><C-k> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : 
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+"enable snipMate compatibility feature
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+"tell neosnippet about the otherr snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 "unite-grepのバックエンドをagに切り替える
 let g:unite_source_grep_command='ag'
@@ -192,7 +209,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 "常にステータスラインを表示する
 set laststatus=2
-set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]%=row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
+set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
 
 "シンタックスハイライトを有効にする
 syntax on
@@ -283,14 +300,16 @@ endif
 
 if has('syntax')
   augroup filetypedetect
-    au BufNewFile,BufRead cpanfile setf perl
     au BufNewFile,BufRead *.psgi   setf perl
     au BufNewFile,BufRead *.t      setf perl
     au BufNewFile,BufRead *.tt     setf tt2html
     au BufNewFile,BufRead *.tt2    setf tt2html
-    au BufNewFile,BufRead
+    au BufNewFile,BufRead cpanfile setf perl
   augroup END
 endif
+
+nnoremap ,pt <Esc>:%! perltidy -se<CR>
+vnoremap ,pt <Esc>:'<,'! perltidy -se<CR>
 
 let s:slhlcmd=''
 function! s:StatusLine(mode)
@@ -397,8 +416,8 @@ inoremap <special> <Esc>O[ <Esc>
 
 "無限undo
 if has( 'persistent_undo' )
-    set undodir=~/.vim/undo
-    set undofile
+  set undodir=~/.vim/undo
+  set undofile
 endif   
 
 "カーソルを自動的に括弧の中へ
