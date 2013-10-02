@@ -1,12 +1,14 @@
 [user]
 	name  = hasen
 	email = hasenfus7@gmail.com
+
 [color]        
   diff        = auto
   status      = auto
   branch      = auto
   interactive = auto
   grep        = auto
+
 [alias]
   st  = status -sb
   ad  = add
@@ -16,6 +18,6 @@
   br  = branch -a
   lp  = log -p
   gr  = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-  di  = diff --color-words
+  df  = diff --color-words
   gp  = grep -n 
   bl  = blame

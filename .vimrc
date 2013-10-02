@@ -30,23 +30,16 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'taka84u9/unite-git'
-"NeoBundle 'ujihisa/unite-colrscheme'
-"NeoBundle 'alpaca-tc/alpaca_powertabline'
-"NeoBundle 'Lokaltog/powerline',{'rtp':'powerline/bindings/vim'}
 NeoBundle 'moznion/unite-git-conflict.vim'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'rking/ag.vim'
-"NeoBundle 'https://bitbhucket.org/ns9tks/vim-fuzzyfinder'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
-"NeoBundle 'mattn/ctrlp-hotentry'
-"NeoBundle 'mattn/ctrlp-google'
 NeoBundle 'tpope/vim-fugitive'
-"NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
@@ -57,13 +50,6 @@ NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'shawncplus/php.vim'
 NeoBundle 'snipMate'
-""http://d.hatena.ne.jp/osyo-manga/20130717/1374069987
-"NeoBundle 'kana/vim-textobj-user'
-"NeoBundle 'kana/vim-textobj-function-perl'
-"NeoBundle 'kana/vim-operator-user.git'
-""regex treat as text objs
-"NeoBundle 'deris/vim-textobj-enclosedsyntax'
-"NeoBundle 'vimtaku/vim-textobj-sigil'
 
 filetype on
 filetype plugin on
@@ -72,9 +58,6 @@ filetype indent on
 "font
 set encoding=utf-8
 set fileencoding=utf-8
-"set guifont=Ricty_for_Powerline:h10
-set guifont=Ricty:h10
-"let g:Powerline_symbols='fancy'
 
 "popupの背景色
 hi Pmenu      ctermbg=0
@@ -99,6 +82,11 @@ nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
 nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
 nnoremap <silent> ,vr :UniteResume<CR>
+
+"Unite設定
+noremap zp :Unite buffer_tab file_mru<CR>
+noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
+noremap zf :Unite file<CR>
 
 "補完ウィンドウの設定
 set completeopt=menuone
@@ -180,6 +168,7 @@ nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
+
 "spolu/dwm.vim(ウィンド型タイルマネージャ)の設定
 nnoremap <C-j> <C-w>w
 nnoremap <C-k> <C-w>W
@@ -191,10 +180,6 @@ nmap <C-@> <Plug>DWMFocus
 nmap <C-Space> <Plug>DWMFocus
 nmap <C-l> <Plug>DWMGrowMaster
 nmap <C-h> <Plug>DWMShrinkMaster
-"Unite設定
-noremap zp :Unite buffer_tab file_mru<CR>
-noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
-noremap zf :Unite file<CR>
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
@@ -207,7 +192,6 @@ set wildmenu wildmode=list:full
 "imap :update:bn
 "vmap :update:bn
 "cmap :update:bn
-cmap w!! w !sudo tee > /dev/null %
 
 "常にステータスラインを表示する
 set laststatus=2
@@ -215,8 +199,10 @@ set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %
 
 "シンタックスハイライトを有効にする
 syntax on
+
 "該当箇所の背景色を変化させる
 set hlsearch
+
 "cursorlineを表示する
 "set cursorline
 
@@ -225,7 +211,7 @@ set hlsearch
 highlight StatusLine term=none cterm=none ctermfg=0 ctermbg=255
 "highlight CursorLine term=none cterm=none ctermfg=none  ctermbg=grey
 
-"日本語入力時にカーソルの色を帰る
+"日本語入力時にカーソルの色を変える
 if has('multi_byte_ime')||('xie')
   highlight CursorIM guibg=Purple guifg=NONE
 endif
@@ -300,9 +286,6 @@ set backupdir=$HOME/vim_backup
 "クリップボードを連携
 set clipboard=unnamed,autoselect
 
-"マウスモード有効
-set mouse=a
-
 "xtermとscreen対応
 set ttymouse=xterm2
 
@@ -323,6 +306,9 @@ set shiftwidth=2
 
 "変更中のファイルでも、保存しないで他のファイルを表示
 "set hidden
+
+"書き込み権限のないファイルの場合
+cmap w!! w !sudo tee > /dev/null %
 
 "インクリメンタルサーチを行う
 set incsearch
@@ -364,21 +350,22 @@ let &t_EI .= "\e[?7727l"
 inoremap <special> <Esc>O[ <Esc>
 
 "無限undo
-if has( 'persistent_undo' )
+if has('persistent_undo')
   set undodir=~/.vim/undo
   set undofile
 endif   
 
 "カーソルを自動的に括弧の中へ
+imap () ()<Left>
 imap {} {}<Left>
 imap [] []<Left>
-imap () ()<Left>
-imap "" ""<Left>
 imap '' ''<Left>
+imap "" ""<Left>
 imap <> <><Left>
 "imap // //<Left>
 imap /// ///<Left>
 imap `` ``<Left>
+imap ** **<Left>
 
 "gfでカーソル下のファイル名を新しいタブで開く
 nnoremap gf :tab <cfile><CR>
@@ -403,18 +390,18 @@ au FileType vim setlocal foldmethod=marker
 au FileType php setlocal makeprg=php\ -l\ %
 au FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 
+" HTMLもハイライト
+let php_htmlInStrings=1
+
 " 文字列の中のSQLをハイライト
-let php_sql_query = 1
+let php_sql_query=1
 
 " Baselibメソッドのハイライト
-let php_baselib = 1
+let php_baselib=1
 
-" HTMLもハイライト
-let php_htmlInStrings = 1
-
-" <? を無効にする→ハイライト除外にする
-let php_noShortTags = 1
+" <? を無効にする(ハイライト除外にする)
+let php_noShortTags=1
 
 " ] や ) の対応エラーをハイライト
-let php_parent_error_close = 1
-let php_parent_error_open = 1
+let php_parent_error_close=1
+let php_parent_error_open=1
