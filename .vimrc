@@ -66,8 +66,8 @@ hi PmenuSbar  ctermbg=2
 hi PmenuThumb ctermfg=3
 
 "unite.vimの設定
-"起動時にインサートモードで開始しない
-let g:unite_enable_start_insert=0
+"起動時にインサートモードで開始する
+let g:unite_enable_start_insert=1
 let g:unite_enable_split_vertically=0
 let g:unite_winwidth=25
 
@@ -338,6 +338,28 @@ set noshowmode
 "コマンドラインの高さ
 set cmdheight=2
 set laststatus=2
+
+"タイトルをウィンドウ枠に表示
+set title
+
+"ルーラを表示
+set ruler
+
+"入力中のコマンドを表示
+set showcmd
+
+"vimrcの簡単起動
+nmap rc [vimrc]
+nnoremap <silent> [vimrc]  :<C-u>e      $MYVIMRC<CR>
+nnoremap <silent> [vimrc]v :<C-u>vs     $MYVIMRC<CR>
+nnoremap <silent> [vimrc]x :<C-u>sp     $MYVIMRC<CR>
+nnoremap <silent> [vimrc]v :<C-u>source $MYVIMRC<CR>
+
+"vimrcを自動更新
+augroup vimrc
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
 
 "jkを加速する
 let g:accelerated_jk_acceleration_table = [10,5,3]

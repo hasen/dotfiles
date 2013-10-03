@@ -12,7 +12,7 @@ alias his='history'
 alias preview='open -a Preview'
 alias diff='colordiff'
 alias top='htop'
-alias grep='egrep --color=always'
+alias grep='egrep -n --color=always'
 alias tree='tree -a'
 
 # Source global definitions
