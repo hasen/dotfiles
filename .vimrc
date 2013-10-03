@@ -43,13 +43,16 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'shawncplus/php.vim'
-NeoBundle 'snipMate'
+"NeoBundle 'snipMate'
+NeoBundle 'vim-scripts/Yankring.vim'
+NeoBundle 'vim-scripts/Pydiction.git'
 
 filetype on
 filetype plugin on
@@ -84,9 +87,28 @@ nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
 nnoremap <silent> ,vr :UniteResume<CR>
 
 "Unite設定
+let g:unite_source_file_mru_filename_format = ''
 noremap zp :Unite buffer_tab file_mru<CR>
 noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
 noremap zf :Unite file<CR>
+
+"vimshell
+nnoremap <silent> vs :<C-u>VimShell<CR>
+nnoremap <silent> vp :<C-u>VimShellPop<CR>
+
+"vimfiler
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_safe_mode_by_default=0
+nnoremap <silent> fe :<C-u>VimFilerBufferDir -quit<CR>
+nnoremap <silent> fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit
+
+augroup vimrc
+  autocmd FileType vimfiler call s:vimfiler_my_settings()
+augroup END
+function! s:vimfiler_my_settings()
+  nmap  <buffer> q <Plug>(vimfiler_exit)
+  nmap  <buffer> ! <Plug>(vimfiler_hide)
+endfunction
 
 "補完ウィンドウの設定
 set completeopt=menuone
@@ -111,9 +133,9 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 "close with <CR>
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 "Plugin key_mappings
-imap <C-k><Plug>(neosnippet_expand_or_jump)
-smap <C-k><Plug>(neosnippet_expand_or_jump)
-xmap <C-k><Plug>(neosnippet_expand_target)
+"imap <C-k><Plug>(neosnippet_expand_or_jump)
+"smap <C-k><Plug>(neosnippet_expand_or_jump)
+"xmap <C-k><Plug>(neosnippet_expand_target)
 
 let g:neocomplcache_ctags_arguments_list={
   \ 'perl' : '-R -h ".pm"'
@@ -128,6 +150,13 @@ let g:neocomplcache_dictionary_filetype_lists={
   \ 'perl'    : $HOME . '/projects/dotfiles/.vim/dict/perl.dict'
   \ }
 
+"Python用のdic
+let g:neocomplcache_dictionary_filetype_lists={
+  \ 'default' : '',
+  \ 'python'  : $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict',
+  \ 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'
+  \}
+
 "define keyword
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns={}
@@ -140,10 +169,10 @@ if !exists('g:neocomplcache_same_filetype_lists')
   let g:neocomplcache_same_filetype_lists={}
 endif
 
-"for snippets
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-imap <expr><C-k> pumvisible() ? "\<C-n>" :neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
-smap <expr><C-k> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
+"snippetの設定
+"inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+"imap <expr><C-k> pumvisible() ? "\<C-n>" :neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
+"smap <expr><C-k> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
 
 "for snippet_complete marker
 if has('conceal')
@@ -163,11 +192,41 @@ let g:unite_source_grep_recursive_opt=''
 let g:unite_source_grep_max_candidates=200
 vnoremap /g y:Unite grep::-iHRn:<C-r>=escape(@",'\\.*$^[]')<CR><CR>
 
+let file_name=expand("%:p")
+if has('vim_starting') && file_name==""
+  autocmd VimEnter * call ExecuteNERDTree()
+endif
+"カーソルが外れているときは自動的にnerdtreeを隠す
+function!ExecuteNERDTree(
+  b:nerdstatus=1:NERDTree表示中
+  b:nerdstatus=2:NERDTree非表示中
+
+  if!exists('g:nerdstatus')
+    execute'NERDTree./'
+    letg:windowWidth=winwidth(winnr())
+    letg:nerdtreebuf=bufnr('')
+    letg:nerdstatus=1
+  elseif g:nerdstatus==1
+    execute'wincmdt'
+    execute 'vertical resize' 0
+    execute 'wincmd p'
+    let g:nerdstatus=2
+  elseif g:nerdstatus==2
+    execute 'wincmd t'
+    execute 'vertical resize' g:windowWidth
+    let g:nerdstatus=1
+  endif
+endfunction
+noremap <c-e> :<c-u>:call ExecuteNERDTree()<CR>
+
 "quickrunの設定(\+rで実行)
 nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
+
+"yankring
+let g:yankring_max_history=30
 
 "spolu/dwm.vim(ウィンド型タイルマネージャ)の設定
 nnoremap <C-j> <C-w>w
@@ -348,6 +407,9 @@ set ruler
 "入力中のコマンドを表示
 set showcmd
 
+"TAB,行末の半角スペースを可視化
+set list
+
 "vimrcの簡単起動
 nmap rc [vimrc]
 nnoremap <silent> [vimrc]  :<C-u>e      $MYVIMRC<CR>
@@ -359,7 +421,7 @@ nnoremap <silent> [vimrc]v :<C-u>source $MYVIMRC<CR>
 augroup vimrc
   autocmd!
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
+augroup END  
 
 "jkを加速する
 let g:accelerated_jk_acceleration_table = [10,5,3]
@@ -427,3 +489,17 @@ let php_noShortTags=1
 " ] や ) の対応エラーをハイライト
 let php_parent_error_close=1
 let php_parent_error_open=1
+
+augroup Python_Coding
+  au FileType python call s:python_setting(
+augroup END
+function! s:python_setting()
+  setl autoindent
+  setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cl
+  set  expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  setl textwidth=80
+  setl colorcolumn=80
+  setl foldmethod=indent
+  setl foldlevel=99
+endfunction
+
