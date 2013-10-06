@@ -197,9 +197,9 @@ if has('vim_starting') && file_name==""
   autocmd VimEnter * call ExecuteNERDTree()
 endif
 "カーソルが外れているときは自動的にnerdtreeを隠す
-function!ExecuteNERDTree(
-  b:nerdstatus=1:NERDTree表示中
-  b:nerdstatus=2:NERDTree非表示中
+function! ExecuteNERDTree()
+  b:nerdstatus=1
+  b:nerdstatus=2
 
   if!exists('g:nerdstatus')
     execute'NERDTree./'
