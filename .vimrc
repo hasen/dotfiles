@@ -51,8 +51,9 @@ NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'shawncplus/php.vim'
 "NeoBundle 'snipMate'
-NeoBundle 'vim-scripts/Yankring.vim'
+"NeoBundle 'vim-scripts/Yankring.vim'
 NeoBundle 'vim-scripts/Pydiction.git'
+"NeoBundle 'altercation/vim-colors-solarized'
 
 filetype on
 filetype plugin on
@@ -61,6 +62,9 @@ filetype indent on
 "font
 set encoding=utf-8
 set fileencoding=utf-8
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
 
 "popupの背景色
 hi Pmenu      ctermbg=0
@@ -69,8 +73,7 @@ hi PmenuSbar  ctermbg=2
 hi PmenuThumb ctermfg=3
 
 "unite.vimの設定
-"起動時にインサートモードで開始する
-let g:unite_enable_start_insert=1
+let g:unite_enable_start_insert=0
 let g:unite_enable_split_vertically=0
 let g:unite_winwidth=25
 
@@ -116,46 +119,56 @@ set completeopt=menuone
 "neocomplchacheの設定
 "disable AutoComplPop
 let g:acp_enableAtStartup=0
+
 "use neocomplcache
 let g:neocomplcache_enable_at_startup=1
+
 "set minimum syntax keyword length
 let g:neocomplcache_min_syntax_length=3
 let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
 let g:neocomplcache_enable_ignore_case=1
+
 "use smartcase
 let g:neocomplcache_enable_smart_case=1
+
 "use camel case completion
 let g:neocomplcache_enable_camel_case_completion=1
+
 "use underbar completion
 let g:neocomplcache_enable_underbar_completion=1
+
 "select with <TAB>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
 "close with <CR>
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+
 "Plugin key_mappings
 "imap <C-k><Plug>(neosnippet_expand_or_jump)
 "smap <C-k><Plug>(neosnippet_expand_or_jump)
 "xmap <C-k><Plug>(neosnippet_expand_target)
 
-let g:neocomplcache_ctags_arguments_list={
-  \ 'perl' : '-R -h ".pm"'
-  \ }
+let g:neocomplcache_ctags_arguments_list={ 'perl' : '-R -h ".pm"' }
+
+"setting markdown filetype
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+"Enable omni completion.
+autocmd FileType eruby,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php setlocal omnifunc=phpcomplete#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=rubycomplete#Complete
 
 "vim-ref用のpathを設定する
 let g:ref_phpmanual_path=$HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
 let g:neocomplcache_snippets_disable_runtime_snippets=1
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
-let g:neocomplcache_dictionary_filetype_lists={
-  \ 'default' : '',
-  \ 'perl'    : $HOME . '/projects/dotfiles/.vim/dict/perl.dict'
-  \ }
+let g:neocomplcache_dictionary_filetype_lists={ 'default' : '', 'perl'    : $HOME . '/projects/dotfiles/.vim/dict/perl.dict' }
 
 "Python用のdic
-let g:neocomplcache_dictionary_filetype_lists={
-  \ 'default' : '',
-  \ 'python'  : $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict',
-  \ 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'
-  \}
+let g:neocomplcache_dictionary_filetype_lists={ 'default' : '', 'python'  : $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict', 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'}
 
 "define keyword
 if !exists('g:neocomplcache_keyword_patterns')
@@ -180,7 +193,7 @@ if has('conceal')
 endif
 
 "enable snipMate compatibility feature
-let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#enable_snipmate_compatibility=1
 
 "tell neosnippet about the otherr snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
@@ -226,7 +239,7 @@ nmap <Leader>r <plug>(quickrun)
 let g:EasyMotion_leader_key='<SPACE>e'
 
 "yankring
-let g:yankring_max_history=30
+"let g:yankring_max_history=30
 
 "spolu/dwm.vim(ウィンド型タイルマネージャ)の設定
 nnoremap <C-j> <C-w>w
@@ -239,6 +252,13 @@ nmap <C-@> <Plug>DWMFocus
 nmap <C-Space> <Plug>DWMFocus
 nmap <C-l> <Plug>DWMGrowMaster
 nmap <C-h> <Plug>DWMShrinkMaster
+
+" use Silver Searcher
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+  "let g:ctrlp_use_caching=0
+endif
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
@@ -258,6 +278,9 @@ set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %
 
 "シンタックスハイライトを有効にする
 syntax on
+"syntax enable
+"set background=dark
+"colorscheme solarized
 
 "該当箇所の背景色を変化させる
 set hlsearch
@@ -336,6 +359,19 @@ if has('syntax')
   call ZenkakuSpace()
 endif
 
+augroup Python_Coding
+  au FileType python call s:python_setting(
+augroup END
+function! s:python_setting()
+  setl autoindent
+  setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cl
+  set  expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  setl textwidth=80
+  setl colorcolumn=80
+  setl foldmethod=indent
+  setl foldlevel=99
+endfunction
+
 "バックアップファイルを作るディレクトリ
 set backupdir=$HOME/vim_backup
 
@@ -410,6 +446,10 @@ set showcmd
 "TAB,行末の半角スペースを可視化
 set list
 
+"splitの設定
+set splitright
+set diffopt=vertical
+
 "vimrcの簡単起動
 nmap rc [vimrc]
 nnoremap <silent> [vimrc]  :<C-u>e      $MYVIMRC<CR>
@@ -464,12 +504,13 @@ autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd if len(getqflist())
 
 "ctagsのファイルをカレントディレクトリから検索して上位にあるもの読み込む
 if has('path_extra')
-set tags+=tags;
+  set tags+=tags;
 endif
+map <Leader>ct :!ctags -R .<CR>
 
 "vimファイルに関して{と}による折りたたみ設定をする
 au FileType vim setlocal foldmethod=marker
-"
+
 " :makeでPHP構文チェック
 au FileType php setlocal makeprg=php\ -l\ %
 au FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
@@ -490,16 +531,5 @@ let php_noShortTags=1
 let php_parent_error_close=1
 let php_parent_error_open=1
 
-augroup Python_Coding
-  au FileType python call s:python_setting(
-augroup END
-function! s:python_setting()
-  setl autoindent
-  setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cl
-  set  expandtab tabstop=4 shiftwidth=4 softtabstop=4
-  setl textwidth=80
-  setl colorcolumn=80
-  setl foldmethod=indent
-  setl foldlevel=99
-endfunction
-
+" li, pをblock tagとして扱う
+let g:html_inden_tags='li\|p'

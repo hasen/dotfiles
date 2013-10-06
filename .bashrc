@@ -2,7 +2,7 @@
 git_branch() {
   echo $(git branch --no-color 2>/dev/null | sed -ne "s/^\* \(.*\)$/\1/p")
 }
-PS1='\n\[\033[0;33m\]\w/ \[\033[1;32m\]$(git_branch)\[\033[0m\]\n \[\033[0;31m\]$\[\033[0m\] '
+PS1='\n\[\033[1;30m\]\w/ \[\033[1;32m\]$(git_branch)\[\033[0m\]\n \[\033[0;31m\]$\[\033[0m\] '
 
 # User specific aliases and functions
 alias rm='rm -i'
