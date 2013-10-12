@@ -67,9 +67,9 @@ if exists('&ambiwidth')
 endif
 
 "popupの背景色
-hi Pmenu      ctermbg=0
-hi pmenuSel   ctermbg=4
-hi PmenuSbar  ctermbg=2
+hi Pmenu      ctermbg=4
+hi PmenuSel   ctermbg=3
+hi PmenuSbar  ctermbg=3
 hi PmenuThumb ctermfg=3
 
 "unite.vimの設定
@@ -99,11 +99,11 @@ noremap zf :Unite file<CR>
 nnoremap <silent> vs :<C-u>VimShell<CR>
 nnoremap <silent> vp :<C-u>VimShellPop<CR>
 
-"vimfiler
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_safe_mode_by_default=0
-nnoremap <silent> fe :<C-u>VimFilerBufferDir -quit<CR>
-nnoremap <silent> fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit
+""vimfiler
+"let g:vimfiler_as_default_explorer=1
+"let g:vimfiler_safe_mode_by_default=0
+"nnoremap <silent> fe :<C-u>VimFilerBufferDir -quit<CR>
+"nnoremap <silent> fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit
 
 augroup vimrc
   autocmd FileType vimfiler call s:vimfiler_my_settings()
@@ -412,9 +412,10 @@ set incsearch
 nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
 "listで表示される文字のフォーマットを指定する
-set listchars=tab:>\
+"set listchars=tab:>\
 
 "行番号を表示する
+set relativenumber
 set number
 
 "閉じ括弧が入力されたとき、対応する括弧を表示する
@@ -444,7 +445,7 @@ set ruler
 set showcmd
 
 "TAB,行末の半角スペースを可視化
-set list
+"set list
 
 "splitの設定
 set splitright
@@ -477,7 +478,7 @@ inoremap <special> <Esc>O[ <Esc>
 if has('persistent_undo')
   set undodir=~/.vim/undo
   set undofile
-endif   
+endif
 
 "カーソルを自動的に括弧の中へ
 imap () ()<Left>
