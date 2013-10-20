@@ -54,6 +54,9 @@ NeoBundle 'shawncplus/php.vim'
 "NeoBundle 'vim-scripts/Yankring.vim'
 NeoBundle 'vim-scripts/Pydiction.git'
 "NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'jnwhiteh/vim-golang'
+NeoBundle 'Blackrush/vim-gocode'
+NeoBundle 'vim-cofee-script'
 
 filetype on
 filetype plugin on
@@ -62,9 +65,7 @@ filetype indent on
 "font
 set encoding=utf-8
 set fileencoding=utf-8
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
+set ambiwidth=double
 
 "popupの背景色
 hi Pmenu      ctermbg=4
@@ -282,9 +283,6 @@ syntax on
 "set background=dark
 "colorscheme solarized
 
-"該当箇所の背景色を変化させる
-set hlsearch
-
 "cursorlineを表示する
 "set cursorline
 
@@ -372,6 +370,21 @@ function! s:python_setting()
   setl foldlevel=99
 endfunction
 
+if $GOROOT != ''
+  set runtimepath+=$GOROOT/misc/vim
+  let g:syntastic_go_checkers=['go', 'golint', 'govet']
+endif
+
+augroup Go
+  autocmd!
+  autocmd BufWritePre *.go Fmt
+augroup END
+
+augroup CoffeeScript
+  autocmd!
+  autocmd FileType coffee cnorepam <buffer> cf CoffeeCompile watch vert<CR>
+augroup END
+
 "バックアップファイルを作るディレクトリ
 set backupdir=$HOME/vim_backup
 
@@ -408,6 +421,9 @@ cmap w!! w !sudo tee > /dev/null %
 "インクリメンタルサーチを行う
 set incsearch
 
+"該当箇所の背景色を変化させる
+set hlsearch
+
 "サーチハイライトをESC２回で消す
 nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
@@ -415,7 +431,7 @@ nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 "set listchars=tab:>\
 
 "行番号を表示する
-set relativenumber
+"set relativenumber
 set number
 
 "閉じ括弧が入力されたとき、対応する括弧を表示する
@@ -433,7 +449,6 @@ set noshowmode
 
 "コマンドラインの高さ
 set cmdheight=2
-set laststatus=2
 
 "タイトルをウィンドウ枠に表示
 set title
@@ -452,7 +467,7 @@ set splitright
 set diffopt=vertical
 
 "vimrcの簡単起動
-nmap rc [vimrc]
+"nmap rc [vimrc]
 nnoremap <silent> [vimrc]  :<C-u>e      $MYVIMRC<CR>
 nnoremap <silent> [vimrc]v :<C-u>vs     $MYVIMRC<CR>
 nnoremap <silent> [vimrc]x :<C-u>sp     $MYVIMRC<CR>
@@ -475,22 +490,22 @@ let &t_EI .= "\e[?7727l"
 inoremap <special> <Esc>O[ <Esc>
 
 "無限undo
-if has('persistent_undo')
-  set undodir=~/.vim/undo
-  set undofile
-endif
+"if has('persistent_undo')
+"  set undodir=~/.vim/undo
+"  set undofile
+"endif
 
 "カーソルを自動的に括弧の中へ
 imap () ()<Left>
 imap {} {}<Left>
 imap [] []<Left>
+imap <> <><Left>
 imap '' ''<Left>
 imap "" ""<Left>
-imap <> <><Left>
-"imap // //<Left>
-imap /// ///<Left>
 imap `` ``<Left>
 imap ** **<Left>
+"imap // //<Left>
+imap /// ///<Left>
 
 "gfでカーソル下のファイル名を新しいタブで開く
 nnoremap gf :tab <cfile><CR>

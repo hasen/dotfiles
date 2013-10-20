@@ -1,6 +1,6 @@
 # .bashrc
 # option
- set -o ignoreeof
+set -o ignoreeof
 
 # colorful primary prompt string
 git_branch() {
@@ -36,14 +36,16 @@ alias shrst='exec $SHELL -l'
 #	. /etc/bashrc
 #fi
 
-# Ruby
-# Add RVM to PATH for scripting
-PATH=$PATH:/usr/local/rvm/bin 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+export PATH="/usr/local/sbin:$PATH"
 
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# Ruby
+# Add RVM to PATH for scripting
+export PATH="/usr/local/rvm/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # Perl
 # switch to plenv
@@ -53,7 +55,23 @@ export PATH="$HOME/.plenv/bin:$PATH"
 eval "$(plenv init -)"
 
 # Python
-PYTHONPATH=$PYTHONPATH:/usr/bin/python2.7
+export PYTHONPATH="$PYTHONPATH:/usr/bin/python2.7"
+
+# Go
+export GOROOT="/usr/local/Cellar/go/1.1.1"
+export GOPATH="/usr/local/Cellar/go/1.1.1/pkg/"
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 
 # node
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
+
+# PHP
+export PATH="$HOME/pear/bin:$PATH"
+export PATH="$HOME/.phpenv/bin:$PATH"
+export PATH="$HOME/.phpenv/plugins/php-build/bin:$PATH"
+export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+eval "$(phpenv init -)"
+
+# D
+export PATH="$HOME/.denv/bin:$PATH"
+eval "$(denv init -)"
