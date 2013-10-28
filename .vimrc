@@ -504,6 +504,7 @@ imap '' ''<Left>
 imap "" ""<Left>
 imap `` ``<Left>
 imap ** **<Left>
+imap %% %%<Left>
 "imap // //<Left>
 imap /// ///<Left>
 

@@ -23,10 +23,11 @@ alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
 alias tmls='tmux ls'
 alias tmmv='tmux rename -t'
+alias tmus='tmux new -s'
 alias his='history'
 alias preview='open -a Preview'
 alias diff='colordiff'
-alias top='htop'
+#alias top='htop'
 alias grep='egrep -n --color=always'
 alias tree='tree -a'
 alias shrst='exec $SHELL -l'
@@ -75,3 +76,7 @@ eval "$(phpenv init -)"
 # D
 export PATH="$HOME/.denv/bin:$PATH"
 eval "$(denv init -)"
+
+export PATH=/usr/local/bin/Sencha/Cmd/4.0.0.203:$PATH
+
+export SENCHA_CMD_3_0_0="/usr/local/bin/Sencha/Cmd/4.0.0.203"
