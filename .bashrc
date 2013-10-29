@@ -31,6 +31,7 @@ alias diff='colordiff'
 alias grep='egrep -n --color=always'
 alias tree='tree -a'
 alias shrst='exec $SHELL -l'
+alias gip='curl http://ipcheck.ieserver.net'
 
 ## Source global definitions
 #if [ -f /etc/bashrc ]; then
