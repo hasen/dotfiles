@@ -2,7 +2,35 @@
   name  = hasen
   email = hasenfus7@gmail.com
 
+[include]
+# from 1.7.10 別ファイルからの読み込み
+# path = .gitconfig.local
+
+[core]
+# repo/.gitignore 特定リポジトリで全メンバ共有
+# repo/.git/info/excludee 特定リポジトリで自分だけ
+# core.excludesfile 全リポジトリで自分だけ
+# excludesfile = ~/.gitignore
+  pager  = less -r
+  editor = vi
+
+[push]
+# push only current branch
+# default = tracking
+
+[branch]
+# autosetuprebase = always
+
+[merge]
+# from 1.7.6
+# ff = false
+
+[pull]
+# from 1.7.9
+# rebase = true
+
 [color]        
+  ui          = auto
   diff        = auto
   status      = auto
   branch      = auto
@@ -10,6 +38,7 @@
   grep        = auto
 
 [alias]
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' 
   st  = status -sb
   ad  = add
   aa  = add -A
@@ -22,3 +51,8 @@
   df  = diff
   gp  = grep -n 
   bl  = blame
+
+# ref
+# https://gist.github.com/teppeis/4117588
+# git-browse-remote
+# http://subtech.g.hatena.ne.jp/motemen/20120917/1347889804
