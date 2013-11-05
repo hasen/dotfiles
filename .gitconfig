@@ -17,6 +17,7 @@
 [push]
 # push only current branch
 # default = tracking
+	default = matching
 
 [branch]
 # autosetuprebase = always
