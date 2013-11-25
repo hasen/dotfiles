@@ -29,11 +29,13 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
+NeoBundle "cohama/vim-smartinput-endwise"
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'jnwhiteh/vim-golang'
+"NeoBundle "kana/vim-smartinput"
 NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
@@ -61,6 +63,7 @@ NeoBundle 'tell-k/vim-browsereload-mac'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
+"NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'vim-perl/vim-perl'
@@ -142,6 +145,9 @@ let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_min_syntax_length=3
 let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
 let g:neocomplcache_enable_ignore_case=1
+
+" use smartinput
+"call smartinput_endwise#define_default_rules()
 
 "use smartcase
 let g:neocomplcache_enable_smart_case=1
@@ -274,6 +280,32 @@ if executable('ag')
   let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
   "let g:ctrlp_use_caching=0
 endif
+
+let g:user_emmet_mode = 'iv'
+let g:user_emmet_leader_key = '<C-y>'
+let g:user_emmet_complete_tag = 1
+let g:user_emmet_settings = {
+  \  'lang': 'ja',
+  \  'html': {
+  \    'filters': 'html',
+  \  },
+  \  'css': {
+  \    'filters': 'fc',
+  \  },
+  \  'php': {
+  \    'extends': 'html',
+  \    'filters': 'html',
+  \  },
+  \}
+augroup EmmetVim
+  autocmd!
+  autocmd FileType * let g:user_emmet_settings.indentation = '  '[:&tabstop]
+augroup END
+
+"カーソル下のURLをブラウザで開く
+nmap <Leader>o <Plug>(openbrowser-open)
+vmap <Leader>o <Plug>(openbrowser-open)
+nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 
 "ファイル変更があった場合、自動再読み込み
 set autoread
