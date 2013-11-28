@@ -11,8 +11,11 @@
 # repo/.git/info/excludee 特定リポジトリで自分だけ
 # core.excludesfile 全リポジトリで自分だけ
 # excludesfile = ~/.gitignore
-  pager  = less -r
   editor = vi
+  pager  = less -r
+  log    = diff-highlight | less
+  show   = diff-highlight | less
+  diff   = diff-highlight | less
 
 [push]
 # push only current branch

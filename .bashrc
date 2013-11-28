@@ -17,6 +17,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias vi='vim'
 alias ls='ls -G'
+alias ls='gls --color=auto'
 alias ll='ls -l -G'
 alias la='ls -al -G'
 alias lm='ls -al -G | more'
@@ -51,7 +52,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Ruby
 # Add RVM to PATH for scripting
 export PATH="/usr/local/rvm/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:~/.rbenv/shims/:$PATH"
 eval "$(rbenv init -)"
 
 # Perl

@@ -25,7 +25,7 @@ NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'airblade/vim-gitgutter'
-"NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
@@ -146,7 +146,7 @@ let g:neocomplcache_min_syntax_length=3
 let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
 let g:neocomplcache_enable_ignore_case=1
 
-" use smartinput
+"use smartinput
 "call smartinput_endwise#define_default_rules()
 
 "use smartcase
@@ -325,9 +325,16 @@ set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %
 
 "シンタックスハイライトを有効にする
 syntax on
-"syntax enable
+syntax enable
 "set background=dark
+"let g:sloarized_termtrans=1
+"let g:solarized_termcolors=256
 "colorscheme solarized
+"colorscheme molokai
+
+"if &background ==# 'dark'
+"  colorscheme solarized
+"endif
 
 "cursorlineを表示する
 "set cursorline
@@ -430,6 +437,46 @@ augroup CoffeeScript
   autocmd!
   autocmd FileType coffee cnorepam <buffer> cf CoffeeCompile watch vert<CR>
 augroup END
+
+" 構文情報とハイライト情報を取得する(:Syntaxinfo)
+" http://cohama.hateblo.jp/entry/2013/08/11/020849
+function! s:get_syn_id(transparent)
+  let synid = synID(line("."), col("."), 1)
+  if a:transparent
+    return synIDtrans(synid)
+  else
+    return synid
+  endif
+endfunction
+function! s:get_syn_attr(synid)
+  let name    = synIDattr(a:synid, "name")
+  let ctermfg = synIDattr(a:synid, "fg", "cterm")
+  let ctermbg = synIDattr(a:synid, "bg", "cterm")
+  let guifg   = synIDattr(a:synid, "fg", "gui")
+  let guibg   = synIDattr(a:synid, "bg", "gui")
+  return {
+        \ "name": name,
+        \ "ctermfg": ctermfg,
+        \ "ctermbg": ctermbg,
+        \ "guifg": guifg,
+        \ "guibg": guibg}
+endfunction
+function! s:get_syn_info()
+  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+  echo "name: " . baseSyn.name .
+        \ " ctermfg: " . baseSyn.ctermfg .
+        \ " ctermbg: " . baseSyn.ctermbg .
+        \ " guifg: " . baseSyn.guifg .
+        \ " guibg: " . baseSyn.guibg
+  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+  echo "link to"
+  echo "name: " . linkedSyn.name .
+        \ " ctermfg: " . linkedSyn.ctermfg .
+        \ " ctermbg: " . linkedSyn.ctermbg .
+        \ " guifg: " . linkedSyn.guifg .
+        \ " guibg: " . linkedSyn.guibg
+endfunction
+command! SyntaxInfo call s:get_syn_info()
 
 "バックアップファイルを作るディレクトリ
 set backupdir=$HOME/vim_backup
@@ -596,3 +643,5 @@ let php_parent_error_open=1
 
 " li, pをblock tagとして扱う
 let g:html_inden_tags='li\|p'
+
+
