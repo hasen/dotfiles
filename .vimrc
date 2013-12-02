@@ -30,6 +30,7 @@ NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
 NeoBundle "cohama/vim-smartinput-endwise"
+NeoBundle "h1mesuke/vim-alignta"
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
@@ -588,6 +589,10 @@ inoremap <special> <Esc>O[ <Esc>
 "  set undofile
 "endif
 
+"alignで選択した範囲を整列
+vnoremap <silent><C-l> :Alignta <<1:1 =>/1<cr>
+vnoremap <silent><C-k> :Alignta <<1:1 =/1<cr>
+
 "カーソルを自動的に括弧の中へ
 imap () ()<Left>
 imap {} {}<Left>
@@ -600,6 +605,11 @@ imap ** **<Left>
 imap %% %%<Left>
 "imap // //<Left>
 imap /// ///<Left>
+
+nnoremap <silent> <S-Left>  :5wincmd <<CR>
+nnoremap <silent> <S-Right> :5wincmd ><CR>
+nnoremap <silent> <S-Up>    :5wincmd -<CR>
+nnoremap <silent> <S-Down>  :5wincmd +<CR>
 
 "gfでカーソル下のファイル名を新しいタブで開く
 nnoremap gf :tab <cfile><CR>

@@ -38,6 +38,7 @@ alias vg='vagrant'
 alias ng='nginx'
 alias neta='vi ~/projects/Tech_Documents/neta.txt'
 alias lhosts='cat ~/projects/Tech_Documents/Localhosts.txt'
+#alias which='which -a'
 
 ## Source global definitions
 #if [ -f /etc/bashrc ]; then
@@ -52,14 +53,14 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Ruby
 # Add RVM to PATH for scripting
 export PATH="/usr/local/rvm/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:~/.rbenv/shims/:$PATH"
+export PATH="$HOME/.rbenv/bin:~/.rbenv/shims:$PATH"
 eval "$(rbenv init -)"
 
 # Perl
 # switch to plenv
 #source ~/perl5/perlbrew/etc/bashrc 
 #eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
-export PATH="$HOME/.plenv/bin:~/.plenv/shims/:$PATH"
+export PATH="$HOME/.plenv/bin:~/.plenv/shims:$PATH"
 eval "$(plenv init -)"
 
 # Python
@@ -94,3 +95,5 @@ export SENCHA_CMD_3_0_0="/usr/local/bin/Sencha/Cmd/4.0.0.203"
 export JAVA_HOME=`/usr/libexec/java_home`
 export JAVA="$JAVA_HOME/bin"
 
+# Git
+eval "$(hub alias -s)"
