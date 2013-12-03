@@ -606,11 +606,6 @@ imap %% %%<Left>
 "imap // //<Left>
 imap /// ///<Left>
 
-nnoremap <silent> <S-Left>  :5wincmd <<CR>
-nnoremap <silent> <S-Right> :5wincmd ><CR>
-nnoremap <silent> <S-Up>    :5wincmd -<CR>
-nnoremap <silent> <S-Down>  :5wincmd +<CR>
-
 "gfでカーソル下のファイル名を新しいタブで開く
 nnoremap gf :tab <cfile><CR>
 vnoremap gf :tab <cfile><CR>
@@ -653,5 +648,4 @@ let php_parent_error_open=1
 
 " li, pをblock tagとして扱う
 let g:html_inden_tags='li\|p'
-
 
