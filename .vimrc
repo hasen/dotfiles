@@ -119,12 +119,6 @@ noremap zf :Unite file<CR>
 nnoremap <silent> vs :<C-u>VimShell<CR>
 nnoremap <silent> vp :<C-u>VimShellPop<CR>
 
-""vimfiler
-"let g:vimfiler_as_default_explorer=1
-"let g:vimfiler_safe_mode_by_default=0
-"nnoremap <silent> fe :<C-u>VimFilerBufferDir -quit<CR>
-"nnoremap <silent> fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit
-
 augroup vimrc
   autocmd FileType vimfiler call s:vimfiler_my_settings()
 augroup END
