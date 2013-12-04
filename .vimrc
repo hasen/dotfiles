@@ -319,16 +319,6 @@ set wildmenu wildmode=list:full
 set laststatus=2
 set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
 
-"lightline.vimの設定
-"let g:lightline = {
-"      \ 'colorscheme': 'wombat',
-"      \ 'component': {
-"      \   'readonly': '%{&readonly?"\u2b64":""}',
-"      \ },
-"      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-"      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
-"      \ }
-
 "シンタックスハイライトを有効にする
 syntax on
 syntax enable
