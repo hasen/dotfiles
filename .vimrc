@@ -35,6 +35,7 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
+"NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'jnwhiteh/vim-golang'
 "NeoBundle "kana/vim-smartinput"
 NeoBundle 'kannokanno/unite-todo.git'
@@ -187,10 +188,10 @@ autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 om
 let g:ref_phpmanual_path=$HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
 let g:neocomplcache_snippets_disable_runtime_snippets=1
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
-let g:neocomplcache_dictionary_filetype_lists={ 'default' : '', 'perl'    : $HOME . '/projects/dotfiles/.vim/dict/perl.dict' }
+let g:neocomplcache_dictionary_filetype_lists={'default': '', 'perl': $HOME . '/projects/dotfiles/.vim/dict/perl.dict'}
 
 "Python用のdic
-let g:neocomplcache_dictionary_filetype_lists={ 'default' : '', 'python'  : $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict', 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'}
+let g:neocomplcache_dictionary_filetype_lists={'default': '', 'python': $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict', 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'}
 
 "define keyword
 if !exists('g:neocomplcache_keyword_patterns')
@@ -323,6 +324,16 @@ set wildmenu wildmode=list:full
 "常にステータスラインを表示する
 set laststatus=2
 set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
+
+"lightline.vimの設定
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'component': {
+"      \   'readonly': '%{&readonly?"\u2b64":""}',
+"      \ },
+"      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+"      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
+"      \ }
 
 "シンタックスハイライトを有効にする
 syntax on
@@ -613,6 +624,14 @@ vnoremap gf :tab <cfile><CR>
 "検索語が画面中央に来るように
 nmap n nzz
 nmap N Nzz
+
+" over.vim 
+" over.vimの起動
+nnoremap <silent> <Leader>m :OverCommandLine<CR>
+" カーソル下の単語をハイライト付きで置換
+nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+" コピーした文字列をハイライト付きで置換
+nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
 
 " :makeや:grepをした際に自動的にquickfixが開くようにする
 autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd if len(getqflist()) != 0 | cw | endif
