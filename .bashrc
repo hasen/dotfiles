@@ -6,7 +6,7 @@ set -o ignoreeof
 git_branch() {
   echo $(git branch --no-color 2>/dev/null | sed -ne "s/^\* \(.*\)$/\1/p")
 }
-PS1='\n\[\033[1;30m\]\H: \u\n\w/ \[\033[1;32m\]$(git_branch)\n\[\033[0;31m\]$\[\033[0m\] '
+PS1='\n\[\033[1;34m\]\u \[\033[0m\]=> \[\033[1;37m\]\H\n\w/ \[\033[0m\]<= \[\033[1;34m\]$(git_branch)\n\[\033[0;31m\]$\[\033[0m\] '
 
 export LESS='-R'
 export LESSOPEN=' | /usr/local/share/source-highlight/src-hilite-lesspipe.sh %s'
