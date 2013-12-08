@@ -45,7 +45,7 @@
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' 
   st  = status -sb
   ad  = add
-  aa  = add -A
+  aa  = add --all .
   ci  = commit
   cm  = commit -m
   cam = commit -am
