@@ -1,0 +1,5 @@
+# tabキーによる補完を1度目の入力で出す
+set show-all-if-ambiguous on
+# 補完時大文字小文字無視
+set completion-ignore-case on
+

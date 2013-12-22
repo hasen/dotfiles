@@ -20,6 +20,7 @@ alias ls='ls -G'
 alias ls='gls --color=auto'
 alias ll='ls -l -G'
 alias la='ls -al -G'
+alias al='ls -al -G'
 alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
 alias tmls='tmux ls'
@@ -39,6 +40,7 @@ alias ng='nginx'
 alias neta='vi ~/projects/Tech_Documents/neta.txt'
 alias lhosts='cat ~/projects/Tech_Documents/Localhosts.txt'
 #alias which='which -a'
+alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc'
 
 ## Source global definitions
 #if [ -f /etc/bashrc ]; then
@@ -97,3 +99,20 @@ export JAVA="$JAVA_HOME/bin"
 
 # Git
 eval "$(hub alias -s)"
+
+export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
+export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
+export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
+export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
+export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
+export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools
+export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
+export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
+export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
+export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
+export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools/
+export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools
+export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools/
+export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools
+export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
+export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools
