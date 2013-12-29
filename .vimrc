@@ -29,15 +29,15 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
-NeoBundle "cohama/vim-smartinput-endwise"
-NeoBundle "h1mesuke/vim-alignta"
+NeoBundle 'cohama/vim-smartinput-endwise'
+NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
 "NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'jnwhiteh/vim-golang'
-"NeoBundle "kana/vim-smartinput"
+"NeoBundle 'kana/vim-smartinput'
 NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
@@ -585,8 +585,8 @@ inoremap <special> <Esc>O[ <Esc>
 "endif
 
 "alignで選択した範囲を整列
-vnoremap <silent><C-l> :Alignta <<1:1 =>/1<cr>
-vnoremap <silent><C-k> :Alignta <<1:1 =/1<cr>
+vnoremap <silent><C-l> :Alignta <<0:1 =>/1<cr>
+vnoremap <silent><C-k> :Alignta <<-1:1 =/1<cr>
 
 "カーソルを自動的に括弧の中へ
 imap () ()<Left>
