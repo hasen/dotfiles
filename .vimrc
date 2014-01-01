@@ -600,6 +600,7 @@ imap ** **<Left>
 imap %% %%<Left>
 "imap // //<Left>
 imap /// ///<Left>
+imap \|\| \|\|<Left>
 
 "gfでカーソル下のファイル名を新しいタブで開く
 nnoremap gf :tab <cfile><CR>
