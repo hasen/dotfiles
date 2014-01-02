@@ -46,6 +46,7 @@
   st  = status -sb
   ad  = add
   aa  = add --all .
+  co  = checkout
   ci  = commit
   cm  = commit -m
   cam = commit -am
