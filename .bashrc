@@ -24,6 +24,7 @@ alias la='ls -al -G'
 alias al='ls -al -G'
 alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
+alias tmnew='tmux new-session -s'
 alias tmls='tmux ls'
 alias tmmv='tmux rename -t'
 alias tmus='tmux new -s'
@@ -103,17 +104,7 @@ eval "$(hub alias -s)"
 
 export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
 export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
-export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
-export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
 export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
 export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools
-export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
-export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
-export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
-export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
 export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools/
 export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools
-export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools/
-export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools
-export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
-export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools

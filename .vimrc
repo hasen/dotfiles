@@ -25,7 +25,7 @@ NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'altercation/vim-colors-solarized'
+"NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
@@ -35,6 +35,7 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
+NeoBundle 'itchyny/Calendar.vim'
 "NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'jnwhiteh/vim-golang'
 "NeoBundle 'kana/vim-smartinput'
@@ -42,7 +43,7 @@ NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
-NeoBundle 'mattn/calendar-vim'
+"NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'moznion/unite-git-conflict.vim'
@@ -653,3 +654,10 @@ let php_parent_error_open=1
 " li, pをblock tagとして扱う
 let g:html_inden_tags='li\|p'
 
+" JSのfunctionλにする
+" http://labs.timedia.co.jp/2011/04/javascript-function-lambda-vim.html
+setlocal conceallevel=2
+syntax keyword javaScriptLambda function conceal cchar=λ
+highlight clear Conceal
+highlight link Conceal Identifier
+highlight link javaScriptLambda Identifier
