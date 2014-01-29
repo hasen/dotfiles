@@ -348,7 +348,7 @@ endif
 
 "新しい行のインデントを現在行と同じにする
 set autoindent
-set smartindent
+"set smartindent
 
 "insert_mode時、status_lineの色を変更
 let g:hi_insert='highlight StatusLine ctermfg=0 ctermbg=190 cterm=none'
@@ -599,6 +599,7 @@ imap "" ""<Left>
 imap `` ``<Left>
 imap ** **<Left>
 imap %% %%<Left>
+imap ?? ??<Left>
 "imap // //<Left>
 imap /// ///<Left>
 imap \|\| \|\|<Left>

@@ -108,3 +108,7 @@ export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
 export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools
 export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools/
 export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools
+
+# Docker
+export DOCKER_HOST="192.168.11.4:5422"
+
