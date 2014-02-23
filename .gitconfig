@@ -1,6 +1,6 @@
 [user]
-  name  = hasen
-  email = hasenfus7@gmail.com
+	name = hasen
+	email = hasenfus7@gmail.com
 
 [include]
 # from 1.7.10 別ファイルからの読み込み
@@ -53,7 +53,7 @@
   br  = branch -a
   lp  = log -p
   gr  = log --graph --decorate=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%d %Creset%s'
-  df  = diff
+  df  = diff --ignore-space-change
   gp  = grep -n 
   bl  = blame
 

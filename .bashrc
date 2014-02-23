@@ -102,6 +102,10 @@ export JAVA="$JAVA_HOME/bin"
 # Git
 eval "$(hub alias -s)"
 
+# Cake
+export PATH="$HOME/projects/localhost/PHP/Book_Digitalcircus/sample_MVC/cake/app/Console:$PATH"
+
+# Phalcon
 export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
 export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
 export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
