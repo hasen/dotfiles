@@ -22,7 +22,6 @@ alias ls='ls -G'
 alias ll='ls -l -G'
 #alias la='ls -al -G'
 alias la='ls -al'
-
 alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
 alias tmnew='tmux new-session -s'

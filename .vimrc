@@ -664,3 +664,6 @@ syntax keyword javaScriptLambda function conceal cchar=λ
 highlight clear Conceal
 highlight link Conceal Identifier
 highlight link javaScriptLambda Identifier
+
+" 行末の空白を保存時に自動削除する
+autocmd BufWritePre * :%s/\s\+$//e
