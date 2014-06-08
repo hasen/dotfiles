@@ -18,10 +18,11 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias vi='vim'
 alias ls='ls -G'
-alias ls='gls --color=auto'
+#alias ls='gls --color=auto'
 alias ll='ls -l -G'
-alias la='ls -al -G'
-alias al='ls -al -G'
+#alias la='ls -al -G'
+alias la='ls -al'
+
 alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
 alias tmnew='tmux new-session -s'
@@ -49,6 +50,7 @@ alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/
 #	. /etc/bashrc
 #fi
 
+export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 # Added by the Heroku Toolbelt

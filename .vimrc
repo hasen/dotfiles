@@ -9,8 +9,8 @@ filetype indent off
 "pathの追加
 "初期化 引数pluginをinstallする基準となるpath
 if has('vim_starting')
-  set runtimepath+=~/projects/dotfiles/.vim/neobundle.vim
-  call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
+  set runtimepath+=~/dotfiles/.vim/neobundle.vim
+  call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
 endif
 
 NeoBundle 'Shougo/echodoc.git'
@@ -24,9 +24,9 @@ NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets.vim'
-NeoBundle 'airblade/vim-gitgutter'
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets.vim'
+"NeoBundle 'airblade/vim-gitgutter'
 "NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
@@ -71,7 +71,7 @@ NeoBundle 'thinca/vim-ref'
 "NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'vim-perl/vim-perl'
+"NeoBundle 'vim-perl/vim-perl'
 "NeoBundle 'vim-scripts/Yankring.vim'
 NeoBundle 'vim-scripts/tagbar-phpctags', {
   \  'build': {
