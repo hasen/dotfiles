@@ -9,8 +9,8 @@ filetype indent off
 "pathの追加
 "初期化 引数pluginをinstallする基準となるpath
 if has('vim_starting')
-  set runtimepath+=~/projects/dotfiles/.vim/neobundle.vim
-  call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
+  set runtimepath+=~/dotfiles/.vim/neobundle.vim
+  call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
 endif
 
 NeoBundle 'Shougo/echodoc.git'
@@ -24,9 +24,9 @@ NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets.vim'
-NeoBundle 'airblade/vim-gitgutter'
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets.vim'
+"NeoBundle 'airblade/vim-gitgutter'
 "NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
@@ -71,7 +71,7 @@ NeoBundle 'thinca/vim-ref'
 "NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'vim-perl/vim-perl'
+"NeoBundle 'vim-perl/vim-perl'
 "NeoBundle 'vim-scripts/Yankring.vim'
 NeoBundle 'vim-scripts/tagbar-phpctags', {
   \  'build': {
@@ -320,7 +320,7 @@ set wildmenu wildmode=list:full
 
 "常にステータスラインを表示する
 set laststatus=2
-set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
+set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \
 
 "シンタックスハイライトを有効にする
 syntax on
@@ -481,7 +481,7 @@ command! SyntaxInfo call s:get_syn_info()
 set backupdir=$HOME/vim_backup
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
-"set browsedir=buffer 
+"set browsedir=buffer
 
 "クリップボードを連携
 set clipboard=unnamed,autoselect
@@ -569,7 +569,7 @@ nnoremap <silent> [vimrc]v :<C-u>source $MYVIMRC<CR>
 augroup vimrc
   autocmd!
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END  
+augroup END
 
 "jkを加速する
 let g:accelerated_jk_acceleration_table = [10,5,3]
@@ -614,7 +614,7 @@ vnoremap gf :tab <cfile><CR>
 nmap n nzz
 nmap N Nzz
 
-" over.vim 
+" over.vim
 " over.vimの起動
 nnoremap <silent> <Leader>m :OverCommandLine<CR>
 " カーソル下の単語をハイライト付きで置換
@@ -670,3 +670,6 @@ autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
 autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl.txt
 autocmd BufNewFile *.php 0r $HOME/.vim/template/php.txt
 autocmd BufNewFile *.go 0r $HOME/.vim/template/go.txt
+
+" 行末の空白を保存時に自動削除する
+autocmd BufWritePre * :%s/\s\+$//e
