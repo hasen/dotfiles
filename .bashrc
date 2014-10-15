@@ -71,9 +71,10 @@ eval "$(plenv init -)"
 export PYTHONPATH="$PYTHONPATH:/usr/bin/python2.7"
 
 # Go
-export GOROOT="/usr/local/Cellar/go/1.1.1"
-export GOPATH="/usr/local/Cellar/go/1.1.1/pkg/"
-export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+export GOROOT="/usr/local/go/"
+#export GOPATH="/usr/local/Cellar/go/1.1.1/pkg/"
+export GOPATH="/usr/local/go/src/pkg/"
+export PATH="$PATH:/usr/local/go/bin"
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
 

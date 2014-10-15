@@ -1,5 +1,5 @@
 [user]
-	name = hasen
+	name = sengoku
 	email = hasenfus7@gmail.com
 
 [include]
@@ -56,6 +56,7 @@
   df  = diff --ignore-space-change
   gp  = grep -n 
   bl  = blame
+  br  = branch
 
 # ref
 # https://gist.github.com/teppeis/4117588

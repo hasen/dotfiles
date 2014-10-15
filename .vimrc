@@ -82,7 +82,7 @@ NeoBundle 'vim-scripts/Pydiction.git'
 
 filetype on
 filetype plugin on
-filetype indent on
+"filetype indent on
 
 "font
 set encoding=utf-8
@@ -349,7 +349,7 @@ if has('multi_byte_ime')||('xie')
 endif
 
 "新しい行のインデントを現在行と同じにする
-set autoindent
+"set autoindent
 "set smartindent
 
 "insert_mode時、status_lineの色を変更
@@ -664,3 +664,9 @@ syntax keyword javaScriptLambda function conceal cchar=λ
 highlight clear Conceal
 highlight link Conceal Identifier
 highlight link javaScriptLambda Identifier
+
+" 拡張子で判定して，ファイル作成時にテンプレートを挿入
+autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
+autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl.txt
+autocmd BufNewFile *.php 0r $HOME/.vim/template/php.txt
+autocmd BufNewFile *.go 0r $HOME/.vim/template/go.txt
