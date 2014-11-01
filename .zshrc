@@ -21,6 +21,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+# path
+fpath=($HOME/projects/dotfiles/.zsh/zsh-completions/src(N-/) $fpath)
+
 # autoload
 autoload -Uz compinit
 compinit
