@@ -7,6 +7,7 @@ RPROMPT=""
 # style
 #zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':chpwd:*' recent-dirs-default true
 
 # option
 setopt SHARE_HISTORY
@@ -26,6 +27,9 @@ compinit
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end \
   history-search-end
+autoload -Uz add-zsh-hook
+autoload -Uz chpwd_recent_dirs cdr
+  add-zsh-hook chpwd chpwd_recent_dirs
 
 # bindkey
 bindkey '^r' \
