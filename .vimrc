@@ -668,6 +668,7 @@ highlight link javaScriptLambda Identifier
 " 拡張子で判定して，ファイル作成時にテンプレートを挿入
 autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
 autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl.txt
+autocmd BufNewFile *.pm 0r $HOME/.vim/template/perl.txt
 autocmd BufNewFile *.php 0r $HOME/.vim/template/php.txt
 autocmd BufNewFile *.go 0r $HOME/.vim/template/go.txt
 
