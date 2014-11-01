@@ -24,6 +24,12 @@ SAVEHIST=1000000
 autoload -Uz compinit
 compinit
 
+# bindkey
+bindkey '^r' \
+  history-incremental-pattern-search-backward
+bindkey '^s' \
+  history-incremental-pattern-search-forward
+
 # function
 function zman() {
     PAGER="less -g -s '+/^ {7}"$1"'" man zshall
