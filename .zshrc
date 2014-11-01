@@ -23,12 +23,18 @@ SAVEHIST=1000000
 # autoload
 autoload -Uz compinit
 compinit
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end \
+  history-search-end
 
 # bindkey
 bindkey '^r' \
   history-incremental-pattern-search-backward
 bindkey '^s' \
   history-incremental-pattern-search-forward
+bindkey '^o' \
+  history-beginning-search-backward-end
+
 
 # function
 function zman() {
