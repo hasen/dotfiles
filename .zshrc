@@ -16,6 +16,10 @@ setopt IGNORE_EOF
 setopt NO_FLOW_CONTROL
 setopt NO_BEEP
 
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+
 # autoload
 autoload -Uz compinit
 compinit
