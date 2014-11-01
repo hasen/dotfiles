@@ -21,18 +21,19 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# path
+# path(should write before compinit)
 fpath=($HOME/projects/dotfiles/.zsh/zsh-completions/src(N-/) $fpath)
 
 # autoload
 autoload -Uz compinit
-compinit
+  compinit
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end \
   history-search-end
 autoload -Uz add-zsh-hook
 autoload -Uz chpwd_recent_dirs cdr
   add-zsh-hook chpwd chpwd_recent_dirs
+autoload -Uz rmv
 
 # bindkey
 bindkey '^r' \
