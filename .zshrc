@@ -4,6 +4,10 @@ PROMPT="
 $ "
 RPROMPT=""
 
+# style
+#zstyle ':completion:*:default' menu select=2
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
 # option
 setopt SHARE_HISTORY
 setopt AUTO_PUSHD
