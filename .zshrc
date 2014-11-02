@@ -1,15 +1,16 @@
 # prompt
 PROMPT="
-[%n@%m] %~
+%n => %m
+%~ <= %v
 $ "
-RPROMPT="[%v]"
+RPROMPT=""
 
 # style
 #zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':vcs_info:*' formats '(%s) - [%b]'
-zstyle ':vcs_info:*' actionformats '(%s) - [%b | %a]'
+zstyle ':vcs_info:*' formats '[%F{green}%b%f]'
+zstyle ':vcs_info:*' actionformats '[%F{red}%b | %a%f]'
 
 # option
 setopt SHARE_HISTORY
@@ -25,6 +26,8 @@ SAVEHIST=1000000
 
 # path(should write before compinit)
 fpath=($HOME/projects/dotfiles/.zsh/zsh-completions/src(N-/) $fpath)
+
+[[ -f $HOME/projects/dotfiles/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $HOME/projects/dotfiles/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # autoload
 autoload -Uz compinit
