@@ -2,12 +2,14 @@
 PROMPT="
 [%n@%m] %~
 $ "
-RPROMPT=""
+RPROMPT="[%v]"
 
 # style
 #zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':vcs_info:*' formats '(%s) - [%b]'
+zstyle ':vcs_info:*' actionformats '(%s) - [%b | %a]'
 
 # option
 setopt SHARE_HISTORY
@@ -34,6 +36,8 @@ autoload -Uz add-zsh-hook
 autoload -Uz chpwd_recent_dirs cdr
   add-zsh-hook chpwd chpwd_recent_dirs
 autoload -Uz rmv
+autoload -Uz vcs_info
+  add-zsh-hook precmd _update_vcs_info_msg
 
 # bindkey
 bindkey '^r' \
@@ -45,7 +49,12 @@ bindkey '^o' \
 
 # function
 function zman() {
-    PAGER="less -g -s '+/^ {7}"$1"'" man zshall
+  PAGER="less -g -s '+/^ {7}"$1"'" man zshall
+}
+function _update_vcs_info_msg() {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  psvar[1]="$vcs_info_msg_0_"
 }
 
 # alias
