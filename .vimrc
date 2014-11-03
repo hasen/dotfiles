@@ -674,3 +674,10 @@ autocmd BufNewFile *.go 0r $HOME/.vim/template/go.txt
 
 " 行末の空白を保存時に自動削除する
 autocmd BufWritePre * :%s/\s\+$//e
+
+" phpunitを実行する
+nmap ,t :!phpunit
+
+" codeceptを実行する
+nmap ,c :!php ./codecept.phar run
+nmap ,cd :!php ./codecept.phar run --debug
