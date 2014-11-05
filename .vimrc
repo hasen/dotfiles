@@ -484,7 +484,7 @@ set backupdir=$HOME/vim_backup
 "set browsedir=buffer
 
 "クリップボードを連携
-set clipboard=unnamed,autoselect
+"set clipboard=unnamed,autoselect
 
 "xtermとscreen対応
 set ttymouse=xterm2
