@@ -6,7 +6,7 @@ set -o ignoreeof
 git_branch() {
   echo $(git branch --no-color 2>/dev/null | sed -ne "s/^\* \(.*\)$/\1/p")
 }
-PS1='\n\[\033[1;34m\]\u \[\033[0m\]=> \[\033[1;37m\]\H\n\w/ \[\033[0m\]<= \[\033[1;34m\]$(git_branch)\n\[\033[0;31m\]$\[\033[0m\] '
+PS1='\n\[\033[1;34m\]\u \[\033[0m\]=> \[\033[0;31m\]B\[\033[0m\] => \[\033[1;37m\]\H\n\w/ \[\033[0m\]<= \[\033[1;34m\]$(git_branch)\n\[\033[0;31m\]$\[\033[0m\] '
 MYSQL_PS1='\U> '
 
 export LESS='-R'
@@ -18,10 +18,10 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias vi='vim'
 alias ls='ls -G'
-alias ls='gls --color=auto'
+#alias ls='gls --color=auto'
 alias ll='ls -l -G'
-alias la='ls -al -G'
-alias al='ls -al -G'
+#alias la='ls -al -G'
+alias la='ls -al'
 alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
 alias tmnew='tmux new-session -s'
@@ -49,6 +49,7 @@ alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/
 #	. /etc/bashrc
 #fi
 
+export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 # Added by the Heroku Toolbelt
@@ -62,7 +63,7 @@ eval "$(rbenv init -)"
 
 # Perl
 # switch to plenv
-#source ~/perl5/perlbrew/etc/bashrc 
+#source ~/perl5/perlbrew/etc/bashrc
 #eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 export PATH="$HOME/.plenv/bin:~/.plenv/shims:$PATH"
 eval "$(plenv init -)"
@@ -71,9 +72,10 @@ eval "$(plenv init -)"
 export PYTHONPATH="$PYTHONPATH:/usr/bin/python2.7"
 
 # Go
-export GOROOT="/usr/local/Cellar/go/1.1.1"
-export GOPATH="/usr/local/Cellar/go/1.1.1/pkg/"
-export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+export GOROOT="/usr/local/go/bin/go"
+#export GOPATH="/usr/local/Cellar/go/1.1.1/pkg/"
+export GOPATH="/usr/local/go/src/pkg/"
+export PATH="$PATH:/usr/local/go/bin"
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
 
@@ -102,6 +104,10 @@ export JAVA="$JAVA_HOME/bin"
 # Git
 eval "$(hub alias -s)"
 
+# Cake
+export PATH="$HOME/projects/localhost/PHP/Book_Digitalcircus/sample_MVC/cake/app/Console:$PATH"
+
+# Phalcon
 export PTOOLSPATH=/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools/
 export PATH=$PATH:/Users/You/projects/localhost/PHP/Phalcon/phalcon-devtools
 export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/

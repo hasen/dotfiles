@@ -1,6 +1,6 @@
 [user]
-  name  = hasen
-  email = hasenfus7@gmail.com
+	name = sengoku
+	email = hasenfus7@gmail.com
 
 [include]
 # from 1.7.10 別ファイルからの読み込み
@@ -33,7 +33,7 @@
 # from 1.7.9
 # rebase = true
 
-[color]        
+[color]
   ui          = auto
   diff        = auto
   status      = auto
@@ -42,10 +42,11 @@
   grep        = auto
 
 [alias]
-  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' 
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/'
   st  = status -sb
   ad  = add
   aa  = add --all .
+  au  = add -u
   co  = checkout
   ci  = commit
   cm  = commit -m
@@ -53,9 +54,10 @@
   br  = branch -a
   lp  = log -p
   gr  = log --graph --decorate=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%d %Creset%s'
-  df  = diff
-  gp  = grep -n 
+  df  = diff --ignore-space-change
+  gp  = grep -n
   bl  = blame
+  br  = branch
 
 # ref
 # https://gist.github.com/teppeis/4117588

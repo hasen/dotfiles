@@ -9,8 +9,8 @@ filetype indent off
 "pathの追加
 "初期化 引数pluginをinstallする基準となるpath
 if has('vim_starting')
-  set runtimepath+=~/projects/dotfiles/.vim/neobundle.vim
-  call neobundle#rc(expand('~/projects/dotfiles/.vim/.bundle/'))
+  set runtimepath+=~/dotfiles/.vim/neobundle.vim
+  call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
 endif
 
 NeoBundle 'Shougo/echodoc.git'
@@ -23,8 +23,10 @@ NeoBundle 'Shougo/vimfiler.git'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'Shougo/neomru.vim'
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets.vim'
+"NeoBundle 'airblade/vim-gitgutter'
 "NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
@@ -35,41 +37,41 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
-NeoBundle 'itchyny/Calendar.vim'
+"NeoBundle 'itchyny/Calendar.vim'
 "NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'jnwhiteh/vim-golang'
 "NeoBundle 'kana/vim-smartinput'
-NeoBundle 'kannokanno/unite-todo.git'
+"NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
 "NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
 NeoBundle 'mattn/webapi-vim'
-NeoBundle 'moznion/unite-git-conflict.vim'
+"NeoBundle 'moznion/unite-git-conflict.vim'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'shawncplus/php.vim'
 "NeoBundle 'snipMate'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 't9md/vim-unite-ack.git'
-NeoBundle 'taichouchou2/html5.vim'
+"NeoBundle 'taichouchou2/html5.vim'
 "NeoBundle 'taichouchou2/surround.vim'
 NeoBundle 'taichouchou2/vim-javascript'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'taka84u9/unite-git'
 NeoBundle 'tell-k/vim-browsereload-mac'
-NeoBundle 'terryma/vim-multiple-cursors'
+"NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 "NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'vim-perl/vim-perl'
+"NeoBundle 'vim-perl/vim-perl'
 "NeoBundle 'vim-scripts/Yankring.vim'
 NeoBundle 'vim-scripts/tagbar-phpctags', {
   \  'build': {
@@ -80,7 +82,7 @@ NeoBundle 'vim-scripts/Pydiction.git'
 
 filetype on
 filetype plugin on
-filetype indent on
+"filetype indent on
 
 "font
 set encoding=utf-8
@@ -318,7 +320,7 @@ set wildmenu wildmode=list:full
 
 "常にステータスラインを表示する
 set laststatus=2
-set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%\ \ \ \ \ 
+set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%
 
 "シンタックスハイライトを有効にする
 syntax on
@@ -347,7 +349,7 @@ if has('multi_byte_ime')||('xie')
 endif
 
 "新しい行のインデントを現在行と同じにする
-set autoindent
+"set autoindent
 "set smartindent
 
 "insert_mode時、status_lineの色を変更
@@ -479,10 +481,10 @@ command! SyntaxInfo call s:get_syn_info()
 set backupdir=$HOME/vim_backup
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
-"set browsedir=buffer 
+"set browsedir=buffer
 
 "クリップボードを連携
-set clipboard=unnamed,autoselect
+"set clipboard=unnamed,autoselect
 
 "xtermとscreen対応
 set ttymouse=xterm2
@@ -567,7 +569,7 @@ nnoremap <silent> [vimrc]v :<C-u>source $MYVIMRC<CR>
 augroup vimrc
   autocmd!
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END  
+augroup END
 
 "jkを加速する
 let g:accelerated_jk_acceleration_table = [10,5,3]
@@ -612,7 +614,7 @@ vnoremap gf :tab <cfile><CR>
 nmap n nzz
 nmap N Nzz
 
-" over.vim 
+" over.vim
 " over.vimの起動
 nnoremap <silent> <Leader>m :OverCommandLine<CR>
 " カーソル下の単語をハイライト付きで置換
@@ -662,3 +664,20 @@ syntax keyword javaScriptLambda function conceal cchar=λ
 highlight clear Conceal
 highlight link Conceal Identifier
 highlight link javaScriptLambda Identifier
+
+" 拡張子で判定して，ファイル作成時にテンプレートを挿入
+autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
+autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl.txt
+autocmd BufNewFile *.pm 0r $HOME/.vim/template/perl.txt
+autocmd BufNewFile *.php 0r $HOME/.vim/template/php.txt
+autocmd BufNewFile *.go 0r $HOME/.vim/template/go.txt
+
+" 行末の空白を保存時に自動削除する
+"autocmd BufWritePre * :%s/\s\+$//e
+
+" phpunitを実行する
+nmap ,t :!phpunit
+
+" codeceptを実行する
+nmap ,c :!php ./codecept.phar run
+nmap ,cd :!php ./codecept.phar run --debug
