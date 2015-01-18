@@ -69,7 +69,12 @@ export PATH="$HOME/.plenv/bin:~/.plenv/shims:$PATH"
 eval "$(plenv init -)"
 
 # Python
-export PYTHONPATH="$PYTHONPATH:/usr/bin/python2.7"
+#export PYTHONPATH="$PYTHONPATH:/usr/bin/python2.7"
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+fi
 
 # Go
 export GOROOT="/usr/local/go/bin/go"

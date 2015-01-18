@@ -1,13 +1,8 @@
-"Vim7.4から$HOME/.vimrcが$HOME/.vim/vimrcに配置変更
-"vi互換にしない VimがVimとして動作する
-"但しvimrcがあるとVimは自動的にcompatibleオプションがoffになる
 set nocompatible
 
 filetype plugin off
 filetype indent off
 
-"pathの追加
-"初期化 引数pluginをinstallする基準となるpath
 if has('vim_starting')
   set runtimepath+=~/dotfiles/.vim/neobundle.vim
   call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
@@ -19,15 +14,10 @@ NeoBundle 'Shougo/unite-ssh.git'
 NeoBundle 'Shougo/unite-outline.git'
 NeoBundle 'Shougo/vimproc.git'
 NeoBundle 'Shougo/vim-vcs.git'
-NeoBundle 'Shougo/vimfiler.git'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neomru.vim'
-"NeoBundle 'Shougo/neosnippet.vim'
-"NeoBundle 'Shougo/neosnippet-snippets.vim'
-"NeoBundle 'airblade/vim-gitgutter'
-"NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
@@ -37,52 +27,36 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
-"NeoBundle 'itchyny/Calendar.vim'
-"NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'jnwhiteh/vim-golang'
-"NeoBundle 'kana/vim-smartinput'
-"NeoBundle 'kannokanno/unite-todo.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
-"NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
 NeoBundle 'mattn/webapi-vim'
-"NeoBundle 'moznion/unite-git-conflict.vim'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rking/ag.vim'
-"NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'shawncplus/php.vim'
-"NeoBundle 'snipMate'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 't9md/vim-unite-ack.git'
-"NeoBundle 'taichouchou2/html5.vim'
-"NeoBundle 'taichouchou2/surround.vim'
 NeoBundle 'taichouchou2/vim-javascript'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'taka84u9/unite-git'
 NeoBundle 'tell-k/vim-browsereload-mac'
-"NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
-"NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim'
-"NeoBundle 'vim-perl/vim-perl'
-"NeoBundle 'vim-scripts/Yankring.vim'
 NeoBundle 'vim-scripts/tagbar-phpctags', {
   \  'build': {
   \    'others': 'chmod +x bin/phpctags',
   \  },
   \}
-NeoBundle 'vim-scripts/Pydiction.git'
 
 filetype on
 filetype plugin on
-"filetype indent on
 
 "font
 set encoding=utf-8
@@ -119,16 +93,16 @@ noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
 noremap zf :Unite file<CR>
 
 "vimshell
-nnoremap <silent> vs :<C-u>VimShell<CR>
-nnoremap <silent> vp :<C-u>VimShellPop<CR>
+"nnoremap <silent> vs :<C-u>VimShell<CR>
+"nnoremap <silent> vp :<C-u>VimShellPop<CR>
 
-augroup vimrc
-  autocmd FileType vimfiler call s:vimfiler_my_settings()
-augroup END
-function! s:vimfiler_my_settings()
-  nmap  <buffer> q <Plug>(vimfiler_exit)
-  nmap  <buffer> ! <Plug>(vimfiler_hide)
-endfunction
+"augroup vimrc
+"  autocmd FileType vimfiler call s:vimfiler_my_settings()
+"augroup END
+"function! s:vimfiler_my_settings()
+"  nmap  <buffer> q <Plug>(vimfiler_exit)
+"  nmap  <buffer> ! <Plug>(vimfiler_hide)
+"endfunction
 
 "補完ウィンドウの設定
 set completeopt=menuone
@@ -178,7 +152,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete#Complete
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setl autoindent
+"autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=rubycomplete#Complete
 
 "vim-ref用のpathを設定する
@@ -187,8 +163,8 @@ let g:neocomplcache_snippets_disable_runtime_snippets=1
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
 let g:neocomplcache_dictionary_filetype_lists={'default': '', 'perl': $HOME . '/projects/dotfiles/.vim/dict/perl.dict'}
 
-"Python用のdic
-let g:neocomplcache_dictionary_filetype_lists={'default': '', 'python': $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict', 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'}
+""Python用のdic
+"let g:neocomplcache_dictionary_filetype_lists={'default': '', 'python': $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict', 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'}
 
 "define keyword
 if !exists('g:neocomplcache_keyword_patterns')
@@ -409,18 +385,18 @@ if has('syntax')
   call ZenkakuSpace()
 endif
 
-augroup Python_Coding
-  au FileType python call s:python_setting(
-augroup END
-function! s:python_setting()
-  setl autoindent
-  setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cl
-  set  expandtab tabstop=4 shiftwidth=4 softtabstop=4
-  setl textwidth=80
-  setl colorcolumn=80
-  setl foldmethod=indent
-  setl foldlevel=99
-endfunction
+"augroup Python_Coding
+"  au FileType python call s:python_setting(
+"augroup END
+"function! s:python_setting()
+"  setl autoindent
+"  setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cl
+"  set  expandtab tabstop=4 shiftwidth=4 softtabstop=4
+"  setl textwidth=80
+"  setl colorcolumn=80
+"  setl foldmethod=indent
+"  setl foldlevel=99
+"endfunction
 
 if $GOROOT != ''
   set runtimepath+=$GOROOT/misc/vim
