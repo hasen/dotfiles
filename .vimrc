@@ -657,3 +657,10 @@ nmap ,t :!phpunit
 " codeceptを実行する
 nmap ,c :!php ./codecept.phar run
 nmap ,cd :!php ./codecept.phar run --debug
+
+" backspaceを修正
+set backspace=indent,eol,start
+
+" set number
+nmap :sn :set number
+nmap :snn :set nonumber
