@@ -2,6 +2,10 @@
 # option
 set -o ignoreeof
 
+# delete until slash
+stty werase undef
+bind '"\C-w": unix-filename-rubout'
+
 # colorful primary prompt string
 git_branch() {
   echo $(git branch --no-color 2>/dev/null | sed -ne "s/^\* \(.*\)$/\1/p")
@@ -55,11 +59,11 @@ export PATH="/usr/local/sbin:$PATH"
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# Ruby
-# Add RVM to PATH for scripting
-export PATH="/usr/local/rvm/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:~/.rbenv/shims:$PATH"
-eval "$(rbenv init -)"
+## Ruby
+## Add RVM to PATH for scripting
+#export PATH="/usr/local/rvm/bin:$PATH"
+#export PATH="$HOME/.rbenv/bin:~/.rbenv/shims:$PATH"
+#eval "$(rbenv init -)"
 
 # Perl
 # switch to plenv
@@ -77,22 +81,19 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 
 # Go
-export GOROOT="/usr/local/go/bin/go"
-#export GOPATH="/usr/local/Cellar/go/1.1.1/pkg/"
-export GOPATH="/usr/local/go/src/pkg/"
-export PATH="$PATH:/usr/local/go/bin"
-#export PATH="$HOME/.gobrew/bin:$PATH"
-#eval "$(gobrew init -)"
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
 # node
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 
-# PHP
-export PATH="$HOME/pear/bin:$PATH"
-export PATH="$HOME/.phpenv/bin:$PATH"
-export PATH="$HOME/.phpenv/plugins/php-build/bin:$PATH"
-export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
-eval "$(phpenv init -)"
+## PHP
+#export PATH="$HOME/pear/bin:$PATH"
+#export PATH="$HOME/.phpenv/bin:$PATH"
+#export PATH="$HOME/.phpenv/plugins/php-build/bin:$PATH"
+#export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+#eval "$(phpenv init -)"
 
 # D
 export PATH="$HOME/.denv/bin:$PATH"
@@ -123,3 +124,7 @@ export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phal
 # Docker
 export DOCKER_HOST="192.168.11.4:5422"
 
+# bash-completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
