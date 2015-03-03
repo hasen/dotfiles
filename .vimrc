@@ -146,6 +146,7 @@ let g:neocomplcache_ctags_arguments_list={ 'perl' : '-R -h ".pm"' }
 
 "setting markdown filetype
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.twig set filetype=html
 "Enable omni completion.
 autocmd FileType eruby,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
@@ -154,7 +155,8 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete#Complete
 "autocmd FileType python setl autoindent
 "autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-"autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType python setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=pythoncomplete#Complete
+
 autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=rubycomplete#Complete
 
 "vim-ref用のpathを設定する
@@ -475,10 +477,10 @@ set smarttab
 set expandtab
 
 "ファイル内の <Tab> が対応する空白の数
-set tabstop=2
+set tabstop=4
 
 "シフト移動幅
-set shiftwidth=2
+set shiftwidth=4
 
 "変更中のファイルでも、保存しないで他のファイルを表示
 "set hidden
