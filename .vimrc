@@ -19,9 +19,13 @@ NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'AtsushiM/sass-compile.vim'
+NeoBundle 'basyura/bitly.vim'
+NeoBundle 'basyura/TweetVim'
+NeoBundle 'basyura/twibill.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'cohama/vim-smartinput-endwise'
+NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
@@ -29,6 +33,7 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'jnwhiteh/vim-golang'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'kakkyz81/evervim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
@@ -57,6 +62,7 @@ NeoBundle 'vim-scripts/tagbar-phpctags', {
 
 filetype on
 filetype plugin on
+filetype plugin indent on
 
 "font
 set encoding=utf-8
@@ -634,6 +640,41 @@ let php_parent_error_open=1
 
 " li, pをblock tagとして扱う
 let g:html_inden_tags='li\|p'
+
+" Evernoteのdeveloper-token
+"let g:evervim_devtoken=''
+
+" TweetVim
+" ページあたりのツイート取得件数
+let g:tweetvim_tweet_per_page = 50
+" 表示内容をキャッシュしておく数(バッファを戻る、進むに使用)
+let g:tweetvim_cache_size     = 10
+" 設定情報を保存するディレクトリ
+let g:tweetvim_config_dir     = expand('~/.tweetvim')
+" タイムラインにリツイートを含める
+let g:tweetvim_include_rts    = 1
+" source(クライアント名) を表示するオプション
+let g:tweetvim_display_source = 1
+" ツイート時間の表示・非表示設定 (少しでも表示時間を速くしたい場合)
+"let g:tweetvim_display_time   = 1
+" タイムラインを開く際のコマンドを指定 (edit/split/vsplit)
+"let g:tweetvim_open_buffer_cmd = 'edit!'
+" 発言用のバッファを開く際のコマンドを指定
+" let g:tweetvim_open_say_cmd = 'botright split'
+" アイコン表示 (ImageMagick が必要)
+let g:tweetvim_display_icon = 1
+" tweetvim_say バッファを開いた際にフッタ(メッセージ)を表示する
+"let g:tweetvim_footer = '
+" tweetvim_say バッファにアカウント名を差し込む
+"let g:tweetvim_say_insert_account = 0
+" セパレータの表示/非表示
+let g:tweetvim_display_separator = 1
+nnoremap <F6> :<C-u>Unite tweetvim<CR>
+nnoremap ,uv :<C-u>Unite tweetvim<CR>
+nnoremap ,th :<C-u>TweetVimHomeTimeline<CR>
+nnoremap ,tm :<C-u>TweetVimMentions<CR>
+nnoremap ,ts :<C-u>TweetVimSay<CR>
+nnoremap ,tc :<C-u>TweetVimCommandSay 
 
 " JSのfunctionλにする
 " http://labs.timedia.co.jp/2011/04/javascript-function-lambda-vim.html
