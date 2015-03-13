@@ -81,9 +81,9 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 
 # Go
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+export GOPATH="$HOME/go"
+export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 
 # node
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
@@ -100,11 +100,11 @@ export PATH="$HOME/.denv/bin:$PATH"
 eval "$(denv init -)"
 
 # JS
-export PATH=/usr/local/bin/Sencha/Cmd/4.0.0.203:$PATH
+export PATH="/usr/local/bin/Sencha/Cmd/4.0.0.203:$PATH"
 export SENCHA_CMD_3_0_0="/usr/local/bin/Sencha/Cmd/4.0.0.203"
 
 # Java
-export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home"
 export JAVA="$JAVA_HOME/bin"
 
 # Git
@@ -128,3 +128,38 @@ export DOCKER_HOST="192.168.11.4:5422"
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
+
+# hsenv
+export PATH="$HOME/.hsenv/bin:$PATH"
+precmd() {
+  local search_dir=$PWD
+  while [ $search_dir != "/" ]; do
+    local hsenv_found=false
+    for dir in `cd $search_dir && find . -maxdepth 1 -type d -name ".hsenv*"`; do
+      if $hsenv_found; then
+        echo multiple environments in $search_dir , manual activaton required
+        return        
+      elif [ -n "$dir" ] && [ -e $search_dir/$dir/bin/activate ]; then
+        hsenv_found=true
+      fi
+    done
+    if ! $hsenv_found; then
+      search_dir=`cd $search_dir/.. && pwd`
+      continue
+    fi
+    if [ -n "$HSENV" ] && [ "$HSENV" != "$search_dir" ]; then
+      deactivate_hsenv
+    fi
+    if [ -z "$HSENV" ]; then
+      pwd_backup=$PWD
+      cd $search_dir
+      source .hsenv*/bin/activate
+      cd $pwd_backup
+    fi
+    return
+  done
+  if [ -n "$HSENV" ]; then
+    deactivate_hsenv
+  fi
+}
+export PROMPT_COMMAND=precmd
