@@ -707,3 +707,7 @@ set backspace=indent,eol,start
 " set number
 nmap :sn :set number
 nmap :snn :set nonumber
+
+" set paste
+nmap :sp :set paste
+nmap :snp :set nopaste
