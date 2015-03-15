@@ -7,7 +7,7 @@ if has('vim_starting')
   set runtimepath+=~/dotfiles/.vim/neobundle.vim
   call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
 endif
-
+ 
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/unite-ssh.git'
@@ -18,6 +18,7 @@ NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'AtsushiM/sass-compile.vim'
 NeoBundle 'basyura/bitly.vim'
 NeoBundle 'basyura/TweetVim'
@@ -25,6 +26,9 @@ NeoBundle 'basyura/twibill.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'cohama/vim-smartinput-endwise'
+NeoBundle 'eagletmt/ghcmod-vim'
+NeoBundle 'eagletmt/neco-ghc'
+NeoBundle 'enomsg/vim-haskellConcealPlus'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'hail2u/vim-css3-syntax'
@@ -35,14 +39,19 @@ NeoBundle 'jnwhiteh/vim-golang'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kakkyz81/evervim'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'guns/vim-clojure-static'
+NeoBundle 'guns/vim-sexp'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mattn/perlvalidate-vim.git'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'pbrisbin/html-template-syntax'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'shawncplus/php.vim'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 't9md/vim-unite-ack.git'
@@ -52,8 +61,12 @@ NeoBundle 'taka84u9/unite-git'
 NeoBundle 'tell-k/vim-browsereload-mac'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
+NeoBundle 'tpope/vim-fireplace'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'Twinside/vim-hoogle'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'yogsototh/haskell-vim'      
 NeoBundle 'vim-scripts/tagbar-phpctags', {
   \  'build': {
   \    'others': 'chmod +x bin/phpctags',
@@ -332,6 +345,12 @@ if has('multi_byte_ime')||('xie')
   highlight CursorIM guibg=Purple guifg=NONE
 endif
 
+" 80行表示
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=16
+endif
+
 "新しい行のインデントを現在行と同じにする
 "set autoindent
 "set smartindent
@@ -460,6 +479,60 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
+
+" Haskell
+let mapleader="-"
+let g:mapleader="-"
+set tm=2000
+nmap <silent> <leader>ht :GhcModType<CR>
+nmap <silent> <leader>hh :GhcModTypeClear<CR>
+nmap <silent> <leader>hT :GhcModTypeInsert<CR>
+nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>:lopen<CR>
+let g:syntastic_mode_map={'mode': 'active', 'passive_filetypes': ['haskell']}
+let g:syntastic_always_populate_loc_list = 1
+nmap <silent> <leader>hl :SyntasticCheck hlint<CR>:lopen<CR>
+
+" Auto-checking on writing
+autocmd BufWritePost *.hs,*.lhs GhcModCheckAndLintAsync
+
+"  neocomplcache (advanced completion)
+autocmd BufEnter *.hs,*.lhs let g:neocomplcache_enable_at_startup = 1
+function! SetToCabalBuild()
+    if glob("*.cabal") != ''
+        set makeprg=cabal\ build
+    endif
+endfunction
+autocmd BufEnter *.hs,*.lhs :call SetToCabalBuild()
+
+" -- neco-ghc
+let $PATH=$PATH.':'.expand("~/.cabal/bin")
+
+" Clojure
+
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesActivate
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadRound
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadSquare
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadBraces
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
+" -- Rainbow parenthesis options
+let g:rbpt_colorpairs = [
+    \ ['darkyellow',  'RoyalBlue3'],
+    \ ['darkgreen',   'SeaGreen3'],
+    \ ['darkcyan',    'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['DarkMagenta', 'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkyellow',  'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['DarkMagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkyellow',  'DarkOrchid3'],
+    \ ['darkred',     'firebrick3'],
+    \ ]
 
 "バックアップファイルを作るディレクトリ
 set backupdir=$HOME/vim_backup
