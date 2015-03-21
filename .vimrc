@@ -75,7 +75,7 @@ NeoBundle 'vim-scripts/tagbar-phpctags', {
 
 filetype on
 filetype plugin on
-filetype plugin indent on
+"filetype plugin indent on
 
 "font
 set encoding=utf-8
