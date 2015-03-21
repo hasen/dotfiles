@@ -174,9 +174,9 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete#Complete
 "autocmd FileType python setl autoindent
 "autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 omnifunc=pythoncomplete#Complete
 
-autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=rubycomplete#Complete
+autocmd FileType ruby setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 omnifunc=rubycomplete#Complete
 
 "vim-ref用のpathを設定する
 let g:ref_phpmanual_path=$HOME.'/projects/dotfiles/.vim/dict/php-chunked-xhtml'
