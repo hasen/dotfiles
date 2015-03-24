@@ -163,3 +163,6 @@ precmd() {
   fi
 }
 export PROMPT_COMMAND=precmd
+
+# added by Anaconda 2.1.0 installer
+export PATH="/Users/You/anaconda/bin:$PATH"
