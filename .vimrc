@@ -786,3 +786,14 @@ nmap :snn :set nonumber
 " set paste
 nmap :sp :set paste
 nmap :snp :set nopaste
+
+" 自動的にディレクトリを作成する
+augroup vimrc-auto-mkdir  " {{{
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'))
+  function! s:auto_mkdir(dir)  " {{{
+    if !isdirectory(a:dir)
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction  " }}}
+augroup END  " }}}
