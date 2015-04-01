@@ -16,6 +16,14 @@ MYSQL_PS1='\U> '
 export LESS='-R'
 export LESSOPEN=' | /usr/local/share/source-highlight/src-hilite-lesspipe.sh %s'
 
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
+# bash-completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
 # User specific aliases and functions
 alias rm='rm -i'
 alias cp='cp -i'
@@ -53,27 +61,24 @@ alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/
 #	. /etc/bashrc
 #fi
 
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ## Ruby
-## Add RVM to PATH for scripting
-#export PATH="/usr/local/rvm/bin:$PATH"
-#export PATH="$HOME/.rbenv/bin:~/.rbenv/shims:$PATH"
-#eval "$(rbenv init -)"
+export RBENV_ROOT="${HOME}/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+    export PATH=${RBENV_ROOT}/bin:$PATH
+    eval "$(rbenv init -)"
+fi
 
 # Perl
-# switch to plenv
-#source ~/perl5/perlbrew/etc/bashrc
-#eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
-export PATH="$HOME/.plenv/bin:~/.plenv/shims:$PATH"
-eval "$(plenv init -)"
+export PLENV_ROOT="${HOME}/.plenv"
+if [ -d "${PLENV_ROOT}" ]; then
+    export PATH=${PLENV_ROOT}/bin:$PATH
+    eval "$(plenv init -)"
+fi
 
 # Python
-#export PYTHONPATH="$PYTHONPATH:/usr/bin/python2.7"
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
@@ -96,8 +101,11 @@ export PATH="$HOME/.nodebrew/current/bin:$PATH"
 #eval "$(phpenv init -)"
 
 # D
-export PATH="$HOME/.denv/bin:$PATH"
-eval "$(denv init -)"
+export DENV_ROOT="${HOME}/.denv"
+if [ -d "${DENV_ROOT}" ]; then
+    export PATH=${DENV_ROOT}/bin:$PATH
+    eval "$(denv init -)"
+fi
 
 # JS
 export PATH="/usr/local/bin/Sencha/Cmd/4.0.0.203:$PATH"
@@ -120,14 +128,6 @@ export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/
 export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools
 export PTOOLSPATH=/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools/
 export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phalcon-devtools
-
-# Docker
-export DOCKER_HOST="192.168.11.4:5422"
-
-# bash-completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-fi
 
 # hsenv
 export PATH="$HOME/.hsenv/bin:$PATH"
@@ -166,6 +166,9 @@ export PROMPT_COMMAND=precmd
 
 # added by Anaconda 2.1.0 installer
 #export PATH="/Users/You/anaconda/bin:$PATH"
+
+# Docker
+export DOCKER_HOST="192.168.11.4:5422"
 
 # boot2docker
 export DOCKER_HOST=tcp://192.168.59.103:2376
