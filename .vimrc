@@ -750,14 +750,6 @@ nnoremap ,tm :<C-u>TweetVimMentions<CR>
 nnoremap ,ts :<C-u>TweetVimSay<CR>
 nnoremap ,tc :<C-u>TweetVimCommandSay 
 
-" JSのfunctionλにする
-" http://labs.timedia.co.jp/2011/04/javascript-function-lambda-vim.html
-setlocal conceallevel=2
-syntax keyword javaScriptLambda function conceal cchar=λ
-highlight clear Conceal
-highlight link Conceal Identifier
-highlight link javaScriptLambda Identifier
-
 " 拡張子で判定して，ファイル作成時にテンプレートを挿入
 autocmd BufNewFile *.html 0r $HOME/projects/dotfiles/.vim/template/html.txt
 autocmd BufNewFile *.pl 0r $HOME/projects/dotfiles/.vim/template/perl.txt
