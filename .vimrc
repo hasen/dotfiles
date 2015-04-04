@@ -756,7 +756,8 @@ autocmd BufNewFile *.pl 0r $HOME/projects/dotfiles/.vim/template/perl.txt
 autocmd BufNewFile *.pm 0r $HOME/projects/dotfiles/.vim/template/perl.txt
 autocmd BufNewFile *.php 0r $HOME/projects/dotfiles/.vim/template/php.txt
 autocmd BufNewFile *.go 0r $HOME/projects/dotfiles/.vim/template/go.txt
-autocmd BufNewFile *.py 0r $HOME/projects/dotfiles/.vim/template/py.txt
+autocmd BufNewFile *.py 0r $HOME/projects/dotfiles/.vim/template/python.txt
+autocmd BufNewFile *.rb 0r $HOME/projects/dotfiles/.vim/template/ruby.txt
 
 " 行末の空白を保存時に自動削除する
 "autocmd BufWritePre * :%s/\s\+$//e
