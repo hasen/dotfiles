@@ -93,12 +93,15 @@ export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 # node
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 
-## PHP
+# PHP
 #export PATH="$HOME/pear/bin:$PATH"
 #export PATH="$HOME/.phpenv/bin:$PATH"
 #export PATH="$HOME/.phpenv/plugins/php-build/bin:$PATH"
 #export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 #eval "$(phpenv init -)"
+
+# composer
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # D
 export DENV_ROOT="${HOME}/.denv"
