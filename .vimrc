@@ -752,6 +752,7 @@ nnoremap ,tc :<C-u>TweetVimCommandSay
 
 " 拡張子で判定して，ファイル作成時にテンプレートを挿入
 autocmd BufNewFile *.html 0r $HOME/projects/dotfiles/template/html.txt
+autocmd BufNewFile *.erb 0r $HOME/projects/dotfiles/template/html.txt
 autocmd BufNewFile *.pl 0r $HOME/projects/dotfiles/template/perl.txt
 autocmd BufNewFile *.pm 0r $HOME/projects/dotfiles/template/perl.txt
 autocmd BufNewFile *.php 0r $HOME/projects/dotfiles/template/php.txt
