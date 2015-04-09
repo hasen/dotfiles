@@ -7,7 +7,7 @@ if has('vim_starting')
   set runtimepath+=~/dotfiles/.vim/neobundle.vim
   call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
 endif
- 
+
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/unite-ssh.git'
@@ -19,10 +19,6 @@ NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'AtsushiM/sass-compile.vim'
-NeoBundle 'basyura/bitly.vim'
-NeoBundle 'basyura/TweetVim'
-NeoBundle 'basyura/twibill.vim'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'cohama/vim-smartinput-endwise'
@@ -37,7 +33,6 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'jnwhiteh/vim-golang'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'kakkyz81/evervim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'derekwyatt/vim-scala'
@@ -51,8 +46,6 @@ NeoBundle 'pbrisbin/html-template-syntax'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'scrooloose/nerdtree.git'
-"NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'shawncplus/php.vim'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 't9md/vim-unite-ack.git'
@@ -67,7 +60,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'Twinside/vim-hoogle'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'yogsototh/haskell-vim'      
+NeoBundle 'yogsototh/haskell-vim'
 NeoBundle 'vim-scripts/tagbar-phpctags', {
   \  'build': {
   \    'others': 'chmod +x bin/phpctags',
@@ -112,18 +105,6 @@ noremap zp :Unite buffer_tab file_mru<CR>
 noremap zn :UniteWithBufferDir -buffer-name=files file file/new<CR>
 noremap zf :Unite file<CR>
 
-"vimshell
-"nnoremap <silent> vs :<C-u>VimShell<CR>
-"nnoremap <silent> vp :<C-u>VimShellPop<CR>
-
-"augroup vimrc
-"  autocmd FileType vimfiler call s:vimfiler_my_settings()
-"augroup END
-"function! s:vimfiler_my_settings()
-"  nmap  <buffer> q <Plug>(vimfiler_exit)
-"  nmap  <buffer> ! <Plug>(vimfiler_hide)
-"endfunction
-
 "補完ウィンドウの設定
 set completeopt=menuone
 
@@ -157,11 +138,6 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 "close with <CR>
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
-"Plugin key_mappings
-"imap <C-k><Plug>(neosnippet_expand_or_jump)
-"smap <C-k><Plug>(neosnippet_expand_or_jump)
-"xmap <C-k><Plug>(neosnippet_expand_target)
-
 let g:neocomplcache_ctags_arguments_list={ 'perl' : '-R -h ".pm"' }
 
 "setting markdown filetype
@@ -185,9 +161,6 @@ let g:neocomplcache_snippets_disable_runtime_snippets=1
 let g:neocomplcache_snippets_dir="~/projects/dotfiles/.vim/snippets"
 let g:neocomplcache_dictionary_filetype_lists={'default': '', 'perl': $HOME . '/projects/dotfiles/.vim/dict/perl.dict'}
 
-""Python用のdic
-"let g:neocomplcache_dictionary_filetype_lists={'default': '', 'python': $HOME . '/projects/dotfiles/.vim/Pydiction/complete_dict', 'vimshell': $HOME . '/projects/dotfiles/.VimShell/command_history'}
-
 "define keyword
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns={}
@@ -199,11 +172,6 @@ let g:neocomplcache_keyword_patterns['default']='\h\w*'
 if !exists('g:neocomplcache_same_filetype_lists')
   let g:neocomplcache_same_filetype_lists={}
 endif
-
-"snippetの設定
-"inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-"imap <expr><C-k> pumvisible() ? "\<C-n>" :neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
-"smap <expr><C-k> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
 
 "for snippet_complete marker
 if has('conceal')
@@ -223,41 +191,11 @@ let g:unite_source_grep_recursive_opt=''
 let g:unite_source_grep_max_candidates=200
 vnoremap /g y:Unite grep::-iHRn:<C-r>=escape(@",'\\.*$^[]')<CR><CR>
 
-let file_name=expand("%:p")
-if has('vim_starting') && file_name==""
-  autocmd VimEnter * call ExecuteNERDTree()
-endif
-"カーソルが外れているときは自動的にnerdtreeを隠す
-function! ExecuteNERDTree()
-  b:nerdstatus=1
-  b:nerdstatus=2
-
-  if!exists('g:nerdstatus')
-    execute'NERDTree./'
-    letg:windowWidth=winwidth(winnr())
-    letg:nerdtreebuf=bufnr('')
-    letg:nerdstatus=1
-  elseif g:nerdstatus==1
-    execute'wincmdt'
-    execute 'vertical resize' 0
-    execute 'wincmd p'
-    let g:nerdstatus=2
-  elseif g:nerdstatus==2
-    execute 'wincmd t'
-    execute 'vertical resize' g:windowWidth
-    let g:nerdstatus=1
-  endif
-endfunction
-noremap <c-e> :<c-u>:call ExecuteNERDTree()<CR>
-
 "quickrunの設定(\+rで実行)
 nmap <Leader>r <plug>(quickrun)
 
 "easy-motionのprefixを指定
 let g:EasyMotion_leader_key='<SPACE>e'
-
-"yankring
-"let g:yankring_max_history=30
 
 "spolu/dwm.vim(ウィンド型タイルマネージャ)の設定
 nnoremap <C-j> <C-w>w
@@ -310,12 +248,6 @@ set autoread
 "コマンドラインモードにおける補完機能を有効にする
 set wildmenu wildmode=list:full
 
-"Ctrl+nでファイルを切り替える 切り替える前にファイルを保存する
-"nmap :update:bn
-"imap :update:bn
-"vmap :update:bn
-"cmap :update:bn
-
 "常にステータスラインを表示する
 set laststatus=2
 set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %l\ col:\ %c\ %5p%%
@@ -323,16 +255,7 @@ set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %
 "シンタックスハイライトを有効にする
 syntax on
 syntax enable
-"set background=dark
-"let g:sloarized_termtrans=1
-"let g:solarized_termcolors=256
-"colorscheme solarized
-"colorscheme molokai
-
-"if &background ==# 'dark'
-"  colorscheme solarized
-"endif
-
+"
 "cursorlineを表示する
 "set cursorline
 
@@ -412,19 +335,6 @@ if has('syntax')
   augroup END
   call ZenkakuSpace()
 endif
-
-"augroup Python_Coding
-"  au FileType python call s:python_setting(
-"augroup END
-"function! s:python_setting()
-"  setl autoindent
-"  setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cl
-"  set  expandtab tabstop=4 shiftwidth=4 softtabstop=4
-"  setl textwidth=80
-"  setl colorcolumn=80
-"  setl foldmethod=indent
-"  setl foldlevel=99
-"endfunction
 
 if $GOROOT != ''
   set runtimepath+=$GOROOT/misc/vim
@@ -715,41 +625,6 @@ let php_parent_error_open=1
 " li, pをblock tagとして扱う
 let g:html_inden_tags='li\|p'
 
-" Evernoteのdeveloper-token
-"let g:evervim_devtoken=''
-
-" TweetVim
-" ページあたりのツイート取得件数
-let g:tweetvim_tweet_per_page = 50
-" 表示内容をキャッシュしておく数(バッファを戻る、進むに使用)
-let g:tweetvim_cache_size     = 10
-" 設定情報を保存するディレクトリ
-let g:tweetvim_config_dir     = expand('~/.tweetvim')
-" タイムラインにリツイートを含める
-let g:tweetvim_include_rts    = 1
-" source(クライアント名) を表示するオプション
-let g:tweetvim_display_source = 1
-" ツイート時間の表示・非表示設定 (少しでも表示時間を速くしたい場合)
-"let g:tweetvim_display_time   = 1
-" タイムラインを開く際のコマンドを指定 (edit/split/vsplit)
-"let g:tweetvim_open_buffer_cmd = 'edit!'
-" 発言用のバッファを開く際のコマンドを指定
-" let g:tweetvim_open_say_cmd = 'botright split'
-" アイコン表示 (ImageMagick が必要)
-let g:tweetvim_display_icon = 1
-" tweetvim_say バッファを開いた際にフッタ(メッセージ)を表示する
-"let g:tweetvim_footer = '
-" tweetvim_say バッファにアカウント名を差し込む
-"let g:tweetvim_say_insert_account = 0
-" セパレータの表示/非表示
-let g:tweetvim_display_separator = 1
-nnoremap <F6> :<C-u>Unite tweetvim<CR>
-nnoremap ,uv :<C-u>Unite tweetvim<CR>
-nnoremap ,th :<C-u>TweetVimHomeTimeline<CR>
-nnoremap ,tm :<C-u>TweetVimMentions<CR>
-nnoremap ,ts :<C-u>TweetVimSay<CR>
-nnoremap ,tc :<C-u>TweetVimCommandSay 
-
 " 拡張子で判定して，ファイル作成時にテンプレートを挿入
 autocmd BufNewFile *.html 0r $HOME/projects/dotfiles/template/html.txt
 autocmd BufNewFile *.erb 0r $HOME/projects/dotfiles/template/html.txt
@@ -761,7 +636,7 @@ autocmd BufNewFile *.py 0r $HOME/projects/dotfiles/template/python.txt
 autocmd BufNewFile *.rb 0r $HOME/projects/dotfiles/template/ruby.txt
 
 " 行末の空白を保存時に自動削除する
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 " phpunitを実行する
 nmap ,t :!phpunit
