@@ -656,6 +656,9 @@ nmap :snn :set nonumber
 nmap :sp :set paste
 nmap :snp :set nopaste
 
+" jsonの'"'を表示する
+set conceallevel=0
+
 " 自動的にディレクトリを作成する
 augroup vimrc-auto-mkdir  " {{{
   autocmd!
@@ -666,3 +669,7 @@ augroup vimrc-auto-mkdir  " {{{
     endif
   endfunction  " }}}
 augroup END  " }}}
+
+" golint
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
