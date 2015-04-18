@@ -30,9 +30,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias vi='vim'
 alias ls='ls -G'
-#alias ls='gls --color=auto'
 alias ll='ls -l -G'
-#alias la='ls -al -G'
 alias la='ls -al'
 alias lm='ls -al -G | more'
 alias tm='tmux attach -t'
@@ -43,17 +41,13 @@ alias tmus='tmux new -s'
 alias his='history'
 alias preview='open -a Preview'
 alias diff='colordiff'
-#alias top='htop'
+alias top='htop'
 alias grep='egrep -n --color=always'
 alias tree='tree -a'
 alias shrst='exec $SHELL -l'
 alias gip='curl http://ipcheck.ieserver.net'
-alias todo='vi ~/projects/Tech_Documents/todo.txt'
 alias vg='vagrant'
 alias ng='nginx'
-alias neta='vi ~/projects/Tech_Documents/neta.txt'
-alias lhosts='cat ~/projects/Tech_Documents/Localhosts.txt'
-#alias which='which -a'
 alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc'
 
 ## Source global definitions
@@ -141,7 +135,7 @@ precmd() {
     for dir in `cd $search_dir && find . -maxdepth 1 -type d -name ".hsenv*"`; do
       if $hsenv_found; then
         echo multiple environments in $search_dir , manual activaton required
-        return        
+        return
       elif [ -n "$dir" ] && [ -e $search_dir/$dir/bin/activate ]; then
         hsenv_found=true
       fi
