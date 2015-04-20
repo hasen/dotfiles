@@ -1,4 +1,6 @@
 # .bashrc
+export LC_ALL='ja_JP.UTF-8'
+
 # option
 set -o ignoreeof
 
