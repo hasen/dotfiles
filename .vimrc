@@ -175,7 +175,7 @@ endif
 
 "for snippet_complete marker
 if has('conceal')
-  set conceallevel=2 concealcursor=i
+  set conceallevel=0 concealcursor=i
 endif
 
 "enable snipMate compatibility feature
@@ -655,9 +655,6 @@ nmap :snn :set nonumber
 " set paste
 nmap :sp :set paste
 nmap :snp :set nopaste
-
-" jsonの'"'を表示する
-set conceallevel=0
 
 " 自動的にディレクトリを作成する
 augroup vimrc-auto-mkdir  " {{{
