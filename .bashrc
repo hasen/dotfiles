@@ -130,6 +130,7 @@ export PATH=$PATH:/Library/WebServer/Documents/PHP/Phalcon/phalcon-devtools/phal
 
 # hsenv
 export PATH="$HOME/.hsenv/bin:$PATH"
+export PATH="$HOME/.hsenv/skelton/ghc/bin:$PATH"
 precmd() {
   local search_dir=$PWD
   while [ $search_dir != "/" ]; do
