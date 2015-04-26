@@ -5,7 +5,9 @@ filetype indent off
 
 if has('vim_starting')
   set runtimepath+=~/dotfiles/.vim/neobundle.vim
-  call neobundle#rc(expand('~/dotfiles/.vim/.bundle/'))
+  call neobundle#begin(expand('~/dotfiles/.vim/.bundle/'))
+  NeoBundleFetch '~/dotfiles/.vim/neobundle.vim'
+  call neobundle#end()
 endif
 
 NeoBundle 'Shougo/echodoc.git'
