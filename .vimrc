@@ -26,7 +26,7 @@ NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'cohama/vim-smartinput-endwise'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'enomsg/vim-haskellConcealPlus'
+"NeoBundle 'enomsg/vim-haskellConcealPlus'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
@@ -47,7 +47,6 @@ NeoBundle 'pbrisbin/html-template-syntax'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'shawncplus/php.vim'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'taichouchou2/vim-javascript'
@@ -408,7 +407,7 @@ let g:syntastic_always_populate_loc_list = 1
 nmap <silent> <leader>hl :SyntasticCheck hlint<CR>:lopen<CR>
 
 " Auto-checking on writing
-autocmd BufWritePost *.hs,*.lhs GhcModCheckAndLintAsync
+"autocmd BufWritePost *.hs,*.lhs GhcModCheckAndLintAsync
 
 "  neocomplcache (advanced completion)
 autocmd BufEnter *.hs,*.lhs let g:neocomplcache_enable_at_startup = 1
