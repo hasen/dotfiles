@@ -14,7 +14,6 @@ NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/unite-ssh.git'
 NeoBundle 'Shougo/unite-outline.git'
-NeoBundle 'Shougo/vimproc.git'
 NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'Shougo/vinarise.git'
 NeoBundle 'Shougo/vim-vcs.git'
@@ -26,7 +25,7 @@ NeoBundle 'c9s/perlomni.vim'
 NeoBundle 'cohama/vim-smartinput-endwise'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'eagletmt/neco-ghc'
-"NeoBundle 'enomsg/vim-haskellConcealPlus'
+NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'heavenshell/unite-zf.git'
@@ -676,3 +675,6 @@ autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 " jq(jsonの整形)
 nmap :jq :%!jq '.'
+
+" @ではなく描画する
+set display=lastline
