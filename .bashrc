@@ -174,3 +174,6 @@ export DOCKER_HOST="192.168.11.4:5422"
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/You/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
+
+# man
+export MANPAGER="col -b -x | vim -R -c 'set ft=man' - "
