@@ -1,5 +1,5 @@
 [user]
-	name = sengoku
+	name = hasen
 	email = hasenfus7@gmail.com
 
 [include]
@@ -63,3 +63,7 @@
 # https://gist.github.com/teppeis/4117588
 # git-browse-remote
 # http://subtech.g.hatena.ne.jp/motemen/20120917/1347889804
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
