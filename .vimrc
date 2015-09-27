@@ -640,6 +640,7 @@ autocmd BufNewFile *.php 0r $HOME/projects/dotfiles/template/php.txt
 autocmd BufNewFile *.go 0r $HOME/projects/dotfiles/template/go.txt
 autocmd BufNewFile *.py 0r $HOME/projects/dotfiles/template/python.txt
 autocmd BufNewFile *.rb 0r $HOME/projects/dotfiles/template/ruby.txt
+autocmd BufNewFile *.js 0r $HOME/projects/dotfiles/template/javascript.txt
 
 " 行末の空白を保存時に自動削除する
 autocmd BufWritePre * :%s/\s\+$//e
