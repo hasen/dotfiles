@@ -4,12 +4,14 @@ filetype plugin off
 filetype indent off
 
 if has('vim_starting')
+  if &compatible
+    set nocompatible
+  endif
   set runtimepath+=~/dotfiles/.vim/neobundle.vim
-  call neobundle#begin(expand('~/dotfiles/.vim/.bundle/'))
-  NeoBundleFetch '~/dotfiles/.vim/neobundle.vim'
-  call neobundle#end()
 endif
 
+call neobundle#begin(expand('~/dotfiles/.vim/.bundle/'))
+NeoBundleFetch '~/dotfiles/.vim/neobundle.vim'
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/unite-ssh.git'
@@ -68,6 +70,8 @@ NeoBundle 'vim-scripts/tagbar-phpctags', {
   \    'others': 'chmod +x bin/phpctags',
   \  },
   \}
+call neobundle#end()
+NeoBundleCheck
 
 filetype on
 filetype plugin on
