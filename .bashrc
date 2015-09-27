@@ -73,6 +73,7 @@ if [ -d "${PLENV_ROOT}" ]; then
     export PATH=${PLENV_ROOT}/bin:$PATH
     eval "$(plenv init -)"
 fi
+export PATH="$HOME/perl6/bin:$PATH"
 
 # Python
 export PYENV_ROOT="${HOME}/.pyenv"
@@ -90,11 +91,11 @@ export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 
 # PHP
-#export PATH="$HOME/pear/bin:$PATH"
-#export PATH="$HOME/.phpenv/bin:$PATH"
-#export PATH="$HOME/.phpenv/plugins/php-build/bin:$PATH"
-#export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
-#eval "$(phpenv init -)"
+export PHPENV_ROOT="${HOME}/.phpenv"
+if [ -d "${PHPENV_ROOT}" ]; then
+    export PATH=${PHPENV_ROOT}/bin:$PATH
+    eval "$(phpenv init -)"
+fi
 
 # composer
 export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -177,3 +178,15 @@ export DOCKER_TLS_VERIFY=1
 
 # man
 export MANPAGER="col -b -x | vim -R -c 'set ft=man' - "
+
+# postgresql
+export PGDATA=/usr/local/var/postgres
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/You/google-cloud-sdk/path.bash.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/You/google-cloud-sdk/completion.bash.inc'
+
+# elixir
+export PATH="$PATH:/usr/local/Cellar/elixir/1.0.3/bin"
