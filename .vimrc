@@ -83,7 +83,7 @@ set fileencoding=utf-8
 set ambiwidth=double
 
 "popupの背景色
-hi Pmenu      ctermbg=4
+hi Pmenu      ctermbg=7
 hi PmenuSel   ctermbg=3
 hi PmenuSbar  ctermbg=3
 hi PmenuThumb ctermfg=3
