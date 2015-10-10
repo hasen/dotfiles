@@ -261,7 +261,7 @@ set statusline=\ \ %F%r\ [%{&fenc}][%{&ff}]\ %{fugitive#statusline()}%=\ row:\ %
 "シンタックスハイライトを有効にする
 syntax on
 syntax enable
-"
+
 "cursorlineを表示する
 "set cursorline
 
