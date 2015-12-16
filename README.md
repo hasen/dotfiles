@@ -11,6 +11,8 @@ $ cd dotfiles/.vim
 
 $ git clone https://github.com/Shougo/neobundle.vim
 
+$ cd ../
+
 $ ln -s -f `pwd`/.bashrc ~/
 
 $ ln -s -f `pwd`/.gitconfig ~/
