@@ -3,7 +3,9 @@ dotfiles
 
 ### install
 
-$ cd ~/
+$ mkdir ~/projects
+
+$ cd ~/projects
 
 $ git clone https://github.com/hasen/dotfiles
 
@@ -12,6 +14,8 @@ $ cd dotfiles/.vim
 $ git clone https://github.com/Shougo/neobundle.vim
 
 $ cd ../
+
+(pwdはバッククォートで囲む)
 
 $ ln -s -f `pwd`/.bashrc ~/
 
