@@ -35,6 +35,12 @@ $ mkdir ~/vim_backup
 
 $ chmod 755 ~/vim_backup
 
+$ cd ~/
+
+$ ln -s `pwd`/.bashrc `pwd`/.bash_profile
+
 $ exec $SHELL -l
 
 #### vimのコマンドモードで`:NeoBundleInstall`
+
+#### Rictyのインストールはこちらのページを参考に(http://morizyun.github.io/blog/ricty-font-homebrew-mac/)
