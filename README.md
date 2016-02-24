@@ -3,7 +3,9 @@ dotfiles
 
 ### install
 
-$ cd ~/
+$ mkdir ~/projects
+
+$ cd ~/projects
 
 $ git clone https://github.com/hasen/dotfiles
 
@@ -12,6 +14,8 @@ $ cd dotfiles/.vim
 $ git clone https://github.com/Shougo/neobundle.vim
 
 $ cd ../
+
+(pwdはバッククォートで囲む)
 
 $ ln -s -f `pwd`/.bashrc ~/
 
@@ -31,6 +35,12 @@ $ mkdir ~/vim_backup
 
 $ chmod 755 ~/vim_backup
 
+$ cd ~/
+
+$ ln -s `pwd`/.bashrc `pwd`/.bash_profile
+
 $ exec $SHELL -l
 
 #### vimのコマンドモードで`:NeoBundleInstall`
+
+#### Rictyのインストールはこちらのページを参考に(http://morizyun.github.io/blog/ricty-font-homebrew-mac/)

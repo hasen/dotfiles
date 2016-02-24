@@ -7,11 +7,11 @@ if has('vim_starting')
   if &compatible
     set nocompatible
   endif
-  set runtimepath+=~/dotfiles/.vim/neobundle.vim
+  set runtimepath+=~/projects/dotfiles/.vim/neobundle.vim
 endif
 
-call neobundle#begin(expand('~/dotfiles/.vim/.bundle/'))
-NeoBundleFetch '~/dotfiles/.vim/neobundle.vim'
+call neobundle#begin(expand('~/projects/dotfiles/.vim/.bundle/'))
+NeoBundleFetch '~/projects/dotfiles/.vim/neobundle.vim'
 NeoBundle 'Shougo/echodoc.git'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/unite-ssh.git'
