@@ -48,6 +48,7 @@ NeoBundle 'pbrisbin/html-template-syntax'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'spolu/dwm.vim'
 NeoBundle 't9md/vim-unite-ack.git'
 NeoBundle 'taichouchou2/vim-javascript'
@@ -611,6 +612,16 @@ au FileType vim setlocal foldmethod=marker
 " :makeでPHP構文チェック
 au FileType php setlocal makeprg=php\ -l\ %
 au FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+
+" phpcs
+let g:syntastic_mode_map = {
+  \ 'mode': 'active',
+  \ 'active_filetypes': ['php']
+  \}
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_php_checkers = ['phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['phpcs']
+let g:syntastic_php_phpcs_args='--standard=psr2'
 
 " HTMLもハイライト
 let php_htmlInStrings=1
